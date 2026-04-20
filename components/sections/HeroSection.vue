@@ -10,15 +10,15 @@
     <!-- Dark overlay -->
     <div
       class="absolute inset-0 z-[1] transition-all duration-1000"
-      :style="phase === 'far' ? 'background:rgba(0,0,0,0.58)' : 'background:rgba(0,0,0,0.70)'"
+      :style="phase === 'far' ? 'background:rgba(0,0,0,0.1)' : 'background:rgba(0,0,0,0.1)'"
     />
 
     <!-- Three.js -->
     <ClientOnly>
       <ThreeHeroCanvas
+        ref="canvasRef"
         class="absolute inset-0 z-[2]"
         @slide="onSlide"
-        @unlocked="onUnlocked"
         @phase="onPhase"
       />
     </ClientOnly>
@@ -29,13 +29,13 @@
     <div class="absolute inset-0 z-[3] pointer-events-none"
       style="background:linear-gradient(to right,rgba(0,0,0,0.45) 0%,transparent 55%)" />
 
-    <!-- Bleed -->
+    <!-- Bleed text -->
     <p class="absolute bottom-0 left-0 right-0 z-[3] font-bold leading-none tracking-[-0.04em] uppercase pointer-events-none select-none px-8 overflow-hidden"
       style="font-size:clamp(70px,13vw,200px);color:rgba(255,255,255,0.03)">
       Gesundheit
     </p>
 
-    <!-- FAR: centred prompt -->
+    <!-- FAR phase: centred prompt -->
     <Transition name="fade-up">
       <div v-if="phase === 'far'"
         class="absolute inset-0 z-[4] flex flex-col items-center justify-center pointer-events-none">
@@ -46,7 +46,7 @@
         </h2>
         <div class="mt-10 flex flex-col items-center gap-2">
           <p class="text-[9px] tracking-[0.3em] uppercase text-white/25">Scroll to enter</p>
-          <div class="scroll-arrow">
+          <div class="bounce-arrow">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M7 1v12M1 8l6 6 6-6" stroke="rgba(255,255,255,0.25)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -55,7 +55,7 @@
       </div>
     </Transition>
 
-    <!-- CLOSE: left hero content -->
+    <!-- CLOSE phase: left hero content -->
     <Transition name="fade-up">
       <div v-if="phase === 'close'" class="absolute z-[4] bottom-20 left-10 max-w-xl">
         <p class="text-[10px] tracking-[0.3em] uppercase text-white/30 mb-4">Küsnacht, Schweiz — seit 2001</p>
@@ -83,48 +83,73 @@
       </div>
     </Transition>
 
-    <!-- CLOSE: bottom-right caption + dots -->
+    <!-- CLOSE phase: bottom-right caption + controls -->
     <Transition name="fade">
-      <div v-if="phase === 'close'" class="absolute z-[5] bottom-10 right-10 flex flex-col items-end gap-3">
+      <div v-if="phase === 'close'" class="absolute z-[5] bottom-10 right-10 flex flex-col items-end gap-4">
 
+        <!-- Caption — no box, just text -->
         <Transition name="caption" mode="out-in">
-          <div :key="currentSlide" class="text-right">
-            <p class="text-[10px] tracking-[0.25em] uppercase text-white/20 mb-2">
+          <NuxtLink
+            :key="currentSlide"
+            :to="slides[currentSlide].link"
+            class="caption-link group text-right block"
+          >
+            <p class="text-[10px] tracking-[0.25em] uppercase text-white/22 mb-2">
               {{ slides[currentSlide].label }}
             </p>
-
-            <!-- Clickable caption link -->
-            <NuxtLink
-              :to="slides[currentSlide].link"
-              class="caption-link group inline-flex flex-col items-end gap-1"
-            >
-              <span class="text-[13px] leading-[1.5] max-w-[200px] text-white/45 group-hover:text-white/80 transition-colors duration-300">
-                {{ slides[currentSlide].caption }}
-              </span>
-              <span class="flex items-center gap-1.5 text-[10px] tracking-[0.18em] uppercase text-white/20 group-hover:text-white/50 transition-colors duration-300">
-                Mehr erfahren
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" class="transition-transform duration-300 group-hover:translate-x-0.5">
-                  <path d="M1 5h8M5 1l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-              <!-- Underline -->
-              <span class="h-px w-0 group-hover:w-full transition-all duration-400 ease-out" style="background:rgba(255,255,255,0.3)" />
-            </NuxtLink>
-          </div>
+            <p class="text-[15px] font-medium leading-[1.35] max-w-[220px] text-white/55 group-hover:text-white transition-colors duration-300">
+              {{ slides[currentSlide].caption }}
+            </p>
+            <span class="flex items-center gap-1.5 justify-end mt-2 text-[10px] tracking-[0.18em] uppercase text-white/20 group-hover:text-white/55 transition-colors duration-300">
+              Mehr erfahren
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
+                class="transition-transform duration-300 group-hover:translate-x-0.5">
+                <path d="M1 5h8M5 1l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <!-- Sliding underline -->
+            <span class="block h-px mt-2 ml-auto underline-slide" />
+          </NuxtLink>
         </Transition>
 
-        <!-- Progress dots -->
-        <div class="flex items-center gap-2 mt-1">
-          <div v-for="(_, i) in slides" :key="i"
-            class="rounded-full transition-all duration-400"
-            :style="i === currentSlide
-              ? 'width:22px;height:3px;background:rgba(255,255,255,0.55)'
-              : 'width:6px;height:3px;background:rgba(255,255,255,0.16)'" />
+        <!-- Arrow controls + dots -->
+        <div class="flex items-center gap-3">
+          <button
+            class="carousel-arrow"
+            :disabled="currentSlide === 0"
+            :class="currentSlide === 0 ? 'opacity-20' : 'hover:opacity-70'"
+            @click="prev"
+            aria-label="Vorheriges Bild"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M9 2L4 7l5 5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <div class="flex items-center gap-2">
+            <button
+              v-for="(_, i) in slides" :key="i"
+              class="rounded-full transition-all duration-400 cursor-pointer"
+              :style="i === currentSlide
+                ? 'width:22px;height:3px;background:rgba(255,255,255,0.6)'
+                : 'width:6px;height:3px;background:rgba(255,255,255,0.2)'"
+              @click="goTo(i)"
+            />
+          </div>
+
+          <button
+            class="carousel-arrow"
+            :disabled="currentSlide === slides.length - 1"
+            :class="currentSlide === slides.length - 1 ? 'opacity-20' : 'hover:opacity-70'"
+            @click="next"
+            aria-label="Nächstes Bild"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M5 2l5 5-5 5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
         </div>
 
-        <p class="text-[9px] tracking-[0.28em] uppercase text-white/20">
-          {{ currentSlide === slides.length - 1 ? 'Scroll down to continue' : 'Scroll to explore' }}
-        </p>
       </div>
     </Transition>
 
@@ -148,33 +173,29 @@
 const ThreeHeroCanvas = defineAsyncComponent(() => import('~/components/three/HeroCanvas.vue'))
 
 const slides = [
-  {
-    label:   'Fitness',
-    caption: 'Modernste Geräte für Kraft & Ausdauer',
-    link:    'https://connect.shore.com/bookings/medlake-training/services',
-  },
-  {
-    label:   'Ärzte',
-    caption: 'Begleitet von Fachärzten vor Ort',
-    link:    '/aerzte',
-  },
-  {
-    label:   'Physiotherapie',
-    caption: 'Individuelle Therapie & Rehabilitation',
-    link:    '/leistungen',
-  },
+  { label: 'Fitness',        caption: 'Modernste Geräte für Kraft & Ausdauer',     link: '/leistungen/krafttraining' },
+  { label: 'Ärzte',          caption: 'Begleitet von Fachärzten vor Ort',           link: '/aerzte' },
+  { label: 'Physiotherapie', caption: 'Individuelle Therapie & Rehabilitation',     link: '/leistungen/physiotherapie' },
 ]
 
 const currentSlide = ref(0)
-const phase = ref<'far' | 'zooming' | 'close'>('far')
+const phase = ref<'far' | 'close'>('far')
+const canvasRef = ref<any>(null)
 
 const progressWidth = computed(() =>
   `${((currentSlide.value + 1) / slides.length) * 100}%`
 )
 
 function onSlide(i: number) { currentSlide.value = i }
-function onUnlocked() {}
-function onPhase(p: 'far' | 'zooming' | 'close') { phase.value = p }
+function onPhase(p: 'far' | 'close') { phase.value = p }
+
+function goTo(i: number) {
+  if (phase.value !== 'close') return
+  currentSlide.value = i
+  canvasRef.value?.goTo(i)
+}
+function prev() { goTo(currentSlide.value - 1) }
+function next() { goTo(currentSlide.value + 1) }
 </script>
 
 <style scoped>
@@ -190,9 +211,40 @@ function onPhase(p: 'far' | 'zooming' | 'close') { phase.value = p }
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(5px); }
 }
-.scroll-arrow { animation: arrowBounce 1.8s ease-in-out infinite; }
+.bounce-arrow { animation: arrowBounce 1.8s ease-in-out infinite; }
 
-.caption-link { cursor: pointer; text-decoration: none; }
+/* Caption: no box, just text */
+.caption-link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Underline slides in from right on hover */
+.underline-slide {
+  width: 0;
+  background: rgba(255,255,255,0.3);
+  transition: width 0.4s ease;
+}
+.caption-link:hover .underline-slide {
+  width: 100%;
+}
+
+.carousel-arrow {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.carousel-arrow:hover:not(:disabled) {
+  border-color: rgba(255,255,255,0.4);
+}
+.carousel-arrow:disabled { cursor: not-allowed; }
 
 .fade-up-enter-active { transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-up-leave-active { transition: opacity 0.35s ease, transform 0.35s ease; }
@@ -202,8 +254,8 @@ function onPhase(p: 'far' | 'zooming' | 'close') { phase.value = p }
 .fade-enter-active, .fade-leave-active { transition: opacity 0.5s ease; }
 .fade-enter-from, .fade-leave-to       { opacity: 0; }
 
-.caption-enter-active { transition: opacity 0.45s ease, transform 0.45s ease; }
-.caption-leave-active { transition: opacity 0.22s ease; }
-.caption-enter-from   { opacity: 0; transform: translateY(8px); }
+.caption-enter-active { transition: opacity 0.4s ease, transform 0.4s ease; }
+.caption-leave-active { transition: opacity 0.2s ease; }
+.caption-enter-from   { opacity: 0; transform: translateY(10px); }
 .caption-leave-to     { opacity: 0; }
 </style>

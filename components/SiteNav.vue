@@ -68,11 +68,14 @@ const mobileOpen = ref(false)
 const scrolled = ref(false)
 
 const links = [
-  { to: '/team',    label: 'Team' },
-  { to: '/aerzte',  label: 'Ärzte' },
-  { to: '/preise',  label: 'Preise' },
-  { to: '/news',    label: 'News' },
-  { to: '/kontakt', label: 'Kontakt' },
+  { to: '/team',          label: 'Team' },
+  { to: '/aerzte',        label: 'Ärzte' },
+  { to: '/preise',        label: 'Preise' },
+  { to: '/news',          label: 'News' },
+  { to: '/jobs',          label: 'Jobs' },
+  { to: '/medizinisches', label: 'Medizinisches' },
+  { to: '/kontakt',       label: 'Kontakt' },
+  { to: '/agb',           label: 'AGB' },
 ]
 
 onMounted(() => {

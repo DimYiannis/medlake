@@ -1,5 +1,5 @@
 <template>
-  <section ref="el" class="section-divider px-10 py-20">
+  <section id="leistungen" ref="el" class="section-divider px-10 py-20">
     <p class="reveal text-[10px] tracking-[0.28em] uppercase mb-12" style="color:var(--text-3)">Unser Angebot</p>
 
     <div>
@@ -31,11 +31,8 @@
           >+</span>
         </div>
 
-        <!-- Body: outside toggle, no reveal class -->
-        <div
-          v-if="activeIndex === i"
-          class="pl-16 pb-8"
-        >
+        <!-- Body -->
+        <div v-if="activeIndex === i" class="pl-16 pb-8">
           <p class="text-[13px] leading-[1.85] max-w-xl mb-5" style="color:var(--text-2)">
             {{ service.desc }}
           </p>
