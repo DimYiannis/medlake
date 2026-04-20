@@ -6,30 +6,40 @@
 import * as THREE from 'three'
 
 const canvasEl = ref<HTMLCanvasElement | null>(null)
+const { theme } = useTheme()
+
+const SLIDES = [
+  { src: '/images/fitness.jpg' },
+  { src: '/images/arzt.jpg' },
+  { src: '/images/physiotherapie.jpg' },
+]
+
+const emit = defineEmits<{
+  slide:    [index: number]
+  unlocked: []
+  phase:    [phase: 'far' | 'zooming' | 'close']
+}>()
 
 onMounted(() => {
   const canvas = canvasEl.value
   if (!canvas) return
 
   // ── Renderer ──
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    alpha: true,
-    antialias: true,
-    powerPreference: 'high-performance',
-  })
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   renderer.toneMapping = THREE.ACESFilmicToneMapping
-  renderer.toneMappingExposure = 1.2
+  renderer.toneMappingExposure = 1.08
 
-  // ── Scene / Camera ──
   const scene = new THREE.Scene()
-  const camera = new THREE.PerspectiveCamera(55, 2, 0.1, 300)
-  camera.position.set(0, 0, 8)
+  const camera = new THREE.PerspectiveCamera(50, 2, 0.1, 300)
+
+  // Start far back — cards look tiny in the distance
+  const CAM_FAR   = 28
+  const CAM_CLOSE = 6
+  camera.position.set(0, 0, CAM_FAR)
 
   function resize() {
-    const w = canvas!.clientWidth
-    const h = canvas!.clientHeight
+    const w = canvas!.clientWidth, h = canvas!.clientHeight
     renderer.setSize(w, h, false)
     camera.aspect = w / h
     camera.updateProjectionMatrix()
@@ -38,157 +48,325 @@ onMounted(() => {
   const ro = new ResizeObserver(resize)
   ro.observe(canvas)
 
-  // ── Particle field ──
-  const PARTICLE_COUNT = 2400
-  const pPositions = new Float32Array(PARTICLE_COUNT * 3)
-  for (let i = 0; i < PARTICLE_COUNT; i++) {
-    // Distribute in a hollow sphere shell
-    const r = 4 + Math.random() * 16
-    const theta = Math.random() * Math.PI * 2
-    const phi = Math.acos(2 * Math.random() - 1)
-    pPositions[i * 3]     = r * Math.sin(phi) * Math.cos(theta)
-    pPositions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta)
-    pPositions[i * 3 + 2] = r * Math.cos(phi)
+  // ── Particles ──
+  const N = 1800
+  const pPos = new Float32Array(N * 3)
+  for (let i = 0; i < N; i++) {
+    const r = 5 + Math.random() * 22
+    const th = Math.random() * Math.PI * 2
+    const ph = Math.acos(2 * Math.random() - 1)
+    pPos[i * 3]     = r * Math.sin(ph) * Math.cos(th)
+    pPos[i * 3 + 1] = r * Math.sin(ph) * Math.sin(th)
+    pPos[i * 3 + 2] = r * Math.cos(ph)
   }
   const pGeo = new THREE.BufferGeometry()
-  pGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3))
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3))
   const pMat = new THREE.PointsMaterial({
-    color: 0xffffff,
-    size: 0.03,
-    transparent: true,
-    opacity: 0.4,
-    sizeAttenuation: true,
-    depthWrite: false,
+    color: 0xffffff, size: 0.06, transparent: true,
+    opacity: 0.35, sizeAttenuation: true, depthWrite: false,
   })
-  const particles = new THREE.Points(pGeo, pMat)
-  scene.add(particles)
+  const pts = new THREE.Points(pGeo, pMat)
+  scene.add(pts)
 
-  // ── Core icosahedron ──
-  const icoGeo = new THREE.IcosahedronGeometry(2.4, 3)
+  // ── Photo cards ──
+  const CARD_W = 8.0
+  const CARD_H = 4.2
+  const FALLBACK = [0x1a2540, 0x1a3028, 0x301a1a]
+  const loader = new THREE.TextureLoader()
 
-  // Solid dark shell
-  const solidMat = new THREE.MeshStandardMaterial({
-    color: 0x0a0a0a,
-    metalness: 0.95,
-    roughness: 0.15,
-    transparent: true,
-    opacity: 0.88,
-    envMapIntensity: 1,
+  interface Card {
+    mesh:  THREE.Mesh
+    mat:   THREE.MeshStandardMaterial
+    frame: THREE.LineSegments
+  }
+  const cards: Card[] = []
+
+  SLIDES.forEach((slide, i) => {
+    const geo = new THREE.PlaneGeometry(CARD_W, CARD_H)
+    const mat = new THREE.MeshStandardMaterial({
+      color: FALLBACK[i],
+      transparent: true,
+      opacity: 0.92,
+      side: THREE.FrontSide,
+    })
+    const mesh = new THREE.Mesh(geo, mat)
+
+    // Cards fanned out slightly so you can see all 3 from far away
+    mesh.position.set(i * 0.6 - 0.6, -i * 0.3, -i * 1.2)
+    mesh.rotation.y = (i - 1) * 0.08
+    scene.add(mesh)
+
+    const edges = new THREE.EdgesGeometry(new THREE.PlaneGeometry(CARD_W, CARD_H))
+    const frame = new THREE.LineSegments(
+      edges,
+      new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.12 })
+    )
+    frame.position.copy(mesh.position)
+    frame.position.z += 0.006
+    frame.rotation.y = mesh.rotation.y
+    scene.add(frame)
+
+    cards.push({ mesh, mat, frame })
+
+    loader.load(slide.src, (tex) => {
+      tex.colorSpace = THREE.SRGBColorSpace
+      mat.map = tex
+      mat.color.set(0xffffff)
+      mat.needsUpdate = true
+    })
   })
-  const solid = new THREE.Mesh(icoGeo, solidMat)
-  solid.position.set(2.8, -0.3, 0)
-  scene.add(solid)
-
-  // Wireframe overlay
-  const wireMat = new THREE.MeshBasicMaterial({
-    color: 0xffffff,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.055,
-  })
-  const wire = new THREE.Mesh(icoGeo.clone(), wireMat)
-  wire.position.copy(solid.position)
-  scene.add(wire)
-
-  // Slightly larger outer wireframe — more depth
-  const outerWireMat = new THREE.MeshBasicMaterial({
-    color: 0xffffff,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.018,
-  })
-  const outerWire = new THREE.Mesh(new THREE.IcosahedronGeometry(3.2, 2), outerWireMat)
-  outerWire.position.copy(solid.position)
-  scene.add(outerWire)
-
-  // Inner bright core
-  const coreGeo = new THREE.SphereGeometry(0.6, 32, 32)
-  const coreMat = new THREE.MeshBasicMaterial({
-    color: 0xffffff,
-    transparent: true,
-    opacity: 0.06,
-  })
-  const core = new THREE.Mesh(coreGeo, coreMat)
-  core.position.copy(solid.position)
-  scene.add(core)
 
   // ── Lights ──
-  scene.add(new THREE.AmbientLight(0xffffff, 0.5))
+  scene.add(new THREE.AmbientLight(0xffffff, 0.7))
+  const key = new THREE.PointLight(0xffffff, 4, 80)
+  key.position.set(4, 6, 10)
+  scene.add(key)
+  const fill = new THREE.PointLight(0x6688cc, 1.5, 50)
+  fill.position.set(-5, -4, 6)
+  scene.add(fill)
 
-  const keyLight = new THREE.PointLight(0xffffff, 4, 40)
-  keyLight.position.set(6, 6, 6)
-  scene.add(keyLight)
+  // ── State machine ──
+  // phase 0 = far (idle, slow float)
+  // phase 1 = zooming in (camera flies forward, first scroll)
+  // phase 2 = close carousel (normal slide navigation)
+  // phase 3 = unlocked (page scroll free)
 
-  const rimLight = new THREE.PointLight(0x8888ff, 2, 25)
-  rimLight.position.set(-5, -4, 3)
-  scene.add(rimLight)
+  let phase = 0
+  let currentSlide = 0
+  let animSlide    = 0
+  let camZ         = CAM_FAR      // animated camera Z
+  let camZTarget   = CAM_FAR
+  let locked       = true
+  let cooldown     = 0
+  let accumulated  = 0
 
-  const fillLight = new THREE.PointLight(0xffffff, 1, 20)
-  fillLight.position.set(0, 8, -4)
-  scene.add(fillLight)
+  emit('phase', 'far')
+
+  function lockScroll() {
+    document.body.style.overflow = 'hidden'
+    window.scrollTo(0, 0)
+  }
+  function unlockScroll() {
+    document.body.style.overflow = ''
+    locked = false
+    emit('unlocked')
+  }
+  lockScroll()
+
+  function zoomIn() {
+    phase       = 1
+    camZTarget  = CAM_CLOSE
+    cooldown    = 90
+    emit('phase', 'zooming')
+    // After zoom completes switch to carousel phase
+    setTimeout(() => {
+      phase = 2
+      emit('phase', 'close')
+    }, 1200)
+  }
+
+  function advanceSlide(dir: number) {
+    if (cooldown > 0) return
+
+    if (phase === 0) {
+      // First scroll down → zoom in regardless of dir
+      if (dir > 0) { zoomIn(); return }
+      return // scroll up while far → ignore
+    }
+
+    if (phase !== 2) return
+
+    const next = currentSlide + dir
+
+    // Scroll up past first slide → zoom back out to far view
+    if (next < 0) {
+      phase      = 1
+      camZTarget = CAM_FAR
+      cooldown   = 90
+      emit('phase', 'zooming')
+      setTimeout(() => {
+        phase    = 0
+        currentSlide = 0
+        emit('phase', 'far')
+      }, 1200)
+      return
+    }
+
+    // Scroll down past last slide → unlock page
+    if (next >= SLIDES.length) {
+      unlockScroll()
+      return
+    }
+
+    currentSlide = next
+    cooldown = 65
+    emit('slide', currentSlide)
+  }
+
+  // Wheel
+  function onWheel(e: WheelEvent) {
+    if (!locked) return
+    e.preventDefault()
+    accumulated += e.deltaY
+    if (Math.abs(accumulated) < 40) return
+    advanceSlide(accumulated > 0 ? 1 : -1)
+    accumulated = 0
+  }
+
+  // Touch
+  let touchY = 0
+  const onTouchStart = (e: TouchEvent) => { touchY = e.touches[0].clientY }
+  const onTouchEnd   = (e: TouchEvent) => {
+    if (!locked) return
+    const d = touchY - e.changedTouches[0].clientY
+    if (Math.abs(d) < 40) return
+    advanceSlide(d > 0 ? 1 : -1)
+  }
+
+  // Keyboard
+  const onKey = (e: KeyboardEvent) => {
+    if (!locked) return
+    if (e.key === 'ArrowDown') { e.preventDefault(); advanceSlide(1) }
+    if (e.key === 'ArrowUp')   { e.preventDefault(); advanceSlide(-1) }
+  }
+
+  window.addEventListener('wheel',      onWheel,      { passive: false })
+  window.addEventListener('touchstart', onTouchStart, { passive: true })
+  window.addEventListener('touchend',   onTouchEnd,   { passive: true })
+  window.addEventListener('keydown',    onKey)
 
   // ── Mouse parallax ──
-  let targetX = 0
-  let targetY = 0
-  let currentX = 0
-  let currentY = 0
-
-  function onMouseMove(e: MouseEvent) {
-    targetX = (e.clientX / window.innerWidth - 0.5) * 2
-    targetY = -(e.clientY / window.innerHeight - 0.5) * 2
+  let tx = 0, ty = 0, cx = 0, cy = 0
+  const onMouse = (e: MouseEvent) => {
+    tx = (e.clientX / window.innerWidth  - 0.5) * 2
+    ty = -(e.clientY / window.innerHeight - 0.5) * 2
   }
-  window.addEventListener('mousemove', onMouseMove)
+  window.addEventListener('mousemove', onMouse)
+
+  // ── Helpers ──
+  function lerp(a: number, b: number, f: number) { return a + (b - a) * f }
+  function easeInOut(t: number) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t }
 
   // ── Animation ──
-  let t = 0
-  let rafId: number
+  let t = 0, rafId: number
+
+  function positionCardsClose(frac: number) {
+    cards.forEach((card, i) => {
+      const offset = i - frac
+      let tx2: number, tz: number, ry: number, op: number
+
+      if (Math.abs(offset) < 0.015) {
+        tx2 = 0; tz = 0; ry = 0; op = 0.95
+      } else if (offset > 0) {
+        tx2 = 11 + (offset - 1) * 3.5; tz = -offset * 1.8; ry = -0.18
+        op  = Math.max(0, 0.4 - (offset - 1) * 0.35)
+      } else {
+        tx2 = -11 - (Math.abs(offset) - 1) * 3.5; tz = -Math.abs(offset) * 1.8; ry = 0.18
+        op  = Math.max(0, 0.4 - (Math.abs(offset) - 1) * 0.35)
+      }
+
+      card.mesh.position.x = lerp(card.mesh.position.x, tx2, 0.075)
+      card.mesh.position.z = lerp(card.mesh.position.z, tz,  0.075)
+      card.mesh.rotation.y = lerp(card.mesh.rotation.y, ry,  0.075)
+      card.mat.opacity      = lerp(card.mat.opacity,     op,  0.075)
+
+      // Float on active
+      card.mesh.position.y = lerp(
+        card.mesh.position.y,
+        i === currentSlide ? Math.sin(t * 0.65) * 0.04 + cy * 0.05 : 0,
+        0.04
+      )
+
+      card.frame.position.x = card.mesh.position.x
+      card.frame.position.y = card.mesh.position.y
+      card.frame.position.z = card.mesh.position.z + 0.006
+      card.frame.rotation.y = card.mesh.rotation.y
+      ;(card.frame.material as THREE.LineBasicMaterial).opacity = card.mat.opacity * 0.12
+    })
+  }
+
+  function positionCardsFar() {
+    // Cards fan slightly so you see the stack from afar
+    cards.forEach((card, i) => {
+      const tx2 = i * 0.6 - 0.6
+      const ty2 = -i * 0.3
+      const tz  = -i * 1.2
+      const ry  = (i - 1) * 0.08
+
+      card.mesh.position.x = lerp(card.mesh.position.x, tx2, 0.04)
+      card.mesh.position.y = lerp(card.mesh.position.y, ty2 + Math.sin(t * 0.4 + i) * 0.08, 0.04)
+      card.mesh.position.z = lerp(card.mesh.position.z, tz,  0.04)
+      card.mesh.rotation.y = lerp(card.mesh.rotation.y, ry,  0.04)
+      card.mat.opacity      = lerp(card.mat.opacity, 0.88 - i * 0.1, 0.04)
+
+      card.frame.position.x = card.mesh.position.x
+      card.frame.position.y = card.mesh.position.y
+      card.frame.position.z = card.mesh.position.z + 0.006
+      card.frame.rotation.y = card.mesh.rotation.y
+      ;(card.frame.material as THREE.LineBasicMaterial).opacity = card.mat.opacity * 0.12
+    })
+  }
+
   function animate() {
     rafId = requestAnimationFrame(animate)
-    t += 0.003
+    t += 0.004
+    if (cooldown > 0) cooldown--
 
-    // Smooth mouse follow
-    currentX += (targetX - currentX) * 0.04
-    currentY += (targetY - currentY) * 0.04
+    cx += (tx - cx) * 0.03
+    cy += (ty - cy) * 0.03
 
-    // Rotate icosahedron
-    solid.rotation.x = t * 0.18 + currentY * 0.2
-    solid.rotation.y = t * 0.26 + currentX * 0.2
-    wire.rotation.copy(solid.rotation)
-    outerWire.rotation.x = -t * 0.08
-    outerWire.rotation.y =  t * 0.12 + currentX * 0.1
+    // Camera zoom
+    const zoomSpeed = phase === 1 ? 0.045 : 0.02
+    camZ = lerp(camZ, camZTarget, zoomSpeed)
+    camera.position.z = camZ
 
-    // Subtle particle drift
-    particles.rotation.y = t * 0.04
-    particles.rotation.x = t * 0.02
+    if (phase === 0 || (phase === 1 && camZTarget === CAM_FAR)) {
+      // Far view — slow float + gentle mouse parallax
+      positionCardsFar()
+      camera.position.x = lerp(camera.position.x, cx * 0.4, 0.02)
+      camera.position.y = lerp(camera.position.y, cy * 0.3, 0.02)
 
-    // Camera parallax
-    camera.position.x += (currentX * 0.6 - camera.position.x) * 0.025
-    camera.position.y += (currentY * 0.3 - camera.position.y) * 0.025
-    camera.lookAt(scene.position)
+      // Slow rotation of whole stack
+      scene.rotation.y = Math.sin(t * 0.15) * 0.06
+      scene.rotation.x = Math.sin(t * 0.1)  * 0.03
 
-    // Light orbit
-    keyLight.position.x = 6 + Math.sin(t * 0.7) * 3
-    keyLight.position.y = 6 + Math.cos(t * 0.5) * 2
+    } else {
+      // Close / carousel view
+      animSlide = lerp(animSlide, currentSlide, 0.075)
+      positionCardsClose(animSlide)
 
-    // Core pulse
-    const pulse = 0.06 + Math.sin(t * 2.5) * 0.02
-    coreMat.opacity = pulse
+      scene.rotation.y = lerp(scene.rotation.y, 0, 0.05)
+      scene.rotation.x = lerp(scene.rotation.x, 0, 0.05)
+
+      camera.position.x = lerp(camera.position.x, cx * 0.2, 0.025)
+      camera.position.y = lerp(camera.position.y, cy * 0.14, 0.025)
+    }
+
+    camera.lookAt(0, 0, 0)
+
+    // Particles
+    pts.rotation.y = t * 0.018
+    pts.rotation.x = t * 0.009
+    // Particle size feels bigger when far, subtle when close
+    pMat.size = lerp(pMat.size, camZ > 12 ? 0.06 : 0.022, 0.02)
+
+    key.position.x = 4 + Math.sin(t * 0.35) * 1.5
+    key.position.y = 6 + Math.cos(t * 0.28) * 1.2
 
     renderer.render(scene, camera)
   }
   animate()
 
-  // ── Cleanup ──
   onUnmounted(() => {
     cancelAnimationFrame(rafId)
     ro.disconnect()
-    window.removeEventListener('mousemove', onMouseMove)
+    unlockScroll()
+    window.removeEventListener('wheel',      onWheel)
+    window.removeEventListener('touchstart', onTouchStart)
+    window.removeEventListener('touchend',   onTouchEnd)
+    window.removeEventListener('keydown',    onKey)
+    window.removeEventListener('mousemove',  onMouse)
     renderer.dispose()
-    solidMat.dispose()
-    wireMat.dispose()
-    pMat.dispose()
-    icoGeo.dispose()
-    pGeo.dispose()
   })
 })
 </script>

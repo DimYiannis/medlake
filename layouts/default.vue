@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-ml-black">
+  <div>
     <SiteNav />
     <main>
       <slot />
@@ -7,3 +7,8 @@
     <SiteFooter />
   </div>
 </template>
+
+<script setup lang="ts">
+const { initTheme } = useTheme()
+onMounted(() => initTheme())
+</script>
