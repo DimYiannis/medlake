@@ -83,34 +83,38 @@
       </div>
     </Transition>
 
-    <!-- CLOSE phase: bottom-right caption + controls -->
+    <!-- CLOSE phase: centred card caption overlay -->
     <Transition name="fade">
-      <div v-if="phase === 'close'" class="absolute z-[5] bottom-10 right-10 flex flex-col items-end gap-4">
-
-        <!-- Caption — no box, just text -->
+      <div v-if="phase === 'close'"
+        class="absolute z-[5] inset-x-0 flex justify-center pointer-events-none"
+        style="bottom: 90px">
         <Transition name="caption" mode="out-in">
           <NuxtLink
             :key="currentSlide"
             :to="slides[currentSlide].link"
-            class="caption-link group text-right block"
+            class="caption-card-link group pointer-events-auto text-center block px-8 py-5"
           >
-            <p class="text-[10px] tracking-[0.25em] uppercase text-white/22 mb-2">
+            <p class="text-[10px] tracking-[0.3em] uppercase text-white/35 mb-2">
               {{ slides[currentSlide].label }}
             </p>
-            <p class="text-[15px] font-medium leading-[1.35] max-w-[220px] text-white/55 group-hover:text-white transition-colors duration-300">
+            <p class="text-[18px] font-semibold leading-[1.3] text-white/80 group-hover:text-white transition-colors duration-300">
               {{ slides[currentSlide].caption }}
             </p>
-            <span class="flex items-center gap-1.5 justify-end mt-2 text-[10px] tracking-[0.18em] uppercase text-white/20 group-hover:text-white/55 transition-colors duration-300">
+            <span class="inline-flex items-center gap-1.5 mt-3 text-[10px] tracking-[0.18em] uppercase text-white/30 group-hover:text-white/65 transition-colors duration-300">
               Mehr erfahren
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                 class="transition-transform duration-300 group-hover:translate-x-0.5">
                 <path d="M1 5h8M5 1l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </span>
-            <!-- Sliding underline -->
-            <span class="block h-px mt-2 ml-auto underline-slide" />
           </NuxtLink>
         </Transition>
+      </div>
+    </Transition>
+
+    <!-- CLOSE phase: bottom-right controls -->
+    <Transition name="fade">
+      <div v-if="phase === 'close'" class="absolute z-[5] bottom-10 right-10 flex flex-col items-end gap-4">
 
         <!-- Arrow controls + dots -->
         <div class="flex items-center gap-3">
@@ -174,8 +178,8 @@ const ThreeHeroCanvas = defineAsyncComponent(() => import('~/components/three/He
 
 const slides = [
   { label: 'Fitness',        caption: 'Modernste Geräte für Kraft & Ausdauer',     link: '/leistungen/krafttraining' },
-  { label: 'Ärzte',          caption: 'Begleitet von Fachärzten vor Ort',           link: '/aerzte' },
-  { label: 'Physiotherapie', caption: 'Individuelle Therapie & Rehabilitation',     link: '/leistungen/physiotherapie' },
+  { label: 'Ärzte',          caption: 'Fach- und Spezialärzte unterstützen Sie auf Ihrem Weg.',           link: '/aerzte' },
+  { label: 'Physiotherapie · Belaria', caption: 'Individuelle Therapie & Rehabilitation',     link: 'https://rueckenschmerz.ch/team/' },
 ]
 
 const currentSlide = ref(0)

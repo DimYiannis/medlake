@@ -18,7 +18,7 @@
     </ul>
 
     <div class="hidden md:flex items-center gap-1">
-      <UiThemeToggle />
+      <ClientOnly><UiThemeToggle /></ClientOnly>
       <a
         href="https://connect.shore.com/bookings/medlake-training/services"
         target="_blank"
@@ -30,7 +30,7 @@
     </div>
 
     <div class="md:hidden flex items-center gap-1">
-      <UiThemeToggle />
+      <ClientOnly><UiThemeToggle /></ClientOnly>
       <button class="flex flex-col gap-1.5 p-1" @click="mobileOpen = !mobileOpen" aria-label="Menu">
         <span class="block w-5 h-px transition-all" style="background:var(--text)" :class="mobileOpen ? 'rotate-45 translate-y-2' : ''" />
         <span class="block w-5 h-px transition-all" style="background:var(--text)" :class="mobileOpen ? 'opacity-0' : ''" />

@@ -17,6 +17,9 @@
           <span class="flex-shrink-0 w-16 text-[11px] tracking-[0.2em] font-medium" style="color:var(--text-4)">
             {{ String(i + 1).padStart(2, '0') }}
           </span>
+          <div class="flex-shrink-0 mr-5 service-icon-wrap">
+            <img :src="service.icon" :alt="service.name" class="service-icon w-7 h-7 object-contain" />
+          </div>
           <h3
             class="flex-1 font-medium tracking-[-0.01em] pr-4 transition-opacity duration-300"
             style="font-size:clamp(18px,2.2vw,28px);color:var(--text)"
@@ -74,17 +77,25 @@ function toggle(i: number) {
 }
 
 const services = [
-  { name: 'Krafttraining',                       link: '/leistungen/krafttraining',       desc: 'Gesundheitsorientiertes Krafttraining führt zu einem besseren Allgemeinzustand. Mitverantwortlich für akute und chronische Schmerzen des Bewegungsapparates sind schwache Muskeln. Wir trainieren präzise, medizinisch begleitet — mit messbaren Ergebnissen.' },
-  { name: 'Herz & Kreislauf',                    link: '/leistungen/herz-kreislauf',      desc: 'Cardio-Training führt zur Ökonomisierung des Herzkreislaufsystems mit verbesserter Muskeldurchblutung. Trainierte Herzen schlagen ruhiger, kraftvoller, ausdauernder.' },
-  { name: 'Hilfe bei Schmerzen',                 link: '/leistungen/hilfe-bei-schmerzen', desc: 'Schmerzen im Nacken, Rücken und Gelenken werden von drei Spezialärzten mit computerisierten Kräftigungsgeräten behandelt — unterstützt von Physiotherapeutinnen.' },
-  { name: 'Firmenfitness',                       link: '/leistungen/firmenfitness',       desc: 'Ihr Beitrag zur Gesundheit Ihrer Mitarbeitenden. Profitieren Sie von unserer Firmen-Kooperation und investieren Sie in die Leistungsfähigkeit Ihres Teams.' },
-  { name: 'Ärztliche Trainingstherapie (MED-X)', link: '/leistungen/med-x',               desc: 'Computerisierte MedX-Geräte fördern den Muskelaufbau im Nacken- und Lendenbereich. Jede Therapieeinheit erfolgt in Einzelbehandlung mit dem Arzt.' },
-  { name: 'Physiotherapie & MTT',                link: '/leistungen/physiotherapie',      desc: 'Medizinische Trainingstherapie zur Steigerung der Belastbarkeit des Bewegungsapparates — individuell abgestimmt und von Krankenkassen anerkannt.' },
-  { name: 'Galileo Vibrationsplatte',            link: '/leistungen/galileo',             desc: 'Seitenalternierende Vibrationsbewegungen bringen Muskeln über Dehnreflexe zu vermehrten Kontraktionen — für Sport, Rehabilitation und Schmerztherapie.' },
-  { name: 'KINESIS Training',                    link: '/leistungen/kinesis',             desc: 'Einzigartiges Ganzkörpertraining durch Seilrollen-Widerstand. Kraft, Flexibilität, Koordination und Haltungskontrolle — alles in einem System.' },
+  { name: 'Krafttraining',                       link: '/leistungen/krafttraining',       icon: '/images/service-icon-6.png', desc: 'Gesundheitsorientiertes Krafttraining führt zu einem besseren Allgemeinzustand. Mitverantwortlich für akute und chronische Schmerzen des Bewegungsapparates sind schwache Muskeln. Wir trainieren präzise, medizinisch begleitet — mit messbaren Ergebnissen.' },
+  { name: 'Herz & Kreislauf',                    link: '/leistungen/herz-kreislauf',      icon: '/images/service-icon-7.png', desc: 'Cardio-Training führt zur Ökonomisierung des Herzkreislaufsystems mit verbesserter Muskeldurchblutung. Trainierte Herzen schlagen ruhiger, kraftvoller, ausdauernder.' },
+  { name: 'Hilfe bei Schmerzen',                 link: '/leistungen/hilfe-bei-schmerzen', icon: '/images/service-icon-2.png', desc: 'Schmerzen im Nacken, Rücken und Gelenken werden von drei Spezialärzten mit computerisierten Kräftigungsgeräten behandelt — unterstützt von Physiotherapeutinnen.' },
+  { name: 'Firmenfitness',                       link: '/leistungen/firmenfitness',       icon: '/images/service-icon-5.png', desc: 'Ihr Beitrag zur Gesundheit Ihrer Mitarbeitenden. Profitieren Sie von unserer Firmen-Kooperation und investieren Sie in die Leistungsfähigkeit Ihres Teams.' },
+  { name: 'Ärztliche Trainingstherapie (MED-X)', link: '/leistungen/med-x',               icon: '/images/service-icon-8.png', desc: 'Computerisierte MedX-Geräte fördern den Muskelaufbau im Nacken- und Lendenbereich. Jede Therapieeinheit erfolgt in Einzelbehandlung mit dem Arzt.' },
+  { name: 'Physiotherapie & MTT',                link: '/leistungen/physiotherapie',      icon: '/images/service-icon-7.png', desc: 'Medizinische Trainingstherapie zur Steigerung der Belastbarkeit des Bewegungsapparates — individuell abgestimmt und von Krankenkassen anerkannt.' },
+  { name: 'Galileo Vibrationsplatte',            link: '/leistungen/galileo',             icon: '/images/service-icon-3.png', desc: 'Seitenalternierende Vibrationsbewegungen bringen Muskeln über Dehnreflexe zu vermehrten Kontraktionen — für Sport, Rehabilitation und Schmerztherapie.' },
+  { name: 'KINESIS Training',                    link: '/leistungen/kinesis',             icon: '/images/service-icon-4.png', desc: 'Einzigartiges Ganzkörpertraining durch Seilrollen-Widerstand. Kraft, Flexibilität, Koordination und Haltungskontrolle — alles in einem System.' },
 ]
 </script>
 
 <style scoped>
 .service-row:first-child { border-top: 1px solid var(--border); }
+
+/* Icons are white on transparent — invert in light mode */
+:root:not(.dark) .service-icon {
+  filter: invert(1) opacity(0.5);
+}
+.dark .service-icon {
+  filter: opacity(0.65);
+}
 </style>

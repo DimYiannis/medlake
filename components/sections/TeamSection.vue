@@ -29,10 +29,10 @@
 const { el } = useReveal()
 
 const fallbackTeam = [
-  { id: 1, name: 'Andrea Badstuber',   role: 'Geschäftsführerin',  photo_url: null },
-  { id: 2, name: 'Natalie Oriet Rota', role: 'Fitnessinstruktorin', photo_url: null },
-  { id: 3, name: 'Tiffany Ismann',     role: 'Fitnessinstruktorin', photo_url: null },
-  { id: 4, name: 'Leo Tomazini',       role: 'Bewegungsspezialist', photo_url: null },
+  { id: 1, name: 'Andrea Badstuber',   role: 'Geschäftsführerin',  photo_url: '/images/andrea.jpg' },
+  { id: 2, name: 'Natalie Oriet Rota', role: 'Fitnessinstruktorin', photo_url: '/images/natalie.jpg' },
+  { id: 3, name: 'Tiffany Ismann',     role: 'Fitnessinstruktorin', photo_url: '/images/tiffany.png' },
+  { id: 4, name: 'Leo Tomazini',       role: 'Bewegungsspezialist', photo_url: '/images/tomazini.jpg' },
 ]
 
 const dbTeam = ref<any[]>([])

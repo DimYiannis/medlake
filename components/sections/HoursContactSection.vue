@@ -10,7 +10,10 @@
       <div class="relative z-10">
         <div v-for="(row, i) in hours" :key="row.day" class="reveal flex justify-between items-center py-4 border-b" :class="`reveal-delay-${i + 1}`" style="border-color:var(--border)">
           <span class="text-[13px] tracking-wide" style="color:var(--text-3)">{{ row.day }}</span>
-          <span class="text-[15px] font-medium tracking-wide" style="color:var(--text)">{{ row.time }}</span>
+          <NuxtLink v-if="row.link" :to="row.link"
+            class="text-[15px] font-medium tracking-wide transition-opacity hover:opacity-60 underline underline-offset-4 decoration-1 cursor-pointer"
+            style="color:var(--text)">{{ row.time }}</NuxtLink>
+          <span v-else class="text-[15px] font-medium tracking-wide" style="color:var(--text)">{{ row.time }}</span>
         </div>
         <div class="mt-10 reveal reveal-delay-4">
           <a href="https://connect.shore.com/bookings/medlake-training/services" target="_blank" rel="noopener"
@@ -60,9 +63,9 @@
 const { el } = useReveal()
 
 const hours = [
-  { day: 'Montag – Freitag',  time: '06:30 – 21:00' },
-  { day: 'Samstag – Sonntag', time: '08:00 – 18:00' },
-  { day: 'Feiertage',         time: 'Variabel' },
+  { day: 'Montag – Freitag',  time: '06:30 – 21:00', link: null },
+  { day: 'Samstag – Sonntag', time: '08:00 – 18:00', link: null },
+  { day: 'Feiertage',         time: 'Variabel →',    link: '/feiertage' },
 ]
 
 const contactItems = [
