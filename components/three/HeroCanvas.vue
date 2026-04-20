@@ -33,7 +33,6 @@ onMounted(() => {
   const scene = new THREE.Scene()
   const camera = new THREE.PerspectiveCamera(50, 2, 0.1, 300)
 
-  // Start far back — cards look tiny in the distance
   const CAM_FAR   = 28
   const CAM_CLOSE = 6
   camera.position.set(0, 0, CAM_FAR)
@@ -68,30 +67,22 @@ onMounted(() => {
   const pts = new THREE.Points(pGeo, pMat)
   scene.add(pts)
 
-  // ── Photo cards ──
+  // ── Cards ──
   const CARD_W = 8.0
   const CARD_H = 4.2
   const FALLBACK = [0x1a2540, 0x1a3028, 0x301a1a]
   const loader = new THREE.TextureLoader()
 
-  interface Card {
-    mesh:  THREE.Mesh
-    mat:   THREE.MeshStandardMaterial
-    frame: THREE.LineSegments
-  }
+  interface Card { mesh: THREE.Mesh; mat: THREE.MeshStandardMaterial; frame: THREE.LineSegments }
   const cards: Card[] = []
 
   SLIDES.forEach((slide, i) => {
     const geo = new THREE.PlaneGeometry(CARD_W, CARD_H)
     const mat = new THREE.MeshStandardMaterial({
-      color: FALLBACK[i],
-      transparent: true,
-      opacity: 0.92,
-      side: THREE.FrontSide,
+      color: FALLBACK[i], transparent: true,
+      opacity: 0.92, side: THREE.FrontSide,
     })
     const mesh = new THREE.Mesh(geo, mat)
-
-    // Cards fanned out slightly so you can see all 3 from far away
     mesh.position.set(i * 0.6 - 0.6, -i * 0.3, -i * 1.2)
     mesh.rotation.y = (i - 1) * 0.08
     scene.add(mesh)
@@ -125,16 +116,12 @@ onMounted(() => {
   fill.position.set(-5, -4, 6)
   scene.add(fill)
 
-  // ── State machine ──
-  // phase 0 = far (idle, slow float)
-  // phase 1 = zooming in (camera flies forward, first scroll)
-  // phase 2 = close carousel (normal slide navigation)
-  // phase 3 = unlocked (page scroll free)
-
-  let phase = 0
+  // ── State ──
+  // phase: 0=far, 1=transitioning, 2=close carousel, 3=unlocked
+  let phase        = 0
   let currentSlide = 0
   let animSlide    = 0
-  let camZ         = CAM_FAR      // animated camera Z
+  let camZ         = CAM_FAR
   let camZTarget   = CAM_FAR
   let locked       = true
   let cooldown     = 0
@@ -142,26 +129,57 @@ onMounted(() => {
 
   emit('phase', 'far')
 
+  // ── Scroll lock helpers ──
   function lockScroll() {
     document.body.style.overflow = 'hidden'
     window.scrollTo(0, 0)
   }
+
   function unlockScroll() {
     document.body.style.overflow = ''
     locked = false
+    phase  = 3
     emit('unlocked')
   }
+
+  // Re-engage when user scrolls back to top of page
+  function onPageScroll() {
+    if (locked) return
+    if (window.scrollY <= 0) {
+      // User is back at top — re-lock and go back to last slide
+      locked       = true
+      phase        = 2
+      currentSlide = SLIDES.length - 1
+      animSlide    = SLIDES.length - 1
+      camZ         = CAM_CLOSE
+      camZTarget   = CAM_CLOSE
+      lockScroll()
+      emit('phase', 'close')
+      emit('slide', currentSlide)
+    }
+  }
+
   lockScroll()
 
+  // ── Slide navigation ──
   function zoomIn() {
-    phase       = 1
-    camZTarget  = CAM_CLOSE
-    cooldown    = 90
+    phase      = 1
+    camZTarget = CAM_CLOSE
+    cooldown   = 90
     emit('phase', 'zooming')
-    // After zoom completes switch to carousel phase
+    setTimeout(() => { phase = 2; emit('phase', 'close') }, 1200)
+  }
+
+  function zoomOut() {
+    phase      = 1
+    camZTarget = CAM_FAR
+    cooldown   = 90
+    emit('phase', 'zooming')
     setTimeout(() => {
-      phase = 2
-      emit('phase', 'close')
+      phase        = 0
+      currentSlide = 0
+      animSlide    = 0
+      emit('phase', 'far')
     }, 1200)
   }
 
@@ -169,41 +187,35 @@ onMounted(() => {
     if (cooldown > 0) return
 
     if (phase === 0) {
-      // First scroll down → zoom in regardless of dir
       if (dir > 0) { zoomIn(); return }
-      return // scroll up while far → ignore
-    }
-
-    if (phase !== 2) return
-
-    const next = currentSlide + dir
-
-    // Scroll up past first slide → zoom back out to far view
-    if (next < 0) {
-      phase      = 1
-      camZTarget = CAM_FAR
-      cooldown   = 90
-      emit('phase', 'zooming')
-      setTimeout(() => {
-        phase    = 0
-        currentSlide = 0
-        emit('phase', 'far')
-      }, 1200)
       return
     }
 
-    // Scroll down past last slide → unlock page
-    if (next >= SLIDES.length) {
-      unlockScroll()
+    if (phase === 1) return // mid-transition, ignore
+
+    if (phase === 2) {
+      const next = currentSlide + dir
+
+      if (next < 0) {
+        // Back past first → zoom out to far
+        zoomOut()
+        return
+      }
+
+      if (next >= SLIDES.length) {
+        // Past last → unlock page scroll
+        unlockScroll()
+        return
+      }
+
+      currentSlide = next
+      cooldown = 65
+      emit('slide', currentSlide)
       return
     }
-
-    currentSlide = next
-    cooldown = 65
-    emit('slide', currentSlide)
   }
 
-  // Wheel
+  // ── Event listeners ──
   function onWheel(e: WheelEvent) {
     if (!locked) return
     e.preventDefault()
@@ -213,7 +225,6 @@ onMounted(() => {
     accumulated = 0
   }
 
-  // Touch
   let touchY = 0
   const onTouchStart = (e: TouchEvent) => { touchY = e.touches[0].clientY }
   const onTouchEnd   = (e: TouchEvent) => {
@@ -223,17 +234,17 @@ onMounted(() => {
     advanceSlide(d > 0 ? 1 : -1)
   }
 
-  // Keyboard
   const onKey = (e: KeyboardEvent) => {
     if (!locked) return
     if (e.key === 'ArrowDown') { e.preventDefault(); advanceSlide(1) }
     if (e.key === 'ArrowUp')   { e.preventDefault(); advanceSlide(-1) }
   }
 
-  window.addEventListener('wheel',      onWheel,      { passive: false })
-  window.addEventListener('touchstart', onTouchStart, { passive: true })
-  window.addEventListener('touchend',   onTouchEnd,   { passive: true })
+  window.addEventListener('wheel',      onWheel,       { passive: false })
+  window.addEventListener('touchstart', onTouchStart,  { passive: true })
+  window.addEventListener('touchend',   onTouchEnd,    { passive: true })
   window.addEventListener('keydown',    onKey)
+  window.addEventListener('scroll',     onPageScroll,  { passive: true })
 
   // ── Mouse parallax ──
   let tx = 0, ty = 0, cx = 0, cy = 0
@@ -245,10 +256,25 @@ onMounted(() => {
 
   // ── Helpers ──
   function lerp(a: number, b: number, f: number) { return a + (b - a) * f }
-  function easeInOut(t: number) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t }
 
-  // ── Animation ──
-  let t = 0, rafId: number
+  function syncFrame(card: Card) {
+    card.frame.position.x = card.mesh.position.x
+    card.frame.position.y = card.mesh.position.y
+    card.frame.position.z = card.mesh.position.z + 0.006
+    card.frame.rotation.y = card.mesh.rotation.y
+    ;(card.frame.material as THREE.LineBasicMaterial).opacity = card.mat.opacity * 0.12
+  }
+
+  function positionCardsFar() {
+    cards.forEach((card, i) => {
+      card.mesh.position.x = lerp(card.mesh.position.x, i * 0.6 - 0.6, 0.04)
+      card.mesh.position.y = lerp(card.mesh.position.y, -i * 0.3 + Math.sin(t * 0.4 + i) * 0.08, 0.04)
+      card.mesh.position.z = lerp(card.mesh.position.z, -i * 1.2, 0.04)
+      card.mesh.rotation.y = lerp(card.mesh.rotation.y, (i - 1) * 0.08, 0.04)
+      card.mat.opacity      = lerp(card.mat.opacity, 0.88 - i * 0.1, 0.04)
+      syncFrame(card)
+    })
+  }
 
   function positionCardsClose(frac: number) {
     cards.forEach((card, i) => {
@@ -258,10 +284,14 @@ onMounted(() => {
       if (Math.abs(offset) < 0.015) {
         tx2 = 0; tz = 0; ry = 0; op = 0.95
       } else if (offset > 0) {
-        tx2 = 11 + (offset - 1) * 3.5; tz = -offset * 1.8; ry = -0.18
+        tx2 = 11 + (offset - 1) * 3.5
+        tz  = -offset * 1.8
+        ry  = -0.18
         op  = Math.max(0, 0.4 - (offset - 1) * 0.35)
       } else {
-        tx2 = -11 - (Math.abs(offset) - 1) * 3.5; tz = -Math.abs(offset) * 1.8; ry = 0.18
+        tx2 = -11 - (Math.abs(offset) - 1) * 3.5
+        tz  = -Math.abs(offset) * 1.8
+        ry  = 0.18
         op  = Math.max(0, 0.4 - (Math.abs(offset) - 1) * 0.35)
       }
 
@@ -269,43 +299,17 @@ onMounted(() => {
       card.mesh.position.z = lerp(card.mesh.position.z, tz,  0.075)
       card.mesh.rotation.y = lerp(card.mesh.rotation.y, ry,  0.075)
       card.mat.opacity      = lerp(card.mat.opacity,     op,  0.075)
-
-      // Float on active
-      card.mesh.position.y = lerp(
+      card.mesh.position.y  = lerp(
         card.mesh.position.y,
         i === currentSlide ? Math.sin(t * 0.65) * 0.04 + cy * 0.05 : 0,
         0.04
       )
-
-      card.frame.position.x = card.mesh.position.x
-      card.frame.position.y = card.mesh.position.y
-      card.frame.position.z = card.mesh.position.z + 0.006
-      card.frame.rotation.y = card.mesh.rotation.y
-      ;(card.frame.material as THREE.LineBasicMaterial).opacity = card.mat.opacity * 0.12
+      syncFrame(card)
     })
   }
 
-  function positionCardsFar() {
-    // Cards fan slightly so you see the stack from afar
-    cards.forEach((card, i) => {
-      const tx2 = i * 0.6 - 0.6
-      const ty2 = -i * 0.3
-      const tz  = -i * 1.2
-      const ry  = (i - 1) * 0.08
-
-      card.mesh.position.x = lerp(card.mesh.position.x, tx2, 0.04)
-      card.mesh.position.y = lerp(card.mesh.position.y, ty2 + Math.sin(t * 0.4 + i) * 0.08, 0.04)
-      card.mesh.position.z = lerp(card.mesh.position.z, tz,  0.04)
-      card.mesh.rotation.y = lerp(card.mesh.rotation.y, ry,  0.04)
-      card.mat.opacity      = lerp(card.mat.opacity, 0.88 - i * 0.1, 0.04)
-
-      card.frame.position.x = card.mesh.position.x
-      card.frame.position.y = card.mesh.position.y
-      card.frame.position.z = card.mesh.position.z + 0.006
-      card.frame.rotation.y = card.mesh.rotation.y
-      ;(card.frame.material as THREE.LineBasicMaterial).opacity = card.mat.opacity * 0.12
-    })
-  }
+  // ── Animation loop ──
+  let t = 0, rafId: number
 
   function animate() {
     rafId = requestAnimationFrame(animate)
@@ -315,39 +319,29 @@ onMounted(() => {
     cx += (tx - cx) * 0.03
     cy += (ty - cy) * 0.03
 
-    // Camera zoom
-    const zoomSpeed = phase === 1 ? 0.045 : 0.02
-    camZ = lerp(camZ, camZTarget, zoomSpeed)
+    // Camera Z
+    camZ = lerp(camZ, camZTarget, phase === 1 ? 0.045 : 0.02)
     camera.position.z = camZ
 
     if (phase === 0 || (phase === 1 && camZTarget === CAM_FAR)) {
-      // Far view — slow float + gentle mouse parallax
       positionCardsFar()
       camera.position.x = lerp(camera.position.x, cx * 0.4, 0.02)
       camera.position.y = lerp(camera.position.y, cy * 0.3, 0.02)
-
-      // Slow rotation of whole stack
-      scene.rotation.y = Math.sin(t * 0.15) * 0.06
-      scene.rotation.x = Math.sin(t * 0.1)  * 0.03
-
+      scene.rotation.y  = Math.sin(t * 0.15) * 0.06
+      scene.rotation.x  = Math.sin(t * 0.10) * 0.03
     } else {
-      // Close / carousel view
       animSlide = lerp(animSlide, currentSlide, 0.075)
       positionCardsClose(animSlide)
-
       scene.rotation.y = lerp(scene.rotation.y, 0, 0.05)
       scene.rotation.x = lerp(scene.rotation.x, 0, 0.05)
-
-      camera.position.x = lerp(camera.position.x, cx * 0.2, 0.025)
+      camera.position.x = lerp(camera.position.x, cx * 0.2,  0.025)
       camera.position.y = lerp(camera.position.y, cy * 0.14, 0.025)
     }
 
     camera.lookAt(0, 0, 0)
 
-    // Particles
     pts.rotation.y = t * 0.018
     pts.rotation.x = t * 0.009
-    // Particle size feels bigger when far, subtle when close
     pMat.size = lerp(pMat.size, camZ > 12 ? 0.06 : 0.022, 0.02)
 
     key.position.x = 4 + Math.sin(t * 0.35) * 1.5
@@ -360,11 +354,12 @@ onMounted(() => {
   onUnmounted(() => {
     cancelAnimationFrame(rafId)
     ro.disconnect()
-    unlockScroll()
+    document.body.style.overflow = ''
     window.removeEventListener('wheel',      onWheel)
     window.removeEventListener('touchstart', onTouchStart)
     window.removeEventListener('touchend',   onTouchEnd)
     window.removeEventListener('keydown',    onKey)
+    window.removeEventListener('scroll',     onPageScroll)
     window.removeEventListener('mousemove',  onMouse)
     renderer.dispose()
   })
