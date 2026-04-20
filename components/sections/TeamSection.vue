@@ -56,6 +56,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed, onMounted } from 'vue'
 const { el } = useReveal()
 
 const fallbackTeam = [
@@ -66,6 +67,7 @@ const fallbackTeam = [
 ]
 
 const dbTeam = ref<any[]>([])
+
 onMounted(async () => {
   try {
     const supabase = useSupabase()
@@ -74,7 +76,13 @@ onMounted(async () => {
   } catch {}
 })
 
-const displayTeam = computed(() => dbTeam.value.length ? dbTeam.value : fallbackTeam)
+const displayTeam = computed(() => {
+  if (!dbTeam.value.length) return fallbackTeam
+  return dbTeam.value.map(member => {
+    const fallback = fallbackTeam.find(f => f.name === member.name)
+    return { ...member, photo_url: member.photo_url ?? fallback?.photo_url ?? null }
+  })
+})
 
 function initials(name: string) {
   return name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase()

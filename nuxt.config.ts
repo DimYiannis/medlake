@@ -39,7 +39,8 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'node-server',
+    //preset: 'node-server', local
+    preset: 'vercel',
   },
 
   compatibilityDate: '2024-04-03',
