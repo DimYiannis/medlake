@@ -1,27 +1,57 @@
 <template>
-  <section ref="el" class="section-divider px-10 py-20" style="background:var(--team-bg)">
-    <p class="reveal text-[10px] tracking-[0.28em] uppercase mb-14" style="color:var(--text-3)">Das Team</p>
+  <section ref="el" class="section-divider py-20" style="background:var(--team-bg)">
 
-    <div class="grid grid-cols-2 md:grid-cols-4 border" style="border-color:var(--border);gap:1px;background:var(--border)">
+    <div class="px-10 mb-12 flex items-end justify-between">
+      <p class="reveal text-[10px] tracking-[0.28em] uppercase" style="color:var(--text-3)">Das Team</p>
+      <NuxtLink
+        to="/team"
+        class="reveal reveal-delay-1 text-[10px] tracking-[0.2em] uppercase transition-opacity hover:opacity-50 flex items-center gap-2"
+        style="color:var(--text-3)"
+      >
+        Alle ansehen
+        <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+          <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </NuxtLink>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-px" style="background:var(--border)">
       <div
         v-for="(member, i) in displayTeam"
         :key="member.id || i"
-        class="reveal p-7 transition-colors"
+        class="reveal group"
         :class="`reveal-delay-${(i % 4) + 1}`"
         style="background:var(--team-bg)"
-        @mouseenter="e => (e.currentTarget as HTMLElement).style.background = 'var(--bg-card)'"
-        @mouseleave="e => (e.currentTarget as HTMLElement).style.background = 'var(--team-bg)'"
       >
-        <div class="w-12 h-12 rounded-full mb-5 overflow-hidden flex items-center justify-center" style="background:var(--border-2)">
-          <img v-if="member.photo_url" :src="member.photo_url" :alt="member.name" class="w-full h-full object-cover" />
-          <span v-else class="text-[13px] font-medium tracking-wider" style="color:var(--text-3)">
+        <!-- Photo -->
+        <div class="overflow-hidden aspect-square relative" style="background:var(--bg-2)">
+          <img
+            v-if="member.photo_url"
+            :src="member.photo_url"
+            :alt="member.name"
+            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+          <div
+            v-else
+            class="w-full h-full flex items-center justify-center text-[22px] font-medium"
+            style="color:var(--text-3)"
+          >
             {{ initials(member.name) }}
-          </span>
+          </div>
+          <div
+            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            style="background:linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%)"
+          ></div>
         </div>
-        <p class="text-[15px] font-medium mb-1.5" style="color:var(--text)">{{ member.name }}</p>
-        <p class="text-[11px] tracking-[0.1em] uppercase" style="color:var(--text-3)">{{ member.role }}</p>
+
+        <!-- Info -->
+        <div class="px-5 py-5" style="border-top:1px solid var(--border)">
+          <p class="text-[14px] font-medium mb-1 tracking-[-0.01em]" style="color:var(--text)">{{ member.name }}</p>
+          <p class="text-[10px] tracking-[0.12em] uppercase" style="color:var(--text-3)">{{ member.role }}</p>
+        </div>
       </div>
     </div>
+
   </section>
 </template>
 

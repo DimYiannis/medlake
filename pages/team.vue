@@ -1,55 +1,73 @@
 <template>
-  <div class="min-h-screen pt-36 pb-24" style="background:var(--bg)">
+  <div ref="el" class="min-h-screen pt-36 pb-24" style="background:var(--bg)">
 
-    <div class="px-10 mb-16 border-b pb-12" style="border-color:var(--border)">
-      <p class="text-[10px] tracking-[0.3em] uppercase mb-4" style="color:var(--text-3)">Medlake</p>
-      <h1 class="font-semibold tracking-[-0.025em] leading-none" style="font-size:clamp(40px,6vw,80px);color:var(--text)">
+    <!-- Header -->
+    <div class="px-10 mb-20">
+      <p class="reveal text-[10px] tracking-[0.3em] uppercase mb-5" style="color:var(--text-3)">Medlake · Küsnacht</p>
+      <h1 class="reveal reveal-delay-1 font-semibold tracking-[-0.03em] leading-none" style="font-size:clamp(48px,7vw,96px);color:var(--text)">
         Das Team
       </h1>
-      <p class="text-[15px] mt-5 leading-[1.8] max-w-xl" style="color:var(--text-2)">
-        Menschen mit Leidenschaft für Gesundheit, Bewegung und persönliche Betreuung — das ist das Medlake Team.
+      <p class="reveal reveal-delay-2 text-[15px] mt-6 leading-[1.8] max-w-lg" style="color:var(--text-2)">
+        Menschen mit Leidenschaft für Gesundheit, Bewegung und persönliche Betreuung.
       </p>
     </div>
 
-    <!-- Team grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-px px-10" style="background:var(--border)">
+    <!-- Grid -->
+    <div class="px-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px" style="background:var(--border)">
       <div
-        v-for="member in team"
+        v-for="(member, i) in team"
         :key="member.name"
-        class="flex gap-7 px-8 py-10 transition-colors"
+        class="reveal group"
+        :class="`reveal-delay-${(i % 3) + 1}`"
         style="background:var(--bg)"
-        @mouseenter="e => (e.currentTarget as HTMLElement).style.background = 'var(--bg-card)'"
-        @mouseleave="e => (e.currentTarget as HTMLElement).style.background = 'var(--bg)'"
       >
-        <!-- Avatar / photo -->
-        <div class="w-16 h-16 rounded-full flex-shrink-0 overflow-hidden flex items-center justify-center text-[16px] font-medium"
-          style="background:var(--bg-2);color:var(--text-3)">
+        <!-- Photo -->
+        <div class="overflow-hidden aspect-[3/4] relative" style="background:var(--bg-2)">
           <img
             v-if="member.photo"
             :src="member.photo"
             :alt="member.name"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
-          <span v-else>{{ initials(member.name) }}</span>
+          <div
+            v-else
+            class="w-full h-full flex items-center justify-center text-[32px] font-medium tracking-wide"
+            style="color:var(--text-3)"
+          >
+            {{ initials(member.name) }}
+          </div>
+          <!-- Hover overlay -->
+          <div
+            class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            style="background:linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%)"
+          ></div>
         </div>
 
-        <div>
-          <h2 class="text-[17px] font-medium mb-1" style="color:var(--text)">{{ member.name }}</h2>
-          <p class="text-[11px] tracking-[0.12em] uppercase mb-3" style="color:var(--text-3)">{{ member.role }}</p>
+        <!-- Info -->
+        <div class="px-7 py-6" style="border-top:1px solid var(--border)">
+          <h2 class="text-[16px] font-medium mb-1.5 tracking-[-0.01em]" style="color:var(--text)">{{ member.name }}</h2>
+          <p class="text-[10px] tracking-[0.15em] uppercase mb-3" style="color:var(--text-3)">{{ member.role }}</p>
           <p v-if="member.desc" class="text-[13px] leading-[1.7]" style="color:var(--text-2)">{{ member.desc }}</p>
         </div>
       </div>
     </div>
 
-    <!-- Join CTA -->
-    <div class="px-10 mt-16 pt-12 border-t" style="border-color:var(--border)">
-      <p class="text-[10px] tracking-[0.25em] uppercase mb-3" style="color:var(--text-3)">Teil des Teams werden?</p>
-      <NuxtLink to="/jobs"
-        class="inline-flex items-center gap-2 text-[11px] tracking-[0.18em] uppercase transition-opacity hover:opacity-60"
-        style="color:var(--text-2)">
-        Offene Stellen ansehen
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </NuxtLink>
+    <!-- CTA -->
+    <div class="reveal px-10 mt-20 pt-12 border-t flex items-center justify-between" style="border-color:var(--border)">
+      <div>
+        <p class="text-[10px] tracking-[0.25em] uppercase mb-3" style="color:var(--text-3)">Teil des Teams werden?</p>
+        <NuxtLink
+          to="/jobs"
+          class="inline-flex items-center gap-3 text-[11px] tracking-[0.18em] uppercase transition-opacity hover:opacity-60"
+          style="color:var(--text-2)"
+        >
+          Offene Stellen ansehen
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </NuxtLink>
+      </div>
+      <p class="text-[10px] tracking-[0.2em] uppercase" style="color:var(--text-4)">{{ team.length }} Mitglieder</p>
     </div>
 
   </div>
@@ -57,6 +75,8 @@
 
 <script setup lang="ts">
 useHead({ title: 'Das Team – Medlake' })
+
+const { el } = useReveal()
 
 const team = [
   {
@@ -68,7 +88,7 @@ const team = [
   {
     name:  'Leonardo Tomazini',
     role:  'Stv. Geschäftsführer',
-    photo: 'images/tomazini.jpg',
+    photo: '/images/tomazini.jpg',
     desc:  'Spezialist Bewegungs- und Gesundheitsförderung mit eidg. Fachausweis',
   },
   {
@@ -80,7 +100,7 @@ const team = [
   {
     name:  'Natalie Oriet Rota',
     role:  'Spezialistin Bewegungs- und Gesundheitsförderung',
-    photo: 'images/natalie.jpg',
+    photo: '/images/natalie.jpg',
     desc:  'Mit eidg. Fachausweis',
   },
   {
