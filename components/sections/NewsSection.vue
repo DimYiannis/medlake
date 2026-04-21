@@ -51,7 +51,7 @@ const fallbackPosts = [
 const dbPosts = ref<any[]>([])
 onMounted(async () => {
   try {
-    const supabase = useSupabase()
+    const supabase = useSupabaseClient()
     const { data } = await supabase.from('news_posts').select('*').eq('published', true).order('published_at', { ascending: false }).limit(3)
     if (data && data.length > 0) dbPosts.value = data
   } catch {}

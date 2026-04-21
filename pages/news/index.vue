@@ -7,7 +7,7 @@
     </div>
 
     <!-- Grid -->
-    <div v-if="posts.length" class="grid grid-cols-1 md:grid-cols-3 gap-px bg-ml-border border border-ml-border">
+    <div v-if="posts && posts.length" class="grid grid-cols-1 md:grid-cols-3 gap-px bg-ml-border border border-ml-border">
       <NuxtLink
         v-for="post in posts"
         :key="post.id"
@@ -36,18 +36,16 @@
 <script setup lang="ts">
 useHead({ title: 'News – Medlake' })
 
-const posts = ref<any[]>([])
+const supabase = useSupabaseClient()
 
-onMounted(async () => {
-  try {
-    const supabase = useSupabase()
-    const { data } = await supabase
-      .from('news_posts')
-      .select('*')
-      .eq('published', true)
-      .order('published_at', { ascending: false })
-    posts.value = data || []
-  } catch { /* No posts yet */ }
+const { data: posts } = await useAsyncData('news-posts', async () => {
+  const { data, error } = await supabase
+    .from('news_posts')
+    .select('*')
+    .eq('published', true)
+    .order('published_at', { ascending: false })
+  if (error) throw error
+  return data ?? []
 })
 
 function formatDate(d: string) {
