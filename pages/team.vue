@@ -24,8 +24,8 @@
         <!-- Photo -->
         <div class="overflow-hidden aspect-[3/4] relative" style="background:var(--bg-2)">
           <img
-            v-if="member.photo"
-            :src="member.photo"
+            v-if="member.photo_url"
+            :src="member.photo_url"
             :alt="member.name"
             class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
@@ -36,6 +36,7 @@
           >
             {{ initials(member.name) }}
           </div>
+
           <!-- Hover overlay -->
           <div
             class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -78,50 +79,7 @@ useHead({ title: 'Das Team – Medlake' })
 
 const { el } = useReveal()
 
-const team = [
-  {
-    name:  'Andrea Badstuber',
-    role:  'Geschäftsführerin / Mitinhaberin',
-    photo: '/images/andrea.jpg',
-    desc:  null,
-  },
-  {
-    name:  'Leonardo Tomazini',
-    role:  'Stv. Geschäftsführer',
-    photo: '/images/tomazini.jpg',
-    desc:  'Spezialist Bewegungs- und Gesundheitsförderung mit eidg. Fachausweis',
-  },
-  {
-    name:  'Tiffany Ismann',
-    role:  'Fitnessinstruktorin',
-    photo: '/images/tiffany.png',
-    desc:  null,
-  },
-  {
-    name:  'Natalie Oriet Rota',
-    role:  'Spezialistin Bewegungs- und Gesundheitsförderung',
-    photo: '/images/natalie.jpg',
-    desc:  'Mit eidg. Fachausweis',
-  },
-  {
-    name:  'Alexandros Dimopoulos',
-    role:  'Fitnessinstruktor',
-    photo: '/images/alex.jpg',
-    desc:  'Bachelor-Abschluss in Sportwissenschaft',
-  },
-  {
-    name:  'Florence Winkler',
-    role:  'Fitnessinstruktorin',
-    photo: '/images/florence.jpg',
-    desc:  'Ausbildung zur Spezialistin Bewegungs- und Gesundheitsförderung mit eidg. Fachausweis',
-  },
-  {
-    name:  'Junioh Kamara',
-    role:  'Fachmann Bewegungs- und Gesundheitsförderung',
-    photo: null,
-    desc:  'Mit EFZ',
-  },
-]
+const team = await useTeamMembers()
 
 function initials(name: string) {
   return name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase()

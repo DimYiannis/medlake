@@ -100,7 +100,16 @@ alter table services       enable row level security;
 alter table holidays       enable row level security;
 alter table jobs           enable row level security;
 
--- Public read policies
+-- Public read policies (drop first so re-runs don't fail)
+drop policy if exists "Public read news"      on news_posts;
+drop policy if exists "Public read team"      on team_members;
+drop policy if exists "Public read gallery"   on gallery_photos;
+drop policy if exists "Public read settings"  on site_settings;
+drop policy if exists "Public read doctors"   on doctors;
+drop policy if exists "Public read services"  on services;
+drop policy if exists "Public read holidays"  on holidays;
+drop policy if exists "Public read jobs"      on jobs;
+
 create policy "Public read news"      on news_posts    for select using (published = true);
 create policy "Public read team"      on team_members  for select using (true);
 create policy "Public read gallery"   on gallery_photos for select using (true);
