@@ -32,24 +32,22 @@
 
 <script setup lang="ts">
 const route = useRoute()
-const post = ref<any>(null)
+const supabase = useSupabaseClient()
+
+const { data: post } = await useAsyncData(`news-post-${route.params.slug}`, async () => {
+  const { data, error } = await supabase
+    .from('news_posts')
+    .select('*')
+    .eq('slug', route.params.slug)
+    .eq('published', true)
+    .single()
+  if (error) return null
+  return data
+})
 
 useHead(() => ({
   title: post.value ? `${post.value.title} – Medlake` : 'News – Medlake',
 }))
-
-onMounted(async () => {
-  try {
-    const supabase = useSupabase()
-    const { data } = await supabase
-      .from('news_posts')
-      .select('*')
-      .eq('slug', route.params.slug)
-      .eq('published', true)
-      .single()
-    post.value = data
-  } catch { /* not found */ }
-})
 
 function formatDate(d: string) {
   if (!d) return ''

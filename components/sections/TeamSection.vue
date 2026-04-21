@@ -66,11 +66,11 @@ const fallbackTeam = [
   { id: 4, name: 'Leo Tomazini',       role: 'Bewegungsspezialist', photo_url: '/images/tomazini.jpg' },
 ]
 
+const supabase = useSupabaseClient()
 const dbTeam = ref<any[]>([])
 
 onMounted(async () => {
   try {
-    const supabase = useSupabase()
     const { data } = await supabase.from('team_members').select('*').order('sort_order', { ascending: true })
     if (data && data.length > 0) dbTeam.value = data
   } catch {}

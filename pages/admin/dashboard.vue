@@ -307,10 +307,11 @@ const siteSettings = ref({
   ],
 })
 
+const supabase = useSupabaseClient()
+
 // ── Load all data ──
 async function loadAll() {
   try {
-    const supabase = useSupabase()
     const [postsRes, teamRes, galleryRes, settingsRes] = await Promise.all([
       supabase.from('news_posts').select('*').order('published_at', { ascending: false }),
       supabase.from('team_members').select('*').order('sort_order'),
@@ -335,7 +336,6 @@ async function savePost() {
   if (!editingPost.value) return
   saving.value = true
   try {
-    const supabase = useSupabase()
     if (editingPost.value.id) {
       await supabase.from('news_posts').update(editingPost.value).eq('id', editingPost.value.id)
     } else {
@@ -348,7 +348,6 @@ async function savePost() {
 }
 async function deletePost(id: number) {
   if (!confirm('Beitrag wirklich löschen?')) return
-  const supabase = useSupabase()
   await supabase.from('news_posts').delete().eq('id', id)
   await loadAll()
 }
@@ -362,7 +361,6 @@ async function saveMember() {
   if (!editingMember.value) return
   saving.value = true
   try {
-    const supabase = useSupabase()
     if (editingMember.value.id) {
       await supabase.from('team_members').update(editingMember.value).eq('id', editingMember.value.id)
     } else {
@@ -374,7 +372,6 @@ async function saveMember() {
 }
 async function deleteMember(id: number) {
   if (!confirm('Mitglied wirklich entfernen?')) return
-  const supabase = useSupabase()
   await supabase.from('team_members').delete().eq('id', id)
   await loadAll()
 }
@@ -384,7 +381,6 @@ async function handleImageUpload(e: Event, context: 'news' | 'team') {
   const file = (e.target as HTMLInputElement).files?.[0]
   if (!file) return
   try {
-    const supabase = useSupabase()
     const path = `${context}/${Date.now()}-${file.name}`
     const { data, error } = await supabase.storage.from('medlake').upload(path, file)
     if (error) throw error
@@ -397,7 +393,6 @@ async function handleImageUpload(e: Event, context: 'news' | 'team') {
 async function handleGalleryUpload(e: Event) {
   const files = (e.target as HTMLInputElement).files
   if (!files) return
-  const supabase = useSupabase()
   for (const file of Array.from(files)) {
     const path = `gallery/${Date.now()}-${file.name}`
     const { error } = await supabase.storage.from('medlake').upload(path, file)
@@ -414,13 +409,11 @@ async function handleGalleryUpload(e: Event) {
 
 async function deleteGalleryPhoto(id: number) {
   if (!confirm('Foto löschen?')) return
-  const supabase = useSupabase()
   await supabase.from('gallery_photos').delete().eq('id', id)
   await loadAll()
 }
 
 async function updateCaption(photo: any) {
-  const supabase = useSupabase()
   await supabase.from('gallery_photos').update({ caption: photo.caption }).eq('id', photo.id)
 }
 
@@ -428,7 +421,6 @@ async function updateCaption(photo: any) {
 async function saveSettings() {
   saving.value = true
   try {
-    const supabase = useSupabase()
     await supabase.from('site_settings').upsert({ key: 'main', value: siteSettings.value })
   } finally { saving.value = false }
 }
