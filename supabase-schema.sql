@@ -70,6 +70,28 @@ insert into team_members (name, role, sort_order) values
   ('Leo Tomazini',      'Bewegungsspezialist',       4)
 on conflict do nothing;
 
+insert into site_settings (key, value) values (
+  'main',
+  '{
+    "hero_title_1": "Die Kraft",
+    "hero_title_2": "zu heilen. Die Kraft zu bewegen.",
+    "hero_subtitle": "Medizinisches Kompetenzzentrum für gesundheitsorientiertes Kraft- und Ausdauertraining.",
+    "hero_eyebrow": "Küsnacht, Schweiz — seit 2001",
+    "opening_hours": [
+      { "day": "Montag – Freitag",  "time": "06:30 – 21:00", "link": null },
+      { "day": "Samstag – Sonntag", "time": "08:00 – 18:00", "link": null },
+      { "day": "Feiertage",         "time": "Variabel →",    "link": "/feiertage" }
+    ],
+    "contact": {
+      "address": "Seestrasse 39, 8700 Küsnacht",
+      "phone":   "+41 44 991 22 02",
+      "fax":     "+41 44 991 22 03",
+      "email":   "info@medlake.ch"
+    },
+    "services": []
+  }'::jsonb
+) on conflict (key) do nothing;
+
 insert into news_posts (title, slug, tag, content, published, published_at) values
   (
     'Sommeraktion: 3 Monate Premium Fitness für 275 CHF',

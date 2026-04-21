@@ -220,13 +220,39 @@
 
         <!-- ── HOURS ── -->
         <div v-if="activeTab === 'hours'">
-          <div class="space-y-4 max-w-sm">
+          <div class="space-y-4 max-w-lg">
             <div v-for="(row, i) in siteSettings.opening_hours" :key="i" class="flex gap-3">
               <input v-model="row.day" type="text" placeholder="Tag" class="admin-input flex-1" />
               <input v-model="row.time" type="text" placeholder="Zeit" class="admin-input flex-1" />
+              <input v-model="row.link" type="text" placeholder="Link (optional)" class="admin-input flex-1" />
             </div>
-            <button @click="siteSettings.opening_hours.push({ day: '', time: '' })" class="admin-btn-sm">+ Zeile</button>
+            <button @click="siteSettings.opening_hours.push({ day: '', time: '', link: null })" class="admin-btn-sm">+ Zeile</button>
             <button @click="saveSettings" :disabled="saving" class="admin-btn mt-4">
+              {{ saving ? 'Speichern…' : 'Speichern' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- ── CONTACT ── -->
+        <div v-if="activeTab === 'contact'">
+          <div class="space-y-4 max-w-md">
+            <div>
+              <label class="admin-label">Adresse</label>
+              <input v-model="siteSettings.contact.address" type="text" class="admin-input" />
+            </div>
+            <div>
+              <label class="admin-label">Telefon</label>
+              <input v-model="siteSettings.contact.phone" type="text" class="admin-input" />
+            </div>
+            <div>
+              <label class="admin-label">Fax</label>
+              <input v-model="siteSettings.contact.fax" type="text" class="admin-input" />
+            </div>
+            <div>
+              <label class="admin-label">E-Mail</label>
+              <input v-model="siteSettings.contact.email" type="email" class="admin-input" />
+            </div>
+            <button @click="saveSettings" :disabled="saving" class="admin-btn mt-2">
               {{ saving ? 'Speichern…' : 'Speichern' }}
             </button>
           </div>
@@ -278,6 +304,7 @@ const tabs = [
   { id: 'gallery',  label: 'Galerie' },
   { id: 'hero',     label: 'Hero-Text' },
   { id: 'hours',    label: 'Öffnungszeiten' },
+  { id: 'contact',  label: 'Kontakt' },
   { id: 'services', label: 'Leistungen' },
 ]
 const activeTab = ref('news')
@@ -297,10 +324,16 @@ const siteSettings = ref({
   hero_subtitle:  'Medizinisches Kompetenzzentrum für gesundheitsorientiertes Kraft- und Ausdauertraining.',
   hero_eyebrow:   'Küsnacht, Schweiz — seit 2001',
   opening_hours:  [
-    { day: 'Montag – Freitag', time: '06:30 – 21:00' },
-    { day: 'Samstag – Sonntag', time: '08:00 – 18:00' },
-    { day: 'Feiertage', time: 'Variabel' },
+    { day: 'Montag – Freitag',  time: '06:30 – 21:00', link: null as string | null },
+    { day: 'Samstag – Sonntag', time: '08:00 – 18:00', link: null as string | null },
+    { day: 'Feiertage',         time: 'Variabel →',    link: '/feiertage' as string | null },
   ],
+  contact: {
+    address: 'Seestrasse 39, 8700 Küsnacht',
+    phone:   '+41 44 991 22 02',
+    fax:     '+41 44 991 22 03',
+    email:   'info@medlake.ch',
+  },
   services: [
     { name: 'Krafttraining', desc: 'Gesundheitsorientiertes Krafttraining...' },
     { name: 'Herz & Kreislauf', desc: 'Cardio-Training für ein starkes Herz-Kreislauf-System.' },
@@ -316,7 +349,7 @@ async function loadAll() {
       supabase.from('news_posts').select('*').order('published_at', { ascending: false }),
       supabase.from('team_members').select('*').order('sort_order'),
       supabase.from('gallery_photos').select('*').order('sort_order'),
-      supabase.from('site_settings').select('*').single(),
+      supabase.from('site_settings').select('value').eq('key', 'main').single(),
     ])
     news.value    = postsRes.data    || []
     team.value    = teamRes.data     || []

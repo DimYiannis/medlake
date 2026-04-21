@@ -62,18 +62,20 @@
 <script setup lang="ts">
 const { el } = useReveal()
 
-const hours = [
-  { day: 'Montag – Freitag',  time: '06:30 – 21:00', link: null },
-  { day: 'Samstag – Sonntag', time: '08:00 – 18:00', link: null },
-  { day: 'Feiertage',         time: 'Variabel →',    link: '/feiertage' },
-]
+const settings = await useSiteSettings()
 
-const contactItems = [
-  { key: 'Adresse', value: 'Seestrasse 39, 8700 Küsnacht', href: null },
-  { key: 'Telefon', value: '+41 44 991 22 02', href: 'tel:+41449912202' },
-  { key: 'Fax',     value: '+41 44 991 22 03', href: null },
-  { key: 'Email',   value: 'info@medlake.ch', href: 'mailto:info@medlake.ch' },
-]
+const hours = computed(() => settings.value?.opening_hours ?? [])
+
+const contactItems = computed(() => {
+  const c = settings.value?.contact
+  if (!c) return []
+  return [
+    { key: 'Adresse', value: c.address, href: null },
+    { key: 'Telefon', value: c.phone,   href: `tel:${c.phone.replace(/\s/g, '')}` },
+    { key: 'Fax',     value: c.fax,     href: null },
+    { key: 'Email',   value: c.email,   href: `mailto:${c.email}` },
+  ]
+})
 
 const form = reactive({ name: '', email: '', subject: '', message: '' })
 const sending = ref(false)
