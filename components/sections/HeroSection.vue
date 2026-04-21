@@ -1,5 +1,5 @@
 <template>
-  <section class="relative w-full h-screen overflow-hidden">
+  <section ref="sectionEl" class="relative w-full h-screen overflow-hidden">
 
     <!-- Ken Burns background -->
     <div
@@ -57,26 +57,26 @@
 
     <!-- CLOSE phase: left hero content -->
     <Transition name="fade-up">
-      <div v-if="phase === 'close'" class="absolute z-[4] bottom-20 left-10 max-w-xl">
-        <p class="text-[10px] tracking-[0.3em] uppercase text-white/30 mb-4">Küsnacht, Schweiz — seit 2001</p>
-        <h1 class="font-semibold leading-[1.06] tracking-[-0.025em] text-white mb-5"
-          style="font-size:clamp(32px,4.5vw,66px)">
+      <div v-if="phase === 'close'" class="absolute z-[4] bottom-44 left-6 max-w-[240px] sm:bottom-52 sm:left-10 sm:max-w-xl">
+        <p class="text-[9px] sm:text-[10px] tracking-[0.3em] uppercase text-white/30 mb-3 sm:mb-4">Küsnacht, Schweiz — seit 2001</p>
+        <h1 class="font-semibold leading-[1.06] tracking-[-0.025em] text-white mb-4 sm:mb-5"
+          style="font-size:clamp(22px,4.5vw,66px)">
           Die Kraft<br>
           <span class="text-white/28">zu heilen.</span><br>
           Die Kraft<br>
           <span class="text-white/28">zu bewegen.</span>
         </h1>
-        <p class="text-[14px] leading-[1.8] max-w-sm text-white/42 mb-8">
+        <p class="hidden sm:block text-[14px] leading-[1.8] max-w-sm text-white/42 mb-8">
           Medizinisches Kompetenzzentrum für gesundheitsorientiertes Kraft- und Ausdauertraining.
         </p>
-        <div class="flex items-center gap-6">
+        <div class="flex items-center gap-3 sm:gap-6">
           <a href="https://connect.shore.com/bookings/medlake-training/services"
             target="_blank" rel="noopener"
-            class="text-[11px] tracking-[0.18em] uppercase px-6 py-3 font-medium bg-white text-black hover:bg-white/85 transition-opacity">
+            class="text-[9px] sm:text-[11px] tracking-[0.15em] uppercase px-3 py-1.5 sm:px-6 sm:py-3 font-medium bg-white text-black hover:bg-white/85 transition-opacity">
             Termin buchen
           </a>
           <NuxtLink to="/leistungen"
-            class="text-[11px] tracking-[0.15em] uppercase flex items-center gap-2 text-white/32 hover:text-white/60 transition-colors">
+            class="text-[9px] sm:text-[11px] tracking-[0.12em] uppercase flex items-center gap-1.5 text-white/32 hover:text-white/60 transition-colors">
             Leistungen <span>→</span>
           </NuxtLink>
         </div>
@@ -86,7 +86,7 @@
     <!-- CLOSE phase: centred card caption overlay -->
     <Transition name="fade">
       <div v-if="phase === 'close'"
-        class="absolute z-[5] inset-x-0 flex justify-center pointer-events-none"
+        class="absolute z-[5] inset-x-0 hidden sm:flex justify-center pointer-events-none"
         style="bottom: 90px">
         <Transition name="caption" mode="out-in">
           <NuxtLink
@@ -114,12 +114,29 @@
 
     <!-- CLOSE phase: bottom-right controls -->
     <Transition name="fade">
-      <div v-if="phase === 'close'" class="absolute z-[5] bottom-10 right-10 flex flex-col items-end gap-4">
+      <div v-if="phase === 'close'" class="absolute z-[5] bottom-10 right-10 flex flex-col items-end gap-3">
 
-        <!-- Arrow controls + dots -->
+        <!-- Mobile caption (replaces arrows on phones) -->
+        <Transition name="caption" mode="out-in">
+          <NuxtLink
+            :key="currentSlide"
+            :to="slides[currentSlide].link"
+            class="sm:hidden text-right group"
+          >
+            <p class="text-[9px] tracking-[0.25em] uppercase text-white/30 mb-1">{{ slides[currentSlide].label }}</p>
+            <p class="text-[13px] font-medium leading-[1.3] text-white/75 group-hover:text-white transition-colors mb-1">{{ slides[currentSlide].caption }}</p>
+            <span class="inline-flex items-center gap-1 text-[9px] tracking-[0.18em] uppercase text-white/30 group-hover:text-white/65 transition-colors">
+              Mehr erfahren
+              <svg width="8" height="8" viewBox="0 0 10 10" fill="none" class="transition-transform duration-300 group-hover:translate-x-0.5">
+                <path d="M1 5h8M5 1l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </NuxtLink>
+        </Transition>
+
         <div class="flex items-center gap-3">
           <button
-            class="carousel-arrow"
+            class="carousel-arrow hidden sm:flex"
             :disabled="currentSlide === 0"
             :class="currentSlide === 0 ? 'opacity-20' : 'hover:opacity-70'"
             @click="prev"
@@ -142,7 +159,7 @@
           </div>
 
           <button
-            class="carousel-arrow"
+            class="carousel-arrow hidden sm:flex"
             :disabled="currentSlide === slides.length - 1"
             :class="currentSlide === slides.length - 1 ? 'opacity-20' : 'hover:opacity-70'"
             @click="next"
@@ -153,7 +170,6 @@
             </svg>
           </button>
         </div>
-
       </div>
     </Transition>
 
@@ -185,6 +201,7 @@ const slides = [
 const currentSlide = ref(0)
 const phase = ref<'far' | 'close'>('far')
 const canvasRef = ref<any>(null)
+const sectionEl = ref<HTMLElement | null>(null)
 
 const progressWidth = computed(() =>
   `${((currentSlide.value + 1) / slides.length) * 100}%`
@@ -200,6 +217,15 @@ function goTo(i: number) {
 }
 function prev() { goTo(currentSlide.value - 1) }
 function next() { goTo(currentSlide.value + 1) }
+
+useSwipe(sectionEl, {
+  onSwipeEnd(_, direction) {
+    if (phase.value !== 'close') return
+    if (direction === 'left')  next()
+    if (direction === 'right') prev()
+  },
+  threshold: 40,
+})
 </script>
 
 <style scoped>
@@ -210,6 +236,13 @@ function next() { goTo(currentSlide.value + 1) }
   100% { transform: scale(1.00) translate(  0%,    0%); }
 }
 .ken-burns { animation: kenBurns 22s ease-in-out infinite; will-change: transform; }
+
+@media (max-width: 640px) {
+  .ken-burns {
+    background-size: 85% auto;
+    background-position: center 30%;
+  }
+}
 
 @keyframes arrowBounce {
   0%, 100% { transform: translateY(0); }
