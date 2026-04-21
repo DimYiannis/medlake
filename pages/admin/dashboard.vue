@@ -258,18 +258,144 @@
           </div>
         </div>
 
+        <!-- ── DOCTORS ── -->
+        <div v-if="activeTab === 'doctors'">
+          <div class="flex items-center justify-between mb-6">
+            <p class="text-[11px] text-white/30 tracking-widest uppercase">{{ doctors.length }} Ärzte</p>
+            <button @click="openNewDoctor" class="admin-btn">+ Neuer Arzt</button>
+          </div>
+          <div class="space-y-px bg-ml-border border border-ml-border">
+            <div v-for="d in doctors" :key="d.id" class="bg-[#080808] px-5 py-4 flex items-center gap-4 hover:bg-white/[0.02] transition-colors">
+              <div class="flex-1 min-w-0">
+                <p class="text-[14px] text-white">{{ d.name }}</p>
+                <p class="text-[11px] text-white/25">{{ d.specialty }}</p>
+              </div>
+              <div class="flex gap-3">
+                <button @click="editDoctor(d)" class="admin-btn-sm">Bearbeiten</button>
+                <button @click="deleteDoctor(d.id)" class="admin-btn-sm text-red-400/50 hover:text-red-400">Löschen</button>
+              </div>
+            </div>
+          </div>
+          <div v-if="editingDoctor" class="fixed inset-0 z-50 bg-black/80 flex items-start justify-center overflow-y-auto py-10">
+            <div class="bg-[#0a0a0a] border border-ml-border w-full max-w-2xl mx-6 p-8">
+              <h2 class="text-[16px] font-medium mb-6">{{ editingDoctor.id ? 'Arzt bearbeiten' : 'Neuer Arzt' }}</h2>
+              <div class="space-y-4">
+                <div><label class="admin-label">Name</label><input v-model="editingDoctor.name" type="text" class="admin-input" /></div>
+                <div><label class="admin-label">Funktion</label><input v-model="editingDoctor.role" type="text" class="admin-input" /></div>
+                <div><label class="admin-label">Fachgebiet</label><input v-model="editingDoctor.specialty" type="text" class="admin-input" /></div>
+                <div><label class="admin-label">Telefon</label><input v-model="editingDoctor.phone" type="text" class="admin-input" /></div>
+                <div><label class="admin-label">Foto</label><input type="file" accept="image/*" class="admin-input" @change="(e) => handleImageUpload(e, 'doctors')" /><img v-if="editingDoctor.photo_url" :src="editingDoctor.photo_url" class="mt-2 h-20 w-20 object-cover rounded-full opacity-70" /></div>
+                <div>
+                  <label class="admin-label">Biografie (eine Zeile pro Eintrag)</label>
+                  <div v-for="(item, i) in editingDoctor.bio" :key="i" class="flex gap-2 mb-2">
+                    <input v-model="editingDoctor.bio[i]" type="text" class="admin-input flex-1" />
+                    <button @click="editingDoctor.bio.splice(i, 1)" class="text-red-400/50 hover:text-red-400 px-2">×</button>
+                  </div>
+                  <button @click="editingDoctor.bio.push('')" class="admin-btn-sm mt-1">+ Zeile</button>
+                </div>
+                <div><label class="admin-label">Reihenfolge</label><input v-model.number="editingDoctor.sort_order" type="number" class="admin-input" /></div>
+              </div>
+              <div class="flex gap-3 mt-6">
+                <button @click="saveDoctor" :disabled="saving" class="admin-btn">{{ saving ? 'Speichern…' : 'Speichern' }}</button>
+                <button @click="editingDoctor = null" class="admin-btn-sm">Abbrechen</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- ── SERVICES ── -->
         <div v-if="activeTab === 'services'">
-          <div class="space-y-4 max-w-2xl">
-            <div v-for="(svc, i) in siteSettings.services" :key="i" class="border border-ml-border p-4 space-y-3">
-              <input v-model="svc.name" type="text" placeholder="Name" class="admin-input" />
-              <textarea v-model="svc.desc" rows="3" placeholder="Beschreibung" class="admin-input" />
-              <button @click="siteSettings.services.splice(i, 1)" class="text-[10px] text-red-400/50 hover:text-red-400 tracking-widest uppercase">Entfernen</button>
+          <div class="flex items-center justify-between mb-6">
+            <p class="text-[11px] text-white/30 tracking-widest uppercase">{{ services.length }} Leistungen</p>
+            <button @click="openNewService" class="admin-btn">+ Neue Leistung</button>
+          </div>
+          <div class="space-y-px bg-ml-border border border-ml-border">
+            <div v-for="s in services" :key="s.id" class="bg-[#080808] px-5 py-4 flex items-center gap-4 hover:bg-white/[0.02] transition-colors">
+              <div class="flex-1 min-w-0">
+                <p class="text-[14px] text-white">{{ s.name }}</p>
+                <p class="text-[11px] text-white/25 truncate">{{ s.link }}</p>
+              </div>
+              <div class="flex gap-3">
+                <button @click="editService(s)" class="admin-btn-sm">Bearbeiten</button>
+                <button @click="deleteService(s.id)" class="admin-btn-sm text-red-400/50 hover:text-red-400">Löschen</button>
+              </div>
             </div>
-            <button @click="siteSettings.services.push({ name: '', desc: '' })" class="admin-btn-sm">+ Service</button>
-            <button @click="saveSettings" :disabled="saving" class="admin-btn mt-2">
-              {{ saving ? 'Speichern…' : 'Speichern' }}
-            </button>
+          </div>
+          <div v-if="editingService" class="fixed inset-0 z-50 bg-black/80 flex items-start justify-center overflow-y-auto py-10">
+            <div class="bg-[#0a0a0a] border border-ml-border w-full max-w-2xl mx-6 p-8">
+              <h2 class="text-[16px] font-medium mb-6">{{ editingService.id ? 'Leistung bearbeiten' : 'Neue Leistung' }}</h2>
+              <div class="space-y-4">
+                <div><label class="admin-label">Name</label><input v-model="editingService.name" type="text" class="admin-input" /></div>
+                <div><label class="admin-label">Beschreibung</label><textarea v-model="editingService.description" rows="4" class="admin-input" /></div>
+                <div><label class="admin-label">Icon (Pfad)</label><input v-model="editingService.icon" type="text" class="admin-input" placeholder="/images/service-icon-1.png" /></div>
+                <div><label class="admin-label">Link</label><input v-model="editingService.link" type="text" class="admin-input" placeholder="/leistungen/name" /></div>
+                <div><label class="admin-label">Reihenfolge</label><input v-model.number="editingService.sort_order" type="number" class="admin-input" /></div>
+              </div>
+              <div class="flex gap-3 mt-6">
+                <button @click="saveService" :disabled="saving" class="admin-btn">{{ saving ? 'Speichern…' : 'Speichern' }}</button>
+                <button @click="editingService = null" class="admin-btn-sm">Abbrechen</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── HOLIDAYS ── -->
+        <div v-if="activeTab === 'holidays'">
+          <div class="flex items-center justify-between mb-6">
+            <p class="text-[11px] text-white/30 tracking-widest uppercase">{{ holidays.length }} Einträge</p>
+            <button @click="addHoliday" class="admin-btn">+ Neuer Eintrag</button>
+          </div>
+          <div class="space-y-px bg-ml-border border border-ml-border">
+            <div v-for="h in holidays" :key="h.id" class="bg-[#080808] px-5 py-3 flex items-center gap-3">
+              <input v-model="h.year" type="text" placeholder="Jahr" class="admin-input w-20 flex-shrink-0" @blur="saveHoliday(h)" />
+              <input v-model="h.date" type="text" placeholder="Datum" class="admin-input w-28 flex-shrink-0" @blur="saveHoliday(h)" />
+              <input v-model="h.holiday" type="text" placeholder="Feiertag" class="admin-input flex-1" @blur="saveHoliday(h)" />
+              <input v-model="h.hours" type="text" placeholder="Zeiten" class="admin-input w-32 flex-shrink-0" @blur="saveHoliday(h)" />
+              <button @click="deleteHoliday(h.id)" class="text-red-400/50 hover:text-red-400 text-lg flex-shrink-0">×</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── JOBS ── -->
+        <div v-if="activeTab === 'jobs'">
+          <div class="flex items-center justify-between mb-6">
+            <p class="text-[11px] text-white/30 tracking-widest uppercase">{{ jobs.length }} Stellen</p>
+            <button @click="openNewJob" class="admin-btn">+ Neue Stelle</button>
+          </div>
+          <div class="space-y-px bg-ml-border border border-ml-border">
+            <div v-for="j in jobs" :key="j.id" class="bg-[#080808] px-5 py-4 flex items-center gap-4 hover:bg-white/[0.02] transition-colors">
+              <div class="flex-1 min-w-0">
+                <p class="text-[14px] text-white truncate">{{ j.title }}</p>
+                <p class="text-[11px] text-white/25">{{ j.active ? 'Aktiv' : 'Inaktiv' }}</p>
+              </div>
+              <div class="flex gap-3">
+                <button @click="editJob(j)" class="admin-btn-sm">Bearbeiten</button>
+                <button @click="deleteJob(j.id)" class="admin-btn-sm text-red-400/50 hover:text-red-400">Löschen</button>
+              </div>
+            </div>
+          </div>
+          <div v-if="editingJob" class="fixed inset-0 z-50 bg-black/80 flex items-start justify-center overflow-y-auto py-10">
+            <div class="bg-[#0a0a0a] border border-ml-border w-full max-w-2xl mx-6 p-8">
+              <h2 class="text-[16px] font-medium mb-6">{{ editingJob.id ? 'Stelle bearbeiten' : 'Neue Stelle' }}</h2>
+              <div class="space-y-4">
+                <div><label class="admin-label">Titel</label><input v-model="editingJob.title" type="text" class="admin-input" /></div>
+                <div><label class="admin-label">Untertitel</label><input v-model="editingJob.subtitle" type="text" class="admin-input" /></div>
+                <div><label class="admin-label">Einleitung</label><textarea v-model="editingJob.intro" rows="3" class="admin-input" /></div>
+                <div>
+                  <label class="admin-label">Abschnitte (JSON)</label>
+                  <textarea :value="JSON.stringify(editingJob.sections, null, 2)" rows="10" class="admin-input font-mono text-[11px]"
+                    @input="(e) => { try { editingJob.sections = JSON.parse((e.target as HTMLTextAreaElement).value) } catch {} }" />
+                </div>
+                <div class="flex items-center gap-3">
+                  <input id="job-active" v-model="editingJob.active" type="checkbox" class="accent-white" />
+                  <label for="job-active" class="text-[12px] text-white/50">Aktiv (öffentlich sichtbar)</label>
+                </div>
+              </div>
+              <div class="flex gap-3 mt-6">
+                <button @click="saveJob" :disabled="saving" class="admin-btn">{{ saving ? 'Speichern…' : 'Speichern' }}</button>
+                <button @click="editingJob = null" class="admin-btn-sm">Abbrechen</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -299,13 +425,16 @@ function logout() {
 
 // ── Tabs ──
 const tabs = [
-  { id: 'news',     label: 'News' },
-  { id: 'team',     label: 'Team' },
-  { id: 'gallery',  label: 'Galerie' },
-  { id: 'hero',     label: 'Hero-Text' },
-  { id: 'hours',    label: 'Öffnungszeiten' },
-  { id: 'contact',  label: 'Kontakt' },
-  { id: 'services', label: 'Leistungen' },
+  { id: 'news',      label: 'News' },
+  { id: 'team',      label: 'Team' },
+  { id: 'gallery',   label: 'Galerie' },
+  { id: 'doctors',   label: 'Ärzte' },
+  { id: 'services',  label: 'Leistungen' },
+  { id: 'holidays',  label: 'Feiertage' },
+  { id: 'jobs',      label: 'Jobs' },
+  { id: 'hero',      label: 'Hero-Text' },
+  { id: 'hours',     label: 'Öffnungszeiten' },
+  { id: 'contact',   label: 'Kontakt' },
 ]
 const activeTab = ref('news')
 const currentTab = computed(() => tabs.find((t) => t.id === activeTab.value))
@@ -314,8 +443,15 @@ const currentTab = computed(() => tabs.find((t) => t.id === activeTab.value))
 const news = ref<any[]>([])
 const team = ref<any[]>([])
 const gallery = ref<any[]>([])
+const doctors = ref<any[]>([])
+const services = ref<any[]>([])
+const holidays = ref<any[]>([])
+const jobs = ref<any[]>([])
 const editingPost = ref<any>(null)
 const editingMember = ref<any>(null)
+const editingDoctor = ref<any>(null)
+const editingService = ref<any>(null)
+const editingJob = ref<any>(null)
 const saving = ref(false)
 
 const siteSettings = ref({
@@ -345,15 +481,23 @@ const supabase = useSupabaseClient()
 // ── Load all data ──
 async function loadAll() {
   try {
-    const [postsRes, teamRes, galleryRes, settingsRes] = await Promise.all([
+    const [postsRes, teamRes, galleryRes, settingsRes, doctorsRes, servicesRes, holidaysRes, jobsRes] = await Promise.all([
       supabase.from('news_posts').select('*').order('published_at', { ascending: false }),
       supabase.from('team_members').select('*').order('sort_order'),
       supabase.from('gallery_photos').select('*').order('sort_order'),
       supabase.from('site_settings').select('value').eq('key', 'main').single(),
+      supabase.from('doctors').select('*').order('sort_order'),
+      supabase.from('services').select('*').order('sort_order'),
+      supabase.from('holidays').select('*').order('sort_order'),
+      supabase.from('jobs').select('*').order('created_at', { ascending: false }),
     ])
-    news.value    = postsRes.data    || []
-    team.value    = teamRes.data     || []
-    gallery.value = galleryRes.data  || []
+    news.value     = postsRes.data     || []
+    team.value     = teamRes.data      || []
+    gallery.value  = galleryRes.data   || []
+    doctors.value  = doctorsRes.data   || []
+    services.value = servicesRes.data  || []
+    holidays.value = holidaysRes.data  || []
+    jobs.value     = jobsRes.data      || []
     if (settingsRes.data?.value) {
       Object.assign(siteSettings.value, settingsRes.data.value)
     }
@@ -410,16 +554,17 @@ async function deleteMember(id: number) {
 }
 
 // ── Image upload ──
-async function handleImageUpload(e: Event, context: 'news' | 'team') {
+async function handleImageUpload(e: Event, context: 'news' | 'team' | 'doctors') {
   const file = (e.target as HTMLInputElement).files?.[0]
   if (!file) return
   try {
     const path = `${context}/${Date.now()}-${file.name}`
-    const { data, error } = await supabase.storage.from('medlake').upload(path, file)
+    const { error } = await supabase.storage.from('medlake').upload(path, file)
     if (error) throw error
     const { data: urlData } = supabase.storage.from('medlake').getPublicUrl(path)
-    if (context === 'news' && editingPost.value) editingPost.value.image_url = urlData.publicUrl
-    if (context === 'team' && editingMember.value) editingMember.value.photo_url = urlData.publicUrl
+    if (context === 'news'    && editingPost.value)   editingPost.value.image_url   = urlData.publicUrl
+    if (context === 'team'    && editingMember.value) editingMember.value.photo_url = urlData.publicUrl
+    if (context === 'doctors' && editingDoctor.value) editingDoctor.value.photo_url = urlData.publicUrl
   } catch (err) { console.error('Upload failed:', err) }
 }
 
@@ -448,6 +593,92 @@ async function deleteGalleryPhoto(id: number) {
 
 async function updateCaption(photo: any) {
   await supabase.from('gallery_photos').update({ caption: photo.caption }).eq('id', photo.id)
+}
+
+// ── Doctors ──
+function openNewDoctor() {
+  editingDoctor.value = { name: '', role: 'Mitinhaber', specialty: '', phone: '', photo_url: null, bio: [], sort_order: doctors.value.length + 1 }
+}
+function editDoctor(d: any) { editingDoctor.value = { ...d, bio: [...(d.bio || [])] } }
+async function saveDoctor() {
+  if (!editingDoctor.value) return
+  saving.value = true
+  try {
+    if (editingDoctor.value.id) {
+      await supabase.from('doctors').update(editingDoctor.value).eq('id', editingDoctor.value.id)
+    } else {
+      await supabase.from('doctors').insert(editingDoctor.value)
+    }
+    await loadAll()
+    editingDoctor.value = null
+  } finally { saving.value = false }
+}
+async function deleteDoctor(id: number) {
+  if (!confirm('Arzt wirklich löschen?')) return
+  await supabase.from('doctors').delete().eq('id', id)
+  await loadAll()
+}
+
+// ── Services ──
+function openNewService() {
+  editingService.value = { name: '', description: '', icon: '', link: '', sort_order: services.value.length + 1 }
+}
+function editService(s: any) { editingService.value = { ...s } }
+async function saveService() {
+  if (!editingService.value) return
+  saving.value = true
+  try {
+    if (editingService.value.id) {
+      await supabase.from('services').update(editingService.value).eq('id', editingService.value.id)
+    } else {
+      await supabase.from('services').insert(editingService.value)
+    }
+    await loadAll()
+    editingService.value = null
+  } finally { saving.value = false }
+}
+async function deleteService(id: number) {
+  if (!confirm('Leistung wirklich löschen?')) return
+  await supabase.from('services').delete().eq('id', id)
+  await loadAll()
+}
+
+// ── Holidays ──
+async function saveHoliday(h: any) {
+  await supabase.from('holidays').update({ date: h.date, holiday: h.holiday, hours: h.hours }).eq('id', h.id)
+}
+async function addHoliday() {
+  await supabase.from('holidays').insert({ year: new Date().getFullYear().toString(), date: '', holiday: '', hours: '', sort_order: holidays.value.length + 1 })
+  await loadAll()
+}
+async function deleteHoliday(id: number) {
+  if (!confirm('Eintrag löschen?')) return
+  await supabase.from('holidays').delete().eq('id', id)
+  await loadAll()
+}
+
+// ── Jobs ──
+function openNewJob() {
+  editingJob.value = { title: '', subtitle: '', intro: '', sections: [], active: true }
+}
+function editJob(j: any) { editingJob.value = { ...j, sections: JSON.parse(JSON.stringify(j.sections || [])) } }
+async function saveJob() {
+  if (!editingJob.value) return
+  saving.value = true
+  try {
+    if (editingJob.value.id) {
+      await supabase.from('jobs').update(editingJob.value).eq('id', editingJob.value.id)
+    } else {
+      await supabase.from('jobs').insert(editingJob.value)
+    }
+    await loadAll()
+    editingJob.value = null
+  } finally { saving.value = false }
+}
+async function deleteJob(id: number) {
+  if (!confirm('Job wirklich löschen?')) return
+  await supabase.from('jobs').delete().eq('id', id)
+  await loadAll()
 }
 
 // ── Settings ──

@@ -52,35 +52,5 @@
 
 <script setup lang="ts">
 useHead({ title: 'Feiertage – Medlake' })
-
-const schedule = [
-  {
-    year: '2026',
-    entries: [
-      { date: '03.04.2026', holiday: 'Karfreitag',    hours: '08:00–18:00' },
-      { date: '06.04.2026', holiday: 'Ostermontag',   hours: '08:00–18:00' },
-      { date: '01.05.2026', holiday: '1. Mai',         hours: '08:00–18:00' },
-      { date: '14.05.2026', holiday: 'Auffahrt',       hours: '08:00–18:00' },
-      { date: '25.05.2026', holiday: 'Pfingstmontag',  hours: '08:00–18:00' },
-      { date: '01.08.2026', holiday: '1. August',      hours: '08:00–18:00' },
-      { date: '24.12.2026', holiday: 'Heiligabend',    hours: '09:00–16:00' },
-      { date: '25.12.2026', holiday: 'Weihnachtstag',  hours: 'GESCHLOSSEN' },
-      { date: '26.12.2026', holiday: 'Stephanstag',    hours: '08:00–18:00' },
-      { date: '31.12.2026', holiday: 'Silvester',      hours: '09:00–16:00' },
-    ],
-  },
-  {
-    year: '2027',
-    entries: [
-      { date: '01.01.2027', holiday: 'Neujahr',        hours: '09:00–16:00' },
-      { date: '26.03.2027', holiday: 'Karfreitag',     hours: '08:00–18:00' },
-      { date: '29.03.2027', holiday: 'Ostermontag',    hours: '08:00–18:00' },
-      { date: '01.05.2027', holiday: '1. Mai',          hours: '08:00–18:00' },
-      { date: '06.05.2027', holiday: 'Auffahrt',        hours: '08:00–18:00' },
-      { date: '17.05.2027', holiday: 'Pfingstmontag',   hours: '08:00–18:00' },
-      { date: '01.08.2027', holiday: '1. August',       hours: '08:00–18:00' },
-      { date: '24.12.2027', holiday: 'Heiligabend',     hours: '09:00–16:00' },
-    ],
-  },
-]
+const schedule = await useHolidays()
 </script>

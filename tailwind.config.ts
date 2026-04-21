@@ -10,6 +10,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        nav: '1125px',
+      },
       fontFamily: {
         sans: ['"Neue Haas Grotesk Display Pro"', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
       },

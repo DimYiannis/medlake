@@ -7,7 +7,7 @@
       Med<span style="color:var(--text-3)">lake</span>
     </NuxtLink>
 
-    <ul class="hidden md:flex items-center gap-8 list-none">
+    <ul class="hidden nav:flex items-center gap-8 list-none">
       <li v-for="link in links" :key="link.to">
         <NuxtLink :to="link.to"
           class="text-[11px] tracking-[0.15em] uppercase transition-opacity hover:opacity-80"
@@ -17,7 +17,7 @@
       </li>
     </ul>
 
-    <div class="hidden md:flex items-center gap-1">
+    <div class="hidden nav:flex items-center gap-1">
       <ClientOnly><UiThemeToggle /></ClientOnly>
       <a
         href="https://connect.shore.com/bookings/medlake-training/services"
@@ -29,7 +29,7 @@
       </a>
     </div>
 
-    <div class="md:hidden flex items-center gap-1">
+    <div class="nav:hidden flex items-center gap-1">
       <ClientOnly><UiThemeToggle /></ClientOnly>
       <button class="flex flex-col gap-1.5 p-1" @click="mobileOpen = !mobileOpen" aria-label="Menu">
         <span class="block w-5 h-px transition-all" style="background:var(--text)" :class="mobileOpen ? 'rotate-45 translate-y-2' : ''" />
@@ -41,7 +41,7 @@
     <Transition name="mobile-menu">
       <div
         v-if="mobileOpen"
-        class="absolute top-full left-0 right-0 py-8 px-10 md:hidden border-b"
+        class="absolute top-full left-0 right-0 py-8 px-10 nav:hidden border-b"
         style="background:var(--nav-bg);border-color:var(--border);backdrop-filter:blur(12px)"
       >
         <ul class="flex flex-col gap-6 list-none mb-8">
