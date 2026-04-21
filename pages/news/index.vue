@@ -1,35 +1,38 @@
 <template>
   <div class="pt-36 px-10 pb-24 min-h-screen">
     <!-- Header -->
-    <div class="mb-16 border-b border-ml-border pb-10">
-      <p class="text-[10px] tracking-[0.28em] uppercase text-white/25 mb-4">Medlake</p>
-      <h1 class="text-[clamp(40px,6vw,80px)] font-semibold tracking-[-0.025em] leading-none">News</h1>
+    <div class="mb-16 border-b pb-10" style="border-color:var(--border)">
+      <p class="text-[10px] tracking-[0.28em] uppercase mb-4" style="color:var(--text-3)">Medlake</p>
+      <h1 class="text-[clamp(40px,6vw,80px)] font-semibold tracking-[-0.025em] leading-none" style="color:var(--text)">News</h1>
     </div>
 
     <!-- Grid -->
-    <div v-if="posts && posts.length" class="grid grid-cols-1 md:grid-cols-3 gap-px bg-ml-border border border-ml-border">
+    <div v-if="posts && posts.length" class="grid grid-cols-1 md:grid-cols-3 gap-px" style="background:var(--border);border:1px solid var(--border)">
       <NuxtLink
         v-for="post in posts"
         :key="post.id"
         :to="`/news/${post.slug}`"
-        class="bg-ml-black p-7 hover:bg-white/[0.02] transition-colors group"
+        class="p-7 transition-colors group"
+        style="background:var(--bg-card)"
+        @mouseenter="($el as HTMLElement).style.background='var(--bg-2)'"
+        @mouseleave="($el as HTMLElement).style.background='var(--bg-card)'"
       >
-        <div class="h-40 mb-5 overflow-hidden">
+        <div class="h-40 mb-5 overflow-hidden" style="background:var(--bg-2)">
           <img
             v-if="post.image_url"
             :src="post.image_url"
             :alt="post.title"
             class="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700"
           />
-          <div v-else class="w-full h-full bg-white/[0.03]" />
+          <div v-else class="w-full h-full" style="background:var(--bg-2)" />
         </div>
-        <p class="text-[10px] tracking-[0.22em] uppercase text-white/25 mb-3">{{ post.tag || 'News' }}</p>
-        <h2 class="text-[16px] font-medium leading-[1.45] text-white mb-4">{{ post.title }}</h2>
-        <p class="text-[11px] text-white/20">{{ formatDate(post.published_at) }}</p>
+        <p class="text-[10px] tracking-[0.22em] uppercase mb-3" style="color:var(--text-3)">{{ post.tag || 'News' }}</p>
+        <h2 class="text-[16px] font-medium leading-[1.45] mb-4" style="color:var(--text)">{{ post.title }}</h2>
+        <p class="text-[11px]" style="color:var(--text-4)">{{ formatDate(post.published_at) }}</p>
       </NuxtLink>
     </div>
 
-    <p v-else class="text-white/20 text-sm tracking-widest">Keine Beiträge vorhanden.</p>
+    <p v-else class="text-sm tracking-widest" style="color:var(--text-3)">Keine Beiträge vorhanden.</p>
   </div>
 </template>
 
