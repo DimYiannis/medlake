@@ -1,11 +1,11 @@
 <template>
   <div class="pt-36 px-10 pb-24 min-h-screen">
     <div v-if="post" class="max-w-2xl mx-auto">
-      <NuxtLink to="/news" class="text-[10px] tracking-[0.2em] uppercase text-white/25 hover:text-white transition-colors mb-10 inline-block">
+      <NuxtLink to="/news" class="text-[12px] tracking-[0.2em] uppercase text-white/25 hover:text-white transition-colors mb-10 inline-block">
         ← Alle News
       </NuxtLink>
 
-      <p class="text-[10px] tracking-[0.22em] uppercase text-white/25 mb-4">{{ post.tag || 'News' }}</p>
+      <p class="text-[12px] tracking-[0.22em] uppercase text-white/25 mb-4">{{ post.tag || 'News' }}</p>
       <h1 class="text-[clamp(28px,4vw,52px)] font-semibold tracking-[-0.02em] leading-[1.15] mb-6">
         {{ post.title }}
       </h1>
@@ -19,7 +19,7 @@
       </div>
 
       <div
-        class="prose prose-invert prose-sm max-w-none text-white/60 leading-[1.9] text-[15px]"
+        class="prose prose-invert prose-sm max-w-none text-white/60 leading-[1.9] text-[17px]"
         v-html="post.content"
       />
     </div>

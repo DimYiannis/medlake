@@ -3,11 +3,11 @@
 
     <!-- Header -->
     <div class="px-10 mb-20">
-      <p class="reveal text-[10px] tracking-[0.3em] uppercase mb-5" style="color:var(--text-3)">Medlake · Küsnacht</p>
+      <p class="reveal text-[12px] tracking-[0.3em] uppercase mb-5" style="color:var(--text-3)">Medlake · Küsnacht</p>
       <h1 class="reveal reveal-delay-1 font-semibold tracking-[-0.03em] leading-none" style="font-size:clamp(48px,7vw,96px);color:var(--text)">
         Das Team
       </h1>
-      <p class="reveal reveal-delay-2 text-[15px] mt-6 leading-[1.8] max-w-lg" style="color:var(--text-2)">
+      <p class="reveal reveal-delay-2 text-[17px] mt-6 leading-[1.8] max-w-lg" style="color:var(--text-2)">
         Menschen mit Leidenschaft für Gesundheit, Bewegung und persönliche Betreuung.
       </p>
     </div>
@@ -47,8 +47,8 @@
         <!-- Info -->
         <div class="px-7 py-6" style="border-top:1px solid var(--border)">
           <h2 class="text-[16px] font-medium mb-1.5 tracking-[-0.01em]" style="color:var(--text)">{{ member.name }}</h2>
-          <p class="text-[10px] tracking-[0.15em] uppercase mb-3" style="color:var(--text-3)">{{ member.role }}</p>
-          <p v-if="member.desc" class="text-[13px] leading-[1.7]" style="color:var(--text-2)">{{ member.desc }}</p>
+          <p class="text-[12px] tracking-[0.15em] uppercase mb-3" style="color:var(--text-3)">{{ member.role }}</p>
+          <p v-if="member.desc" class="text-[15px] leading-[1.7]" style="color:var(--text-2)">{{ member.desc }}</p>
         </div>
       </div>
     </div>
@@ -56,10 +56,10 @@
     <!-- CTA -->
     <div class="reveal px-10 mt-20 pt-12 border-t flex items-center justify-between" style="border-color:var(--border)">
       <div>
-        <p class="text-[10px] tracking-[0.25em] uppercase mb-3" style="color:var(--text-3)">Teil des Teams werden?</p>
+        <p class="text-[12px] tracking-[0.25em] uppercase mb-3" style="color:var(--text-3)">Teil des Teams werden?</p>
         <NuxtLink
           to="/jobs"
-          class="inline-flex items-center gap-3 text-[11px] tracking-[0.18em] uppercase transition-opacity hover:opacity-60"
+          class="inline-flex items-center gap-3 text-[13px] tracking-[0.18em] uppercase transition-opacity hover:opacity-60"
           style="color:var(--text-2)"
         >
           Offene Stellen ansehen
@@ -68,7 +68,7 @@
           </svg>
         </NuxtLink>
       </div>
-      <p class="text-[10px] tracking-[0.2em] uppercase" style="color:var(--text-4)">{{ team.length }} Mitglieder</p>
+      <p class="text-[12px] tracking-[0.2em] uppercase" style="color:var(--text-4)">{{ team.length }} Mitglieder</p>
     </div>
 
   </div>

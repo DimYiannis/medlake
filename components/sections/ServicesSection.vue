@@ -1,6 +1,6 @@
 <template>
   <section id="leistungen" ref="el" class="section-divider px-10 py-20">
-    <p class="reveal text-[10px] tracking-[0.28em] uppercase mb-12" style="color:var(--text-3)">Unser Angebot</p>
+    <p class="reveal text-[12px] tracking-[0.28em] uppercase mb-12" style="color:var(--text-3)">Unser Angebot</p>
 
     <div>
       <div
@@ -14,7 +14,7 @@
           class="flex items-center cursor-pointer py-8"
           @click="toggle(i)"
         >
-          <span class="flex-shrink-0 w-16 text-[11px] tracking-[0.2em] font-medium" style="color:var(--text-4)">
+          <span class="flex-shrink-0 w-16 text-[13px] tracking-[0.2em] font-medium" style="color:var(--text-4)">
             {{ String(i + 1).padStart(2, '0') }}
           </span>
           <div class="flex-shrink-0 mr-5 service-icon-wrap">
@@ -36,12 +36,12 @@
 
         <!-- Body -->
         <div v-if="activeIndex === i" class="pl-16 pb-8">
-          <p class="text-[13px] leading-[1.85] max-w-xl mb-5" style="color:var(--text-2)">
+          <p class="text-[15px] leading-[1.85] max-w-xl mb-5" style="color:var(--text-2)">
             {{ service.description }}
           </p>
           <NuxtLink
             :to="service.link"
-            class="inline-flex items-center gap-2 text-[11px] tracking-[0.18em] uppercase transition-opacity hover:opacity-60"
+            class="inline-flex items-center gap-2 text-[13px] tracking-[0.18em] uppercase transition-opacity hover:opacity-60"
             style="color:var(--text-2)"
           >
             Mehr erfahren
@@ -56,7 +56,7 @@
     <div class="mt-12">
       <NuxtLink
         to="/leistungen"
-        class="inline-flex items-center gap-3 text-[11px] tracking-[0.2em] uppercase transition-opacity hover:opacity-60"
+        class="inline-flex items-center gap-3 text-[13px] tracking-[0.2em] uppercase transition-opacity hover:opacity-60"
         style="color:var(--text-3)"
       >
         Alle Leistungen ansehen

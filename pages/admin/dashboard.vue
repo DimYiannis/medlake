@@ -4,8 +4,8 @@
     <!-- Sidebar -->
     <aside class="w-56 flex-shrink-0 border-r border-ml-border flex flex-col bg-[#060606]">
       <div class="px-6 py-5 border-b border-ml-border">
-        <p class="text-[10px] tracking-[0.25em] uppercase text-white/25">Medlake</p>
-        <p class="text-[11px] tracking-[0.15em] uppercase text-white/50 mt-0.5">Admin</p>
+        <p class="text-[12px] tracking-[0.25em] uppercase text-white/25">Medlake</p>
+        <p class="text-[13px] tracking-[0.15em] uppercase text-white/50 mt-0.5">Admin</p>
       </div>
 
       <nav class="flex-1 py-4">
@@ -23,10 +23,10 @@
       </nav>
 
       <div class="px-6 py-4 border-t border-ml-border">
-        <NuxtLink to="/" target="_blank" class="text-[10px] tracking-widest uppercase text-white/20 hover:text-white/50 transition-colors block mb-2">
+        <NuxtLink to="/" target="_blank" class="text-[12px] tracking-widest uppercase text-white/20 hover:text-white/50 transition-colors block mb-2">
           Website ↗
         </NuxtLink>
-        <button @click="logout" class="text-[10px] tracking-widest uppercase text-white/20 hover:text-white/50 transition-colors">
+        <button @click="logout" class="text-[12px] tracking-widest uppercase text-white/20 hover:text-white/50 transition-colors">
           Ausloggen
         </button>
       </div>
@@ -43,7 +43,7 @@
         <!-- ── NEWS ── -->
         <div v-if="activeTab === 'news'">
           <div class="flex items-center justify-between mb-6">
-            <p class="text-[11px] text-white/30 tracking-widest uppercase">{{ news.length }} Beiträge</p>
+            <p class="text-[13px] text-white/30 tracking-widest uppercase">{{ news.length }} Beiträge</p>
             <button @click="openNewPost" class="admin-btn">+ Neuer Beitrag</button>
           </div>
 
@@ -54,8 +54,8 @@
               class="bg-[#080808] px-5 py-4 flex items-center gap-4 hover:bg-white/[0.02] transition-colors"
             >
               <div class="flex-1 min-w-0">
-                <p class="text-[14px] text-white truncate">{{ post.title }}</p>
-                <p class="text-[11px] text-white/25 mt-0.5">{{ formatDate(post.published_at) }} · {{ post.published ? 'Veröffentlicht' : 'Entwurf' }}</p>
+                <p class="text-[16px] text-white truncate">{{ post.title }}</p>
+                <p class="text-[13px] text-white/25 mt-0.5">{{ formatDate(post.published_at) }} · {{ post.published ? 'Veröffentlicht' : 'Entwurf' }}</p>
               </div>
               <div class="flex gap-3 flex-shrink-0">
                 <button @click="editPost(post)" class="admin-btn-sm">Bearbeiten</button>
@@ -106,7 +106,7 @@
         <!-- ── TEAM ── -->
         <div v-if="activeTab === 'team'">
           <div class="flex items-center justify-between mb-6">
-            <p class="text-[11px] text-white/30 tracking-widest uppercase">{{ team.length }} Mitglieder</p>
+            <p class="text-[13px] text-white/30 tracking-widest uppercase">{{ team.length }} Mitglieder</p>
             <button @click="openNewMember" class="admin-btn">+ Neues Mitglied</button>
           </div>
           <div class="space-y-px bg-ml-border border border-ml-border">
@@ -117,11 +117,11 @@
             >
               <div class="w-9 h-9 rounded-full bg-white/[0.05] flex-shrink-0 overflow-hidden">
                 <img v-if="member.photo_url" :src="member.photo_url" class="w-full h-full object-cover" />
-                <span v-else class="w-full h-full flex items-center justify-center text-[11px] text-white/30">{{ initials(member.name) }}</span>
+                <span v-else class="w-full h-full flex items-center justify-center text-[13px] text-white/30">{{ initials(member.name) }}</span>
               </div>
               <div class="flex-1 min-w-0">
-                <p class="text-[14px] text-white">{{ member.name }}</p>
-                <p class="text-[11px] text-white/25">{{ member.role }}</p>
+                <p class="text-[16px] text-white">{{ member.name }}</p>
+                <p class="text-[13px] text-white/25">{{ member.role }}</p>
               </div>
               <div class="flex gap-3">
                 <button @click="editMember(member)" class="admin-btn-sm">Bearbeiten</button>
@@ -164,7 +164,7 @@
         <!-- ── GALLERY ── -->
         <div v-if="activeTab === 'gallery'">
           <div class="flex items-center justify-between mb-6">
-            <p class="text-[11px] text-white/30 tracking-widest uppercase">{{ gallery.length }} Fotos</p>
+            <p class="text-[13px] text-white/30 tracking-widest uppercase">{{ gallery.length }} Fotos</p>
           </div>
           <div class="mb-6">
             <label class="admin-label">Fotos hochladen</label>
@@ -180,13 +180,13 @@
               <div class="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors flex items-center justify-center">
                 <button
                   @click="deleteGalleryPhoto(photo.id)"
-                  class="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] tracking-widest uppercase text-red-400/80 border border-red-400/30 px-3 py-1.5"
+                  class="opacity-0 group-hover:opacity-100 transition-opacity text-[12px] tracking-widest uppercase text-red-400/80 border border-red-400/30 px-3 py-1.5"
                 >
                   Löschen
                 </button>
               </div>
               <input v-model="photo.caption" type="text" placeholder="Beschriftung…"
-                class="absolute bottom-0 left-0 right-0 bg-black/60 text-white/50 text-[11px] px-2 py-1 border-t border-ml-border focus:outline-none placeholder-white/20"
+                class="absolute bottom-0 left-0 right-0 bg-black/60 text-white/50 text-[13px] px-2 py-1 border-t border-ml-border focus:outline-none placeholder-white/20"
                 @blur="updateCaption(photo)"
               />
             </div>
@@ -261,14 +261,14 @@
         <!-- ── DOCTORS ── -->
         <div v-if="activeTab === 'doctors'">
           <div class="flex items-center justify-between mb-6">
-            <p class="text-[11px] text-white/30 tracking-widest uppercase">{{ doctors.length }} Ärzte</p>
+            <p class="text-[13px] text-white/30 tracking-widest uppercase">{{ doctors.length }} Ärzte</p>
             <button @click="openNewDoctor" class="admin-btn">+ Neuer Arzt</button>
           </div>
           <div class="space-y-px bg-ml-border border border-ml-border">
             <div v-for="d in doctors" :key="d.id" class="bg-[#080808] px-5 py-4 flex items-center gap-4 hover:bg-white/[0.02] transition-colors">
               <div class="flex-1 min-w-0">
-                <p class="text-[14px] text-white">{{ d.name }}</p>
-                <p class="text-[11px] text-white/25">{{ d.specialty }}</p>
+                <p class="text-[16px] text-white">{{ d.name }}</p>
+                <p class="text-[13px] text-white/25">{{ d.specialty }}</p>
               </div>
               <div class="flex gap-3">
                 <button @click="editDoctor(d)" class="admin-btn-sm">Bearbeiten</button>
@@ -306,14 +306,14 @@
         <!-- ── SERVICES ── -->
         <div v-if="activeTab === 'services'">
           <div class="flex items-center justify-between mb-6">
-            <p class="text-[11px] text-white/30 tracking-widest uppercase">{{ services.length }} Leistungen</p>
+            <p class="text-[13px] text-white/30 tracking-widest uppercase">{{ services.length }} Leistungen</p>
             <button @click="openNewService" class="admin-btn">+ Neue Leistung</button>
           </div>
           <div class="space-y-px bg-ml-border border border-ml-border">
             <div v-for="s in services" :key="s.id" class="bg-[#080808] px-5 py-4 flex items-center gap-4 hover:bg-white/[0.02] transition-colors">
               <div class="flex-1 min-w-0">
-                <p class="text-[14px] text-white">{{ s.name }}</p>
-                <p class="text-[11px] text-white/25 truncate">{{ s.link }}</p>
+                <p class="text-[16px] text-white">{{ s.name }}</p>
+                <p class="text-[13px] text-white/25 truncate">{{ s.link }}</p>
               </div>
               <div class="flex gap-3">
                 <button @click="editService(s)" class="admin-btn-sm">Bearbeiten</button>
@@ -342,7 +342,7 @@
         <!-- ── HOLIDAYS ── -->
         <div v-if="activeTab === 'holidays'">
           <div class="flex items-center justify-between mb-6">
-            <p class="text-[11px] text-white/30 tracking-widest uppercase">{{ holidays.length }} Einträge</p>
+            <p class="text-[13px] text-white/30 tracking-widest uppercase">{{ holidays.length }} Einträge</p>
             <button @click="addHoliday" class="admin-btn">+ Neuer Eintrag</button>
           </div>
           <div class="space-y-px bg-ml-border border border-ml-border">
@@ -359,14 +359,14 @@
         <!-- ── JOBS ── -->
         <div v-if="activeTab === 'jobs'">
           <div class="flex items-center justify-between mb-6">
-            <p class="text-[11px] text-white/30 tracking-widest uppercase">{{ jobs.length }} Stellen</p>
+            <p class="text-[13px] text-white/30 tracking-widest uppercase">{{ jobs.length }} Stellen</p>
             <button @click="openNewJob" class="admin-btn">+ Neue Stelle</button>
           </div>
           <div class="space-y-px bg-ml-border border border-ml-border">
             <div v-for="j in jobs" :key="j.id" class="bg-[#080808] px-5 py-4 flex items-center gap-4 hover:bg-white/[0.02] transition-colors">
               <div class="flex-1 min-w-0">
-                <p class="text-[14px] text-white truncate">{{ j.title }}</p>
-                <p class="text-[11px] text-white/25">{{ j.active ? 'Aktiv' : 'Inaktiv' }}</p>
+                <p class="text-[16px] text-white truncate">{{ j.title }}</p>
+                <p class="text-[13px] text-white/25">{{ j.active ? 'Aktiv' : 'Inaktiv' }}</p>
               </div>
               <div class="flex gap-3">
                 <button @click="editJob(j)" class="admin-btn-sm">Bearbeiten</button>
@@ -383,7 +383,7 @@
                 <div><label class="admin-label">Einleitung</label><textarea v-model="editingJob.intro" rows="3" class="admin-input" /></div>
                 <div>
                   <label class="admin-label">Abschnitte (JSON)</label>
-                  <textarea :value="JSON.stringify(editingJob.sections, null, 2)" rows="10" class="admin-input font-mono text-[11px]"
+                  <textarea :value="JSON.stringify(editingJob.sections, null, 2)" rows="10" class="admin-input font-mono text-[13px]"
                     @input="(e) => { try { editingJob.sections = JSON.parse((e.target as HTMLTextAreaElement).value) } catch {} }" />
                 </div>
                 <div class="flex items-center gap-3">
@@ -701,15 +701,15 @@ function initials(name: string) {
 
 <style scoped>
 .admin-btn {
-  @apply text-[11px] tracking-[0.15em] uppercase bg-white text-black px-5 py-2.5 font-medium hover:bg-white/85 transition-colors disabled:opacity-40;
+  @apply text-[13px] tracking-[0.15em] uppercase bg-white text-black px-5 py-2.5 font-medium hover:bg-white/85 transition-colors disabled:opacity-40;
 }
 .admin-btn-sm {
-  @apply text-[10px] tracking-[0.15em] uppercase border border-ml-border px-4 py-2 text-white/40 hover:text-white hover:border-white/30 transition-colors;
+  @apply text-[12px] tracking-[0.15em] uppercase border border-ml-border px-4 py-2 text-white/40 hover:text-white hover:border-white/30 transition-colors;
 }
 .admin-label {
-  @apply block text-[10px] tracking-[0.2em] uppercase text-white/30 mb-2;
+  @apply block text-[12px] tracking-[0.2em] uppercase text-white/30 mb-2;
 }
 .admin-input {
-  @apply w-full bg-white/[0.04] border border-ml-border text-white text-[13px] px-4 py-3 placeholder-white/20 focus:outline-none focus:border-white/25 transition-colors;
+  @apply w-full bg-white/[0.04] border border-ml-border text-white text-[15px] px-4 py-3 placeholder-white/20 focus:outline-none focus:border-white/25 transition-colors;
 }
 </style>

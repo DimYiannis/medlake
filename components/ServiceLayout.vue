@@ -4,7 +4,7 @@
     <div class="px-10 mb-12">
       <NuxtLink
         to="/"
-        class="inline-flex items-center gap-2 text-[10px] tracking-[0.22em] uppercase transition-opacity hover:opacity-60"
+        class="inline-flex items-center gap-2 text-[12px] tracking-[0.22em] uppercase transition-opacity hover:opacity-60"
         style="color:var(--text-3)"
       >
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -15,7 +15,7 @@
     </div>
 
     <div class="px-10 mb-16 border-b pb-12" style="border-color:var(--border)">
-      <p class="text-[10px] tracking-[0.3em] uppercase mb-4" style="color:var(--text-3)">
+      <p class="text-[12px] tracking-[0.3em] uppercase mb-4" style="color:var(--text-3)">
         Medlake — Leistungen
       </p>
       <h1
@@ -24,7 +24,7 @@
       >
         <slot name="title" />
       </h1>
-      <p class="text-[15px] leading-[1.8] max-w-2xl" style="color:var(--text-2)">
+      <p class="text-[17px] leading-[1.8] max-w-2xl" style="color:var(--text-2)">
         <slot name="intro" />
       </p>
     </div>
@@ -34,14 +34,14 @@
     </div>
 
     <div class="px-10 mt-16 pt-12 border-t" style="border-color:var(--border)">
-      <p class="text-[10px] tracking-[0.25em] uppercase mb-6" style="color:var(--text-3)">
+      <p class="text-[12px] tracking-[0.25em] uppercase mb-6" style="color:var(--text-3)">
         Interessiert?
       </p>
       <a
         href="https://connect.shore.com/bookings/medlake-training/services"
         target="_blank"
         rel="noopener"
-        class="inline-flex items-center gap-3 text-[11px] tracking-[0.2em] uppercase px-7 py-4 font-medium transition-opacity hover:opacity-80"
+        class="inline-flex items-center gap-3 text-[13px] tracking-[0.2em] uppercase px-7 py-4 font-medium transition-opacity hover:opacity-80"
         style="background:var(--btn-bg);color:var(--btn-text)"
       >
         Termin buchen

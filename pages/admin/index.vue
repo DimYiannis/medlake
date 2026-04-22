@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen flex items-center justify-center px-6">
     <div class="w-full max-w-sm">
-      <p class="text-[10px] tracking-[0.3em] uppercase text-white/20 mb-2 text-center">Medlake</p>
+      <p class="text-[12px] tracking-[0.3em] uppercase text-white/20 mb-2 text-center">Medlake</p>
       <h1 class="text-[28px] font-semibold tracking-[-0.02em] text-center mb-10">Admin</h1>
 
       <form @submit.prevent="login" class="space-y-3">
@@ -10,13 +10,13 @@
           type="password"
           placeholder="Passwort"
           autofocus
-          class="w-full bg-white/[0.04] border border-ml-border text-white text-[13px] px-4 py-3.5 placeholder-white/20 focus:outline-none focus:border-white/30 transition-colors"
+          class="w-full bg-white/[0.04] border border-ml-border text-white text-[15px] px-4 py-3.5 placeholder-white/20 focus:outline-none focus:border-white/30 transition-colors"
         />
-        <p v-if="error" class="text-[11px] text-red-400/70 tracking-wide">Falsches Passwort.</p>
+        <p v-if="error" class="text-[13px] text-red-400/70 tracking-wide">Falsches Passwort.</p>
         <button
           type="submit"
           :disabled="loading"
-          class="w-full text-[11px] tracking-[0.2em] uppercase bg-white text-ml-black py-3.5 font-medium hover:bg-white/85 transition-colors disabled:opacity-40"
+          class="w-full text-[13px] tracking-[0.2em] uppercase bg-white text-ml-black py-3.5 font-medium hover:bg-white/85 transition-colors disabled:opacity-40"
         >
           {{ loading ? '…' : 'Einloggen' }}
         </button>

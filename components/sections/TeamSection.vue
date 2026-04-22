@@ -2,10 +2,10 @@
   <section ref="el" class="section-divider py-20 overflow-hidden" style="background:var(--team-bg)">
 
     <div class="px-10 mb-12 flex items-end justify-between">
-      <p class="reveal text-[10px] tracking-[0.28em] uppercase" style="color:var(--text-3)">Das Team</p>
+      <p class="reveal text-[12px] tracking-[0.28em] uppercase" style="color:var(--text-3)">Das Team</p>
       <NuxtLink
         to="/team"
-        class="reveal reveal-delay-1 text-[10px] tracking-[0.2em] uppercase transition-opacity hover:opacity-50 flex items-center gap-2"
+        class="reveal reveal-delay-1 text-[12px] tracking-[0.2em] uppercase transition-opacity hover:opacity-50 flex items-center gap-2"
         style="color:var(--text-3)"
       >
         Alle ansehen
@@ -44,8 +44,8 @@
             />
           </div>
           <div class="px-4 py-4" style="border-top:1px solid var(--border)">
-            <p class="text-[13px] font-medium mb-1 tracking-[-0.01em]" style="color:var(--text)">{{ member.name }}</p>
-            <p class="text-[10px] tracking-[0.12em] uppercase" style="color:var(--text-3)">{{ member.role }}</p>
+            <p class="text-[15px] font-medium mb-1 tracking-[-0.01em]" style="color:var(--text)">{{ member.name }}</p>
+            <p class="text-[12px] tracking-[0.12em] uppercase" style="color:var(--text-3)">{{ member.role }}</p>
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@
           </div>
           <div class="px-6 py-5" style="background:var(--bg);border-top:1px solid var(--border)">
             <p class="text-[16px] font-medium mb-1" style="color:var(--text)">{{ hovered.name }}</p>
-            <p class="text-[10px] tracking-[0.15em] uppercase" style="color:var(--text-3)">{{ hovered.role }}</p>
+            <p class="text-[12px] tracking-[0.15em] uppercase" style="color:var(--text-3)">{{ hovered.role }}</p>
           </div>
           <button
             class="absolute top-3 right-3 w-8 h-8 flex items-center justify-center text-white/60 hover:text-white transition-colors bg-black/40"

@@ -2,7 +2,7 @@
   <div class="pt-36 px-10 pb-24 min-h-screen">
     <!-- Header -->
     <div class="mb-16 border-b pb-10" style="border-color:var(--border)">
-      <p class="text-[10px] tracking-[0.28em] uppercase mb-4" style="color:var(--text-3)">Medlake</p>
+      <p class="text-[12px] tracking-[0.28em] uppercase mb-4" style="color:var(--text-3)">Medlake</p>
       <h1 class="text-[clamp(40px,6vw,80px)] font-semibold tracking-[-0.025em] leading-none" style="color:var(--text)">News</h1>
     </div>
 
@@ -26,9 +26,9 @@
           />
           <div v-else class="w-full h-full" style="background:var(--bg-2)" />
         </div>
-        <p class="text-[10px] tracking-[0.22em] uppercase mb-3" style="color:var(--text-3)">{{ post.tag || 'News' }}</p>
+        <p class="text-[12px] tracking-[0.22em] uppercase mb-3" style="color:var(--text-3)">{{ post.tag || 'News' }}</p>
         <h2 class="text-[16px] font-medium leading-[1.45] mb-4" style="color:var(--text)">{{ post.title }}</h2>
-        <p class="text-[11px]" style="color:var(--text-4)">{{ formatDate(post.published_at) }}</p>
+        <p class="text-[13px]" style="color:var(--text-4)">{{ formatDate(post.published_at) }}</p>
       </NuxtLink>
     </div>
 

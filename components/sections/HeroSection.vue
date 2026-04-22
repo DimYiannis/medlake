@@ -37,13 +37,13 @@
     <Transition name="fade-up">
       <div v-if="phase === 'far'"
         class="absolute inset-0 z-[4] flex flex-col items-center justify-center pointer-events-none">
-        <p class="text-[10px] tracking-[0.35em] uppercase text-white/30 mb-5">Medlake Training — Küsnacht</p>
+        <p class="text-[12px] tracking-[0.35em] uppercase text-white/30 mb-5">Medlake Training — Küsnacht</p>
         <h2 class="text-[clamp(26px,3.8vw,52px)] font-semibold tracking-[-0.02em] text-white/80 text-center leading-tight">
           Kompetenzzentrum für<br>
           <span class="text-white/35">Gesundheit & Bewegung</span>
         </h2>
         <div class="mt-10 flex flex-col items-center gap-2">
-          <p class="text-[9px] tracking-[0.3em] uppercase text-white/25">Scroll to enter</p>
+          <p class="text-[11px] tracking-[0.3em] uppercase text-white/25">Scroll to enter</p>
           <div class="bounce-arrow">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M7 1v12M1 8l6 6 6-6" stroke="rgba(255,255,255,0.25)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -56,7 +56,7 @@
     <!-- CLOSE phase: left hero content -->
     <Transition name="fade-up">
       <div v-if="phase === 'close'" class="absolute z-[4] bottom-44 left-6 max-w-[240px] sm:bottom-52 sm:left-10 sm:max-w-xl">
-        <p class="text-[9px] sm:text-[10px] tracking-[0.3em] uppercase text-white/30 mb-3 sm:mb-4">Küsnacht, Schweiz — seit 2001</p>
+        <p class="text-[11px] sm:text-[12px] tracking-[0.3em] uppercase text-white/30 mb-3 sm:mb-4">Küsnacht, Schweiz — seit 2001</p>
         <h1 class="font-semibold leading-[1.06] tracking-[-0.025em] text-white mb-4 sm:mb-5"
           style="font-size:clamp(22px,4.5vw,66px)">
           Die Kraft<br>
@@ -64,17 +64,17 @@
           Die Kraft<br>
           <span class="text-white/28">zu bewegen.</span>
         </h1>
-        <p class="hidden sm:block text-[14px] leading-[1.8] max-w-sm text-white/42 mb-8">
+        <p class="hidden sm:block text-[16px] leading-[1.8] max-w-sm text-white/42 mb-8">
           Medizinisches Kompetenzzentrum für gesundheitsorientiertes Kraft- und Ausdauertraining.
         </p>
         <div class="flex items-center gap-3 sm:gap-6">
           <a href="https://connect.shore.com/bookings/medlake-training/services"
             target="_blank" rel="noopener"
-            class="text-[9px] sm:text-[11px] tracking-[0.15em] uppercase px-3 py-1.5 sm:px-6 sm:py-3 font-medium bg-white text-black hover:bg-white/85 transition-opacity">
+            class="text-[11px] sm:text-[13px] tracking-[0.15em] uppercase px-3 py-1.5 sm:px-6 sm:py-3 font-medium bg-white text-black hover:bg-white/85 transition-opacity">
             Termin buchen
           </a>
           <NuxtLink to="/leistungen"
-            class="text-[9px] sm:text-[11px] tracking-[0.12em] uppercase flex items-center gap-1.5 text-white/32 hover:text-white/60 transition-colors">
+            class="text-[11px] sm:text-[13px] tracking-[0.12em] uppercase flex items-center gap-1.5 text-white/32 hover:text-white/60 transition-colors">
             Leistungen <span>→</span>
           </NuxtLink>
         </div>
@@ -92,13 +92,13 @@
             :to="slides[currentSlide].link"
             class="caption-card-link group pointer-events-auto text-center block px-8 py-5"
           >
-            <p class="text-[10px] tracking-[0.3em] uppercase text-white/35 mb-2">
+            <p class="text-[12px] tracking-[0.3em] uppercase text-white/35 mb-2">
               {{ slides[currentSlide].label }}
             </p>
             <p class="text-[18px] font-semibold leading-[1.3] text-white/80 group-hover:text-white transition-colors duration-300">
               {{ slides[currentSlide].caption }}
             </p>
-            <span class="inline-flex items-center gap-1.5 mt-3 text-[10px] tracking-[0.18em] uppercase text-white/30 group-hover:text-white/65 transition-colors duration-300">
+            <span class="inline-flex items-center gap-1.5 mt-3 text-[12px] tracking-[0.18em] uppercase text-white/30 group-hover:text-white/65 transition-colors duration-300">
               Mehr erfahren
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                 class="transition-transform duration-300 group-hover:translate-x-0.5">
@@ -121,9 +121,9 @@
             :to="slides[currentSlide].link"
             class="sm:hidden text-right group"
           >
-            <p class="text-[9px] tracking-[0.25em] uppercase text-white/30 mb-1">{{ slides[currentSlide].label }}</p>
-            <p class="text-[13px] font-medium leading-[1.3] text-white/75 group-hover:text-white transition-colors mb-1">{{ slides[currentSlide].caption }}</p>
-            <span class="inline-flex items-center gap-1 text-[9px] tracking-[0.18em] uppercase text-white/30 group-hover:text-white/65 transition-colors">
+            <p class="text-[11px] tracking-[0.25em] uppercase text-white/30 mb-1">{{ slides[currentSlide].label }}</p>
+            <p class="text-[15px] font-medium leading-[1.3] text-white/75 group-hover:text-white transition-colors mb-1">{{ slides[currentSlide].caption }}</p>
+            <span class="inline-flex items-center gap-1 text-[11px] tracking-[0.18em] uppercase text-white/30 group-hover:text-white/65 transition-colors">
               Mehr erfahren
               <svg width="8" height="8" viewBox="0 0 10 10" fill="none" class="transition-transform duration-300 group-hover:translate-x-0.5">
                 <path d="M1 5h8M5 1l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>

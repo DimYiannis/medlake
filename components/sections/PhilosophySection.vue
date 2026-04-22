@@ -7,16 +7,16 @@
 
       <div class="reveal mb-10 flex items-center gap-4">
         <div class="h-px w-12" style="background:var(--text-3)"></div>
-        <span class="text-[10px] tracking-[0.3em] uppercase" style="color:rgba(197,160,80,0.6)">Unsere Philosophie</span>
+        <span class="text-[12px] tracking-[0.3em] uppercase" style="color:rgba(197,160,80,0.6)">Unsere Philosophie</span>
       </div>
 
       <div class="font-normal leading-[1.4] tracking-[-0.01em]" style="font-size:clamp(22px,3.5vw,50px);color:var(--text-2)">
-        <span class="reveal reveal-delay-1 block text-[11px] tracking-[0.25em] uppercase mb-2" style="font-size:11px;color:var(--text-3)">Wer sind wir?</span>
+        <span class="reveal reveal-delay-1 block text-[13px] tracking-[0.25em] uppercase mb-2" style="font-size:11px;color:var(--text-3)">Wer sind wir?</span>
         <span class="reveal reveal-delay-2 block">
           Kompetenzzentrum für <strong class="text-highlight" style="font-weight:500">Gesundheitsorientiertes Kraft- und Ausdauertraining.</strong>
         </span>
 
-        <span class="reveal reveal-delay-3 block text-[11px] tracking-[0.25em] uppercase mt-10 mb-2" style="font-size:11px;color:var(--text-3)">Was unterscheidet uns von anderen Fitnesscentern?</span>
+        <span class="reveal reveal-delay-3 block text-[13px] tracking-[0.25em] uppercase mt-10 mb-2" style="font-size:11px;color:var(--text-3)">Was unterscheidet uns von anderen Fitnesscentern?</span>
         <span class="reveal reveal-delay-4 block">
           <strong class="text-highlight" style="font-weight:500">Spezialärzte und Physiotherapeutinnen</strong>
           behandeln Rücken-, Nacken- und Gelenkschmerzen —

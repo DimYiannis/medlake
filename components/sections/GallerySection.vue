@@ -1,6 +1,6 @@
 <template>
   <section ref="el" class="section-divider px-10 py-20">
-    <p class="reveal text-[10px] tracking-[0.28em] uppercase mb-14" style="color:var(--text-3)">Galerie</p>
+    <p class="reveal text-[12px] tracking-[0.28em] uppercase mb-14" style="color:var(--text-3)">Galerie</p>
 
     <div class="grid grid-cols-2 md:grid-cols-3" style="gap:1px;background:var(--border);border:1px solid var(--border)">
       <div
@@ -13,11 +13,11 @@
       >
         <img v-if="photo.url" :src="photo.url" :alt="photo.caption || 'Medlake'"
           class="w-full h-full object-cover opacity-75 group-hover:opacity-95 group-hover:scale-105 transition-all duration-700" />
-        <span v-else class="text-[9px] tracking-widest uppercase" style="color:var(--text-4)">Medlake</span>
+        <span v-else class="text-[11px] tracking-widest uppercase" style="color:var(--text-4)">Medlake</span>
         <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center" style="background:rgba(0,0,0,0.2)">
-          <span class="text-[10px] tracking-[0.2em] uppercase text-white/70">Ansehen</span>
+          <span class="text-[12px] tracking-[0.2em] uppercase text-white/70">Ansehen</span>
         </div>
-        <p class="absolute bottom-0 left-0 right-0 p-4 text-[11px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity text-white/80" style="background:linear-gradient(to top,rgba(0,0,0,0.6),transparent)">
+        <p class="absolute bottom-0 left-0 right-0 p-4 text-[13px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity text-white/80" style="background:linear-gradient(to top,rgba(0,0,0,0.6),transparent)">
           Medlake
         </p>
       </div>
@@ -32,7 +32,7 @@
           <img v-if="displayPhotos[lightboxIndex]?.url" :src="displayPhotos[lightboxIndex].url" :alt="displayPhotos[lightboxIndex].caption || 'Medlake'" class="max-w-[85vw] max-h-[85vh] object-contain" />
           <div v-else class="text-white/20 text-sm tracking-widest">Kein Bild</div>
           <button class="absolute right-6 top-1/2 -translate-y-1/2 text-4xl text-white/30 hover:text-white transition-colors px-4 py-2" @click="nextPhoto">›</button>
-          <p v-if="displayPhotos[lightboxIndex]?.caption" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-[11px] tracking-widest uppercase text-white/30">
+          <p v-if="displayPhotos[lightboxIndex]?.caption" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-[13px] tracking-widest uppercase text-white/30">
             {{ displayPhotos[lightboxIndex].caption }}
           </p>
         </div>

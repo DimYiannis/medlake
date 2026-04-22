@@ -6,18 +6,18 @@
       <p class="absolute bottom-0 left-0 font-bold leading-none tracking-[-0.04em] uppercase select-none pointer-events-none" style="font-size:clamp(55px,9vw,130px);color:var(--bleed)">
         Öffnungs<br>zeiten
       </p>
-      <p class="reveal text-[10px] tracking-[0.28em] uppercase mb-10" style="color:var(--text-3)">Öffnungszeiten</p>
+      <p class="reveal text-[12px] tracking-[0.28em] uppercase mb-10" style="color:var(--text-3)">Öffnungszeiten</p>
       <div class="relative z-10">
         <div v-for="(row, i) in hours" :key="row.day" class="reveal flex justify-between items-center py-4 border-b" :class="`reveal-delay-${i + 1}`" style="border-color:var(--border)">
-          <span class="text-[13px] tracking-wide" style="color:var(--text-3)">{{ row.day }}</span>
+          <span class="text-[15px] tracking-wide" style="color:var(--text-3)">{{ row.day }}</span>
           <NuxtLink v-if="row.link" :to="row.link"
-            class="text-[15px] font-medium tracking-wide transition-opacity hover:opacity-60 underline underline-offset-4 decoration-1 cursor-pointer"
+            class="text-[17px] font-medium tracking-wide transition-opacity hover:opacity-60 underline underline-offset-4 decoration-1 cursor-pointer"
             style="color:var(--text)">{{ row.time }}</NuxtLink>
-          <span v-else class="text-[15px] font-medium tracking-wide" style="color:var(--text)">{{ row.time }}</span>
+          <span v-else class="text-[17px] font-medium tracking-wide" style="color:var(--text)">{{ row.time }}</span>
         </div>
         <div class="mt-10 reveal reveal-delay-4">
           <a href="https://connect.shore.com/bookings/medlake-training/services" target="_blank" rel="noopener"
-            class="inline-flex items-center text-[11px] tracking-[0.2em] uppercase px-7 py-3.5 font-medium transition-opacity hover:opacity-80"
+            class="inline-flex items-center text-[13px] tracking-[0.2em] uppercase px-7 py-3.5 font-medium transition-opacity hover:opacity-80"
             style="background:var(--btn-bg);color:var(--btn-text)">
             Jetzt Termin buchen
           </a>
@@ -27,12 +27,12 @@
 
     <!-- Contact -->
     <div class="px-10 py-20">
-      <p class="reveal text-[10px] tracking-[0.28em] uppercase mb-10" style="color:var(--text-3)">Kontakt</p>
+      <p class="reveal text-[12px] tracking-[0.28em] uppercase mb-10" style="color:var(--text-3)">Kontakt</p>
       <div class="space-y-7 mb-14">
         <div v-for="(item, i) in contactItems" :key="item.key" class="reveal flex gap-8" :class="`reveal-delay-${i + 1}`">
-          <span class="text-[10px] tracking-[0.2em] uppercase w-20 flex-shrink-0 pt-0.5" style="color:var(--text-4)">{{ item.key }}</span>
+          <span class="text-[12px] tracking-[0.2em] uppercase w-20 flex-shrink-0 pt-0.5" style="color:var(--text-4)">{{ item.key }}</span>
           <component :is="item.href ? 'a' : 'span'" :href="item.href"
-            class="text-[14px] leading-relaxed transition-opacity" :class="item.href ? 'hover:opacity-70 cursor-pointer' : ''"
+            class="text-[16px] leading-relaxed transition-opacity" :class="item.href ? 'hover:opacity-70 cursor-pointer' : ''"
             style="color:var(--text-2)">
             {{ item.value }}
           </component>
@@ -41,14 +41,14 @@
 
       <!-- Contact form -->
       <div class="reveal reveal-delay-4">
-        <p class="text-[10px] tracking-[0.28em] uppercase mb-6" style="color:var(--text-4)">Schreiben Sie uns</p>
+        <p class="text-[12px] tracking-[0.28em] uppercase mb-6" style="color:var(--text-4)">Schreiben Sie uns</p>
         <form @submit.prevent="submitForm" class="space-y-3">
-          <input v-model="form.name" type="text" placeholder="Name" class="form-input w-full text-[13px] px-4 py-3 focus:outline-none transition-colors" />
-          <input v-model="form.email" type="email" placeholder="E-Mail" class="form-input w-full text-[13px] px-4 py-3 focus:outline-none transition-colors" />
-          <input v-model="form.subject" type="text" placeholder="Betreff" class="form-input w-full text-[13px] px-4 py-3 focus:outline-none transition-colors" />
-          <textarea v-model="form.message" placeholder="Ihre Nachricht" rows="4" class="form-input w-full text-[13px] px-4 py-3 focus:outline-none transition-colors resize-none" />
+          <input v-model="form.name" type="text" placeholder="Name" class="form-input w-full text-[15px] px-4 py-3 focus:outline-none transition-colors" />
+          <input v-model="form.email" type="email" placeholder="E-Mail" class="form-input w-full text-[15px] px-4 py-3 focus:outline-none transition-colors" />
+          <input v-model="form.subject" type="text" placeholder="Betreff" class="form-input w-full text-[15px] px-4 py-3 focus:outline-none transition-colors" />
+          <textarea v-model="form.message" placeholder="Ihre Nachricht" rows="4" class="form-input w-full text-[15px] px-4 py-3 focus:outline-none transition-colors resize-none" />
           <button type="submit" :disabled="sending"
-            class="w-full text-[11px] tracking-[0.2em] uppercase py-3.5 font-medium transition-opacity hover:opacity-80 disabled:opacity-40"
+            class="w-full text-[13px] tracking-[0.2em] uppercase py-3.5 font-medium transition-opacity hover:opacity-80 disabled:opacity-40"
             style="background:var(--btn-bg);color:var(--btn-text)">
             {{ sending ? 'Wird gesendet…' : 'Nachricht senden' }}
           </button>

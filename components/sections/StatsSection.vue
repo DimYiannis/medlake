@@ -11,7 +11,7 @@
         <p class="font-semibold tracking-[-0.04em] leading-none mb-3" style="font-size:clamp(36px,5vw,68px);color:var(--text)">
           {{ stat.num }}
         </p>
-        <p class="text-[11px] tracking-[0.12em] uppercase leading-[1.6] whitespace-pre-line" style="color:var(--text-3)">
+        <p class="text-[13px] tracking-[0.12em] uppercase leading-[1.6] whitespace-pre-line" style="color:var(--text-3)">
           {{ stat.label }}
         </p>
       </div>

@@ -17,13 +17,13 @@
       </div>
       <nav class="flex flex-wrap gap-x-8 gap-y-3">
         <NuxtLink v-for="link in links" :key="link.to" :to="link.to"
-          class="text-[10px] tracking-[0.15em] uppercase hover:opacity-60 transition-opacity" style="color:var(--text-3)">
+          class="text-[12px] tracking-[0.15em] uppercase hover:opacity-60 transition-opacity" style="color:var(--text-3)">
           {{ link.label }}
         </NuxtLink>
       </nav>
       <div class="text-right">
-        <p class="text-[10px] tracking-widest uppercase" style="color:var(--text-4)">© {{ new Date().getFullYear() }} Medlake</p>
-        <NuxtLink to="/admin" class="text-[10px] tracking-widest uppercase mt-1 block hover:opacity-50 transition-opacity" style="color:var(--text-4)">Admin</NuxtLink>
+        <p class="text-[12px] tracking-widest uppercase" style="color:var(--text-4)">© {{ new Date().getFullYear() }} Medlake</p>
+        <NuxtLink to="/admin" class="text-[12px] tracking-widest uppercase mt-1 block hover:opacity-50 transition-opacity" style="color:var(--text-4)">Admin</NuxtLink>
       </div>
     </div>
   </footer>

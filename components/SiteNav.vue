@@ -10,7 +10,7 @@
     <ul class="hidden nav:flex items-center gap-8 list-none">
       <li v-for="link in links" :key="link.to">
         <NuxtLink :to="link.to"
-          class="text-[11px] tracking-[0.15em] uppercase transition-opacity hover:opacity-80"
+          class="text-[13px] tracking-[0.15em] uppercase transition-opacity hover:opacity-80"
           style="color:var(--text-3)">
           {{ link.label }}
         </NuxtLink>
@@ -23,7 +23,7 @@
         href="https://connect.shore.com/bookings/medlake-training/services"
         target="_blank"
         rel="noopener"
-        class="cta-btn text-[11px] tracking-[0.15em] uppercase px-5 py-2.5 transition-all duration-300 border"
+        class="cta-btn text-[13px] tracking-[0.15em] uppercase px-5 py-2.5 transition-all duration-300 border"
       >
         Termin buchen
       </a>
@@ -54,7 +54,7 @@
         <a
           href="https://connect.shore.com/bookings/medlake-training/services"
           target="_blank"
-          class="cta-btn text-[11px] tracking-[0.15em] uppercase inline-block px-5 py-3 border"
+          class="cta-btn text-[13px] tracking-[0.15em] uppercase inline-block px-5 py-3 border"
         >
           Termin buchen
         </a>
