@@ -140,7 +140,7 @@
             @click="prev"
             aria-label="Vorheriges Bild"
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <svg width="18" height="18" viewBox="0 0 14 14" fill="none">
               <path d="M9 2L4 7l5 5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
@@ -163,7 +163,7 @@
             @click="next"
             aria-label="Nächstes Bild"
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <svg width="18" height="18" viewBox="0 0 14 14" fill="none">
               <path d="M5 2l5 5-5 5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
@@ -276,7 +276,7 @@ useSwipe(sectionEl, {
 
 .carousel-arrow {
   width: 32px;
-  height: 32px;
+  height: 22px;
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 2px;
   display: flex;
@@ -285,6 +285,12 @@ useSwipe(sectionEl, {
   background: transparent;
   cursor: pointer;
   transition: opacity 0.2s, border-color 0.2s;
+}
+@media (min-width: 640px) {
+  .carousel-arrow {
+    width: 48px;
+    height: 48px;
+  }
 }
 .carousel-arrow:hover:not(:disabled) {
   border-color: rgba(255,255,255,0.4);

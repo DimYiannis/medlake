@@ -41,7 +41,7 @@ onMounted(() => {
   const camera = new THREE.PerspectiveCamera(50, 2, 0.1, 300)
 
   const CAM_FAR   = 28
-  const CAM_CLOSE = 9
+  let CAM_CLOSE   = window.innerWidth < 1024 ? 10 : 6
   let camZ        = CAM_FAR
   let camZTarget  = CAM_FAR
 
@@ -55,6 +55,7 @@ onMounted(() => {
     renderer.setSize(w, h, false)
     camera.aspect = w / h
     camera.updateProjectionMatrix()
+    CAM_CLOSE = w < 1024 ? 10 : 6
   }
   resize()
   const ro = new ResizeObserver(resize)

@@ -44,7 +44,11 @@
   --footer-bg:     #e8e5df;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  min-width: 0;
+}
 
 body {
   background: var(--bg);
@@ -59,6 +63,13 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 2px; }
 ::selection { background: rgba(128,128,128,0.2); }
+
+:focus-visible {
+  outline: 2px solid var(--text-2);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+:focus:not(:focus-visible) { outline: none; }
 
 .reveal {
   opacity: 0;
