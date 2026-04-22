@@ -24,10 +24,8 @@
     </ClientOnly>
 
     <!-- Gradients -->
-    <div class="absolute inset-0 z-[3] pointer-events-none"
-      style="background:linear-gradient(to top,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.25) 40%,transparent 70%)" />
-    <div class="absolute inset-0 z-[3] pointer-events-none"
-      style="background:linear-gradient(to right,rgba(0,0,0,0.45) 0%,transparent 55%)" />
+    <div class="absolute inset-0 z-[3] pointer-events-none" :style="{ background: bottomGradient }" />
+    <div class="absolute inset-0 z-[3] pointer-events-none" :style="{ background: leftGradient }" />
 
     <!-- Bleed text -->
     <p class="absolute bottom-0 left-0 right-0 z-[3] font-bold leading-none tracking-[-0.04em] uppercase pointer-events-none select-none px-8 overflow-hidden"
@@ -191,6 +189,16 @@
 
 <script setup lang="ts">
 const ThreeHeroCanvas = defineAsyncComponent(() => import('~/components/three/HeroCanvas.vue'))
+const { theme } = useTheme()
+const isLight = computed(() => theme.value === 'light')
+const bottomGradient = computed(() => isLight.value
+  ? 'linear-gradient(to top,rgba(0,0,0,0.45) 0%,rgba(0,0,0,0.1) 40%,transparent 70%)'
+  : 'linear-gradient(to top,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.25) 40%,transparent 70%)'
+)
+const leftGradient = computed(() => isLight.value
+  ? 'linear-gradient(to right,rgba(0,0,0,0.2) 0%,transparent 55%)'
+  : 'linear-gradient(to right,rgba(0,0,0,0.45) 0%,transparent 55%)'
+)
 
 const slides = [
   { label: 'Fitness',        caption: 'Modernste Geräte für Kraft & Ausdauer',     link: '/leistungen/krafttraining' },

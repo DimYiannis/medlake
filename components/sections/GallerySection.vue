@@ -17,8 +17,8 @@
         <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center" style="background:rgba(0,0,0,0.2)">
           <span class="text-[10px] tracking-[0.2em] uppercase text-white/70">Ansehen</span>
         </div>
-        <p v-if="photo.caption" class="absolute bottom-0 left-0 right-0 p-4 text-[11px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity text-white/80" style="background:linear-gradient(to top,rgba(0,0,0,0.6),transparent)">
-          {{ photo.caption }}
+        <p class="absolute bottom-0 left-0 right-0 p-4 text-[11px] tracking-wide opacity-0 group-hover:opacity-100 transition-opacity text-white/80" style="background:linear-gradient(to top,rgba(0,0,0,0.6),transparent)">
+          Medlake
         </p>
       </div>
     </div>
