@@ -5,7 +5,7 @@
     <SectionsStatsSection />
     <SectionsPhilosophySection />
     <SectionsServicesSection />
-    <SectionsTeamSection />
+    <!-- <SectionsTeamSection /> -->
     <SectionsGallerySection />
     <SectionsNewsSection />
     <SectionsHoursContactSection />

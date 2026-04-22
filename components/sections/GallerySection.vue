@@ -47,16 +47,13 @@ const supabase = useSupabaseClient()
 const lightboxIndex = ref<number | null>(null)
 
 const fallbackPhotos = Array.from({ length: 6 }, (_, i) => ({ id: i + 1, url: null, caption: null }))
-const dbPhotos = ref<any[]>([])
 
-onMounted(async () => {
-  try {
-    const { data } = await supabase.from('gallery_photos').select('*').order('sort_order', { ascending: true })
-    if (data && data.length > 0) dbPhotos.value = data
-  } catch {}
+const { data: dbPhotos } = await useAsyncData('gallery-photos', async () => {
+  const { data } = await supabase.from('gallery_photos').select('*').order('sort_order', { ascending: true })
+  return data?.length ? data : fallbackPhotos
 })
 
-const displayPhotos = computed(() => dbPhotos.value.length ? dbPhotos.value : fallbackPhotos)
+const displayPhotos = computed(() => dbPhotos.value ?? fallbackPhotos)
 
 function openLightbox(i: number) { lightboxIndex.value = i }
 function closeLightbox() { lightboxIndex.value = null }
