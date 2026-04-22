@@ -13,7 +13,7 @@ Built with Nuxt 3, Tailwind CSS, Three.js, and Supabase.
 | Styling    | Tailwind CSS                |
 | 3D / Hero  | Three.js (icosahedron + particles + mouse parallax) |
 | Backend    | Supabase (Postgres + Storage + Auth) |
-| Hosting    | Vercel / Netlify / Node VPS |
+| Hosting    | Vercel
 
 ---
 
@@ -33,14 +33,6 @@ npm install
 ### 3. Configure environment
 ```bash
 cp .env.example .env
-```
-
-Fill in `.env`:
-```
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_ANON_KEY=your-anon-key
-SUPABASE_SERVICE_KEY=your-service-role-key
-ADMIN_PASSWORD=choose-a-secure-password
 ```
 
 ### 4. Run dev server
@@ -69,28 +61,6 @@ Visit `/admin` → enter your `ADMIN_PASSWORD`.
 
 ---
 
-## Project Structure
-
-```
-medlake/
-├── assets/css/        # Global styles
-├── components/
-│   ├── three/         # HeroCanvas.vue (Three.js)
-│   ├── ui/            # MarqueeTicker, etc.
-│   └── sections/      # Hero, Stats, Services, Team, Gallery, News, HoursContact
-├── composables/       # useReveal, useSupabase
-├── layouts/           # default.vue, admin.vue
-├── pages/
-│   ├── index.vue      # Home
-│   ├── news/          # Listing + detail
-│   └── admin/         # Login + dashboard
-├── server/api/        # Login endpoint
-├── supabase-schema.sql
-└── nuxt.config.ts
-```
-
----
-
 ## Deployment (Vercel)
 
 ```bash
@@ -108,15 +78,3 @@ Or connect your GitHub repo to [vercel.com](https://vercel.com) and add the envi
 - **Marquee items**: Edit `components/ui/MarqueeTicker.vue`
 - **Services list**: Editable via admin panel, or directly in `components/sections/ServicesSection.vue`
 - **Colors**: All in `tailwind.config.ts` under `colors.ml`
-
----
-
-## Pages to add
-
-These stub pages can be created in `/pages/`:
-- `/pages/team.vue` — full team page
-- `/pages/aerzte.vue` — doctors
-- `/pages/preise.vue` — pricing
-- `/pages/kontakt.vue` — standalone contact page
-- `/pages/jobs.vue` — jobs
-- `/pages/agb.vue` — terms
