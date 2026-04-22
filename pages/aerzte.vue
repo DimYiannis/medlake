@@ -5,10 +5,10 @@
     <div class="px-10 mb-16 border-b pb-12" style="border-color:var(--border)">
       <p class="text-[12px] tracking-[0.3em] uppercase mb-4" style="color:var(--text-3)">Medlake</p>
       <h1 class="font-semibold tracking-[-0.025em] leading-none" style="font-size:clamp(40px,6vw,80px);color:var(--text)">
-        Unsere Ärzte
+        {{ $t('pages.aerzte.title') }}
       </h1>
       <p class="text-[17px] mt-5 leading-[1.8] max-w-xl" style="color:var(--text-2)">
-        Fach- und Spezialärzte begleiten Sie auf dem Weg zu mehr Gesundheit und Wohlbefinden — direkt vor Ort im Medlake.
+        {{ $t('pages.aerzte.desc') }}
       </p>
     </div>
 
@@ -36,7 +36,7 @@
           </a>
         </div>
         <div class="px-10 py-12 md:col-span-2" style="background:var(--bg)">
-          <p class="text-[12px] tracking-[0.2em] uppercase mb-5" style="color:var(--text-3)">Ausbildung & Werdegang</p>
+          <p class="text-[12px] tracking-[0.2em] uppercase mb-5" style="color:var(--text-3)">{{ $t('pages.aerzte.career') }}</p>
           <div class="space-y-4">
             <div v-for="item in doctor.bio" :key="item" class="flex gap-4">
               <span class="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:var(--text-4)" />
@@ -49,14 +49,14 @@
 
     <!-- CTA -->
     <div class="px-10 mt-16 pt-12 border-t" style="border-color:var(--border)">
-      <p class="text-[12px] tracking-[0.25em] uppercase mb-6" style="color:var(--text-3)">Termin vereinbaren</p>
+      <p class="text-[12px] tracking-[0.25em] uppercase mb-6" style="color:var(--text-3)">{{ $t('pages.aerzte.book') }}</p>
       <a
         href="https://connect.shore.com/bookings/medlake-training/services"
         target="_blank" rel="noopener"
         class="inline-flex items-center gap-3 text-[13px] tracking-[0.2em] uppercase px-7 py-4 font-medium transition-opacity hover:opacity-80"
         style="background:var(--btn-bg);color:var(--btn-text)"
       >
-        Jetzt buchen
+        {{ $t('pages.aerzte.bookNow') }}
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
           <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -67,6 +67,7 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: 'Unsere Ärzte – Medlake' })
+const { t } = useI18n()
+useHead({ title: t('pages.aerzte.meta') })
 const doctors = await useDoctors()
 </script>

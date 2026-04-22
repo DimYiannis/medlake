@@ -2,7 +2,22 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt', '@nuxtjs/supabase'],
+  modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt', '@nuxtjs/supabase', '@nuxtjs/i18n'],
+
+  i18n: {
+    locales: [
+      { code: 'de', name: 'Deutsch', file: 'de.json' },
+      { code: 'en', name: 'English', file: 'en.json' },
+    ],
+    defaultLocale: 'de',
+    strategy: 'prefix_except_default',
+    langDir: 'locales',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'ml-lang',
+      redirectOn: 'root',
+    },
+  },
 
   supabase: {
     url: process.env.SUPABASE_URL,

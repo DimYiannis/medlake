@@ -5,23 +5,23 @@
     <div class="px-10 mb-16 border-b pb-12" style="border-color:var(--border)">
       <p class="text-[12px] tracking-[0.3em] uppercase mb-4" style="color:var(--text-3)">Medlake</p>
       <h1 class="font-semibold tracking-[-0.025em] leading-none" style="font-size:clamp(40px,6vw,80px);color:var(--text)">
-        Preise & Leistungen
+        {{ $t('pages.preise.title') }}
       </h1>
       <p class="text-[17px] mt-5 leading-[1.8] max-w-xl" style="color:var(--text-2)">
-        Transparente Preise für alle — inklusive medizinisch begleiteter Betreuung von Beginn an.
+        {{ $t('pages.preise.desc') }}
       </p>
     </div>
 
     <!-- Main plans -->
     <div class="px-10 mb-16">
-      <p class="text-[12px] tracking-[0.25em] uppercase mb-8" style="color:var(--text-3)">Erwachsene</p>
+      <p class="text-[12px] tracking-[0.25em] uppercase mb-8" style="color:var(--text-3)">{{ $t('pages.preise.adults') }}</p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-px" style="background:var(--border)">
         <div v-for="plan in mainPlans" :key="plan.name"
           class="px-8 py-10"
           :style="plan.featured
             ? `background:var(--bg-card);border-top:2px solid var(--text-2)`
             : `background:var(--bg)`">
-          <p v-if="plan.featured" class="text-[11px] tracking-[0.25em] uppercase mb-4" style="color:var(--text-3)">Empfohlen</p>
+          <p v-if="plan.featured" class="text-[11px] tracking-[0.25em] uppercase mb-4" style="color:var(--text-3)">{{ $t('pages.preise.recommended') }}</p>
           <h2 class="text-[18px] font-medium mb-2" style="color:var(--text)">{{ plan.name }}</h2>
           <p class="text-[15px] mb-6 leading-[1.6]" style="color:var(--text-3)">{{ plan.desc }}</p>
           <div class="mb-6">
@@ -58,7 +58,7 @@
 
     <!-- Included services -->
     <div class="px-10 mb-16">
-      <p class="text-[12px] tracking-[0.25em] uppercase mb-8" style="color:var(--text-3)">Im Abonnement enthaltene Leistungen</p>
+      <p class="text-[12px] tracking-[0.25em] uppercase mb-8" style="color:var(--text-3)">{{ $t('pages.preise.includedLabel') }}</p>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-px border" style="background:var(--border);border-color:var(--border)">
         <div v-for="item in included" :key="item" class="flex gap-4 px-8 py-5" style="background:var(--bg)">
           <span class="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:var(--text-3)" />
@@ -69,7 +69,7 @@
 
     <!-- Not included -->
     <div class="px-10 mb-16">
-      <p class="text-[12px] tracking-[0.25em] uppercase mb-6" style="color:var(--text-3)">Zusätzliche Kosten (nicht im Abo enthalten)</p>
+      <p class="text-[12px] tracking-[0.25em] uppercase mb-6" style="color:var(--text-3)">{{ $t('pages.preise.notIncludedLabel') }}</p>
       <div class="flex flex-wrap gap-3">
         <span v-for="item in notIncluded" :key="item"
           class="text-[12px] px-4 py-2 tracking-wide border"
@@ -78,7 +78,7 @@
         </span>
       </div>
       <p class="text-[15px] mt-6" style="color:var(--text-3)">
-        Gerne beraten wir Sie bezüglich Reduktionen durch Ihre Krankenkasse.
+        {{ $t('pages.preise.insuranceNote') }}
       </p>
     </div>
 
@@ -87,7 +87,7 @@
       <a href="https://connect.shore.com/bookings/medlake-training/services" target="_blank" rel="noopener"
         class="inline-flex items-center gap-3 text-[13px] tracking-[0.2em] uppercase px-7 py-4 font-medium transition-opacity hover:opacity-80"
         style="background:var(--btn-bg);color:var(--btn-text)">
-        Termin vereinbaren
+        {{ $t('pages.preise.book') }}
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
@@ -96,106 +96,29 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: 'Preise & Leistungen – Medlake' })
+const { t, tm, rt } = useI18n()
+useHead({ title: t('pages.preise.meta') })
 
-const mainPlans = [
-  {
-    name: 'Medlake Premium',
-    desc: 'Unser umfassendstes Paket — inklusive aller Spezialgeräte',
-    price: '1300',
-    duration: '12 Monate',
-    featured: true,
-    features: [
-      'Inklusive Galileo Vibrationsplatte',
-      'Inklusive Sensopro',
-      'Inklusive Kinesis Station',
-      'Handtuch (leihweise)',
-      'Alle Grundleistungen',
-    ],
-  },
-  {
-    name: 'Medlake Plus+',
-    desc: 'Mit einem Spezialgerät Ihrer Wahl',
-    price: '1100',
-    duration: '12 Monate',
-    featured: false,
-    features: [
-      'Sensopro ODER Kinesis ODER Galileo',
-      'Alle Grundleistungen',
-    ],
-  },
-  {
-    name: 'Trainingsabonnement',
-    desc: 'Klassisches Jahresabo ohne Extras',
-    price: '1000',
-    duration: '12 Monate',
-    featured: false,
-    features: [
-      'Nutzung aller Trainingseinrichtungen',
-      'Einführung & Betreuung',
-      'Trainingskontrolle',
-    ],
-  },
-]
+const p = (key: string) => t(`pages.preise.${key}`)
+const i = (key: string) => t(`pages.preise.items.${key}`)
+const c = (key: string) => t(`pages.preise.categories.${key}`)
+const arr = (key: string) => (tm(key) as any[]).map((f: any) => rt(f))
 
-const otherCategories = [
-  {
-    title: 'Studenten',
-    items: [
-      { label: 'Jahresabonnement', sub: '12 Monate', price: 'CHF 900.–' },
-      { label: 'Halbjahresabo',    sub: '6 Monate',  price: 'CHF 700.–' },
-    ],
-  },
-  {
-    title: 'Jugendliche bis 20 Jahre',
-    items: [
-      { label: 'Jahresabonnement', sub: '12 Monate', price: 'CHF 700.–' },
-      { label: 'Halbjahresabo',    sub: '6 Monate',  price: 'CHF 500.–' },
-    ],
-  },
-  {
-    title: 'Familie mit Kind (bis 18 Jahre)*',
-    items: [
-      { label: 'Jahresabonnement', sub: '*Für Kinder deren Eltern ebenfalls Abo haben', price: 'CHF 500.–' },
-    ],
-  },
-  {
-    title: 'Einzelleistungen',
-    items: [
-      { label: 'Einzeleintritt',   sub: null, price: 'CHF 30.–' },
-      { label: 'Sensopro',         sub: null, price: 'CHF 15.–' },
-      { label: 'Personaltraining', sub: null, price: 'Auf Anfrage' },
-      { label: 'Handtuchverleih',  sub: null, price: 'CHF 1.–' },
-      { label: 'Duschgel',         sub: null, price: 'CHF 2.–' },
-    ],
-  },
-  {
-    title: 'Sensopro — Mitglieder & MedX',
-    items: [
-      { label: 'Einzeleintritt',    sub: null, price: 'CHF 15.–' },
-      { label: '10er Abonnement',   sub: null, price: 'CHF 125.–' },
-    ],
-  },
-  {
-    title: 'Sensopro — Externe',
-    items: [
-      { label: 'Einzeleintritt',    sub: null, price: 'CHF 30.–' },
-      { label: '10er Abonnement',   sub: null, price: 'CHF 250.–' },
-    ],
-  },
-]
+const mainPlans = computed(() => [
+  { name: p('plans.premium.name'), desc: p('plans.premium.desc'), price: '1300', duration: p('plans.premium.duration'), featured: true,  features: arr('pages.preise.plans.premium.features') },
+  { name: p('plans.plus.name'),    desc: p('plans.plus.desc'),    price: '1100', duration: p('plans.plus.duration'),    featured: false, features: arr('pages.preise.plans.plus.features') },
+  { name: p('plans.basis.name'),   desc: p('plans.basis.desc'),   price: '1000', duration: p('plans.basis.duration'),   featured: false, features: arr('pages.preise.plans.basis.features') },
+])
 
-const included = [
-  'Benützung der Trainingseinrichtungen, Garderoben und Duschkabinen',
-  'Instruktion und Einführung — die ersten 3 Trainings werden von einem Instruktor begleitet',
-  'Regelmässige Trainingskontrolle — jedes 10. Training auf Anfrage mit Instruktor',
-  'Periodische Erneuerung des Trainingsprogrammes nach 20–40 Einheiten',
-  'Kostenlose ärztliche Trainingsberatung (bei Jahresabo)',
-  'Kostenloses gekühltes Wasser von Eauvation — mit oder ohne Kohlensäure',
-]
+const otherCategories = computed(() => [
+  { title: c('students'),  items: [{ label: i('annual'), sub: i('12months'), price: 'CHF 900.–' }, { label: i('halfYear'), sub: i('6months'), price: 'CHF 700.–' }] },
+  { title: c('youth'),     items: [{ label: i('annual'), sub: i('12months'), price: 'CHF 700.–' }, { label: i('halfYear'), sub: i('6months'), price: 'CHF 500.–' }] },
+  { title: c('family'),    items: [{ label: i('annual'), sub: i('familySub'), price: 'CHF 500.–' }] },
+  { title: c('single'),    items: [{ label: i('singleEntry'), sub: null, price: 'CHF 30.–' }, { label: i('sensopro'), sub: null, price: 'CHF 15.–' }, { label: i('pt'), sub: null, price: i('onRequest') }, { label: i('towel'), sub: null, price: 'CHF 1.–' }, { label: i('shower'), sub: null, price: 'CHF 2.–' }] },
+  { title: c('sensoproM'), items: [{ label: i('singleEntry'), sub: null, price: 'CHF 15.–' }, { label: i('10pack'), sub: null, price: 'CHF 125.–' }] },
+  { title: c('sensoproE'), items: [{ label: i('singleEntry'), sub: null, price: 'CHF 30.–' }, { label: i('10pack'), sub: null, price: 'CHF 250.–' }] },
+])
 
-const notIncluded = [
-  'Kinesis-Station', 'Galileo-Vibrationstraining', 'Sensopro',
-  'Dividat', 'MedX-Therapie LE/CE', 'Physiotherapie',
-]
+const included = computed(() => arr('pages.preise.included'))
+const notIncluded = computed(() => arr('pages.preise.notIncluded'))
 </script>

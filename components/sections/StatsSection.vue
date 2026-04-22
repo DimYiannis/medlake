@@ -21,10 +21,11 @@
 
 <script setup lang="ts">
 const { el } = useReveal()
-const stats = [
-  { num: '3',     label: 'Spezialärzte\nvor Ort' },
-  { num: '20+',   label: 'Jahre\nErfahrung' },
-  { num: '06:30', label: 'Öffnung\nMo – Fr' },
-  { num: '100%',  label: 'Medizinisch\nbegleitet' },
-]
+const { t } = useI18n()
+const stats = computed(() => [
+  { num: '3',     label: t('stats.doctors') },
+  { num: '20+',   label: t('stats.years') },
+  { num: '06:30', label: t('stats.opening') },
+  { num: '100%',  label: t('stats.medical') },
+])
 </script>

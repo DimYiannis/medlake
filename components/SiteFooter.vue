@@ -8,36 +8,39 @@
     </div>
     <div class="px-10 pb-12 pt-4 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
       <div>
-        <p class="text-xs tracking-[0.2em] uppercase mb-4" style="color:var(--text-4)">Medlake Training</p>
+        <p class="text-xs tracking-[0.2em] uppercase mb-4" style="color:var(--text-4)">{{ $t('footer.company') }}</p>
         <address class="not-italic text-xs leading-6" style="color:var(--text-3)">
-          Seestrasse 39<br>8700 Küsnacht, Schweiz<br>
+          Seestrasse 39<br>8700 Küsnacht, {{ locale === 'en' ? 'Switzerland' : 'Schweiz' }}<br>
           <a href="tel:+41449912202" class="hover:opacity-70 transition-opacity">+41 44 991 22 02</a><br>
           <a href="mailto:info@medlake.ch" class="hover:opacity-70 transition-opacity">info@medlake.ch</a>
         </address>
       </div>
       <nav class="flex flex-wrap gap-x-8 gap-y-3">
-        <NuxtLink v-for="link in links" :key="link.to" :to="link.to"
+        <NuxtLink v-for="link in links" :key="link.to" :to="localePath(link.to)"
           class="text-[12px] tracking-[0.15em] uppercase hover:opacity-60 transition-opacity" style="color:var(--text-3)">
-          {{ link.label }}
+          {{ $t(link.labelKey) }}
         </NuxtLink>
       </nav>
       <div class="text-right">
         <p class="text-[12px] tracking-widest uppercase" style="color:var(--text-4)">© {{ new Date().getFullYear() }} Medlake</p>
-        <NuxtLink to="/admin" class="text-[12px] tracking-widest uppercase mt-1 block hover:opacity-50 transition-opacity" style="color:var(--text-4)">Admin</NuxtLink>
+        <NuxtLink :to="localePath('/admin')" class="text-[12px] tracking-widest uppercase mt-1 block hover:opacity-50 transition-opacity" style="color:var(--text-4)">{{ $t('footer.admin') }}</NuxtLink>
       </div>
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
+const { locale } = useI18n()
+const localePath = useLocalePath()
+
 const links = [
-  { to: '/team', label: 'Team' },
-  { to: '/aerzte', label: 'Ärzte' },
-  { to: '/preise', label: 'Preise' },
-  { to: '/news', label: 'News' },
-  { to: '/jobs', label: 'Jobs' },
-  { to: '/medizinisches', label: 'Medizinisches' },
-  { to: '/agb', label: 'AGB' },
-  { to: '/kontakt', label: 'Kontakt' },
+  { to: '/team',          labelKey: 'nav.team' },
+  { to: '/aerzte',        labelKey: 'nav.doctors' },
+  { to: '/preise',        labelKey: 'nav.prices' },
+  { to: '/news',          labelKey: 'nav.news' },
+  { to: '/jobs',          labelKey: 'nav.jobs' },
+  { to: '/medizinisches', labelKey: 'nav.medical' },
+  { to: '/agb',           labelKey: 'nav.agb' },
+  { to: '/kontakt',       labelKey: 'nav.contact' },
 ]
 </script>

@@ -4,9 +4,9 @@
     <div class="px-10 mb-16 border-b pb-12" style="border-color:var(--border)">
       <p class="text-[12px] tracking-[0.3em] uppercase mb-4" style="color:var(--text-3)">Medlake</p>
       <h1 class="font-semibold tracking-[-0.025em] leading-none" style="font-size:clamp(40px,6vw,80px);color:var(--text)">
-        AGB
+        {{ $t('pages.agb.title') }}
       </h1>
-      <p class="text-[16px] mt-5" style="color:var(--text-3)">Vertragsbedingungen Medlake Training AG — 2026/2027</p>
+      <p class="text-[16px] mt-5" style="color:var(--text-3)">{{ $t('pages.agb.subtitle') }}</p>
     </div>
 
     <div class="px-10 max-w-2xl">
@@ -24,7 +24,7 @@
 
       <div class="mt-12 pt-10 border-t" style="border-color:var(--border)">
         <p class="text-[15px] leading-[1.8]" style="color:var(--text-3)">
-          Bei Fragen zu unseren Vertragsbedingungen stehen wir Ihnen gerne zur Verfügung.
+          {{ $t('pages.agb.questions') }}
         </p>
         <a href="mailto:info@medlake.ch"
           class="inline-flex items-center gap-2 mt-6 text-[13px] tracking-[0.18em] uppercase transition-opacity hover:opacity-60"
@@ -39,7 +39,8 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: 'AGB – Medlake' })
+const { t } = useI18n()
+useHead({ title: t('pages.agb.meta') })
 
 const articles = [
   'Bei jedem Besuch müssen Sie Ihren Medlake-Ausweis an der Rezeption hinterlegen. Dieser Ausweis ist persönlich und nicht übertragbar; er berechtigt Sie zur Nutzung der Trainingsanlage während der offiziellen Öffnungszeiten.',

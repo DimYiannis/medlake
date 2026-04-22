@@ -1,0 +1,228 @@
+{
+  "nav": {
+    "team": "Team",
+    "doctors": "Ärzte",
+    "prices": "Preise",
+    "news": "News",
+    "jobs": "Jobs",
+    "medical": "Medizinisches",
+    "contact": "Kontakt",
+    "agb": "AGB",
+    "services": "Leistungen",
+    "bookAppointment": "Termin buchen",
+    "menu": "Menü"
+  },
+  "hero": {
+    "eyebrow": "Medlake Training — Küsnacht",
+    "title": "Kompetenzzentrum für",
+    "titleAccent": "Gesundheit & Bewegung",
+    "scrollHint": "Scroll to enter",
+    "location": "Küsnacht, Schweiz — seit 2001",
+    "headline1": "Die Kraft",
+    "headlineAccent1": "zu heilen.",
+    "headline2": "Die Kraft",
+    "headlineAccent2": "zu bewegen.",
+    "description": "Medizinisches Kompetenzzentrum für gesundheitsorientiertes Kraft- und Ausdauertraining.",
+    "learnMore": "Mehr erfahren",
+    "prevImage": "Vorheriges Bild",
+    "nextImage": "Nächstes Bild"
+  },
+  "sections": {
+    "gallery": "Galerie",
+    "team": "Team",
+    "news": "News",
+    "philosophy": "Philosophie",
+    "services": "Leistungen",
+    "hours": "Öffnungszeiten",
+    "contact": "Kontakt",
+    "stats": "Zahlen"
+  },
+  "team": {
+    "subtitle": "Medlake · Küsnacht",
+    "title": "Das Team",
+    "description": "Menschen mit Leidenschaft für Gesundheit, Bewegung und persönliche Betreuung.",
+    "join": "Teil des Teams werden?",
+    "viewJobs": "Offene Stellen ansehen",
+    "viewAll": "Alle ansehen",
+    "members": "Mitglieder"
+  },
+  "gallery": {
+    "view": "Ansehen",
+    "noImage": "Kein Bild"
+  },
+  "news": {
+    "current": "Aktuelles",
+    "all": "Alle News",
+    "read": "Lesen",
+    "tag": "News"
+  },
+  "hours": {
+    "title": "Öffnungszeiten",
+    "titleBleed1": "Öffnungs",
+    "titleBleed2": "zeiten",
+    "bookNow": "Jetzt Termin buchen"
+  },
+  "stats": {
+    "doctors": "Spezialärzte\nvor Ort",
+    "years": "Jahre\nErfahrung",
+    "opening": "Öffnung\nMo – Fr",
+    "medical": "Medizinisch\nbegleitet"
+  },
+  "services": {
+    "offer": "Unser Angebot",
+    "learnMore": "Mehr erfahren",
+    "viewAll": "Alle Leistungen ansehen"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "address": "Adresse",
+    "phone": "Telefon",
+    "fax": "Fax",
+    "email": "Email",
+    "writeUs": "Schreiben Sie uns",
+    "name": "Name",
+    "emailPlaceholder": "E-Mail",
+    "subject": "Betreff",
+    "message": "Ihre Nachricht",
+    "send": "Nachricht senden",
+    "sending": "Wird gesendet…",
+    "thanks": "Vielen Dank — wir melden uns bald."
+  },
+  "philosophy": {
+    "label": "Unsere Philosophie",
+    "whoAreWe": "Wer sind wir?",
+    "intro": "Kompetenzzentrum für",
+    "introHighlight": "Gesundheitsorientiertes Kraft- und Ausdauertraining.",
+    "diff": "Was unterscheidet uns von anderen Fitnesscentern?",
+    "diffText1": "behandeln Rücken-, Nacken- und Gelenkschmerzen — Kraftmessungen von Rücken- und Nackenmuskulatur durch unsere",
+    "highlight1": "Spezialärzte und Physiotherapeutinnen",
+    "highlight2": "Spezialärzte."
+  },
+  "footer": {
+    "company": "Medlake Training",
+    "admin": "Admin"
+  },
+  "pages": {
+    "team": {
+      "meta": "Das Team – Medlake",
+      "eyebrow": "Medlake · Küsnacht",
+      "title": "Das Team",
+      "desc": "Menschen mit Leidenschaft für Gesundheit, Bewegung und persönliche Betreuung.",
+      "join": "Teil des Teams werden?",
+      "viewJobs": "Offene Stellen ansehen",
+      "members": "Mitglieder"
+    },
+    "kontakt": {
+      "meta": "Kontakt – Medlake",
+      "title": "Kontakt",
+      "contactData": "Kontaktdaten",
+      "hours": "Öffnungszeiten",
+      "writeUs": "Schreiben Sie uns",
+      "name": "Name",
+      "yourName": "Ihr Name",
+      "email": "E-Mail",
+      "subject": "Betreff",
+      "message": "Nachricht",
+      "yourMessage": "Ihre Nachricht",
+      "book": "Termin buchen",
+      "send": "Nachricht senden",
+      "sending": "Wird gesendet…",
+      "thanks": "Danke — wir melden uns bald.",
+      "mapLabel": "Standort"
+    },
+    "jobs": {
+      "meta": "Jobs – Medlake",
+      "eyebrow": "Medlake — Karriere",
+      "title": "Jobs",
+      "desc": "Werde Teil unseres Teams im Kompetenzzentrum für Gesundheitsorientiertes Kraft- und Ausdauertraining in Küsnacht.",
+      "openPosition": "Offene Stelle",
+      "application": "Bewerbung",
+      "applicationText": "Sende deine vollständigen Bewerbungsunterlagen per E-Mail an uns. Wir freuen uns auf dich!",
+      "apply": "Jetzt bewerben",
+      "none": "Zurzeit keine offenen Stellen."
+    },
+    "aerzte": {
+      "meta": "Ärzte – Medlake",
+      "title": "Unsere Ärzte",
+      "desc": "Fach- und Spezialärzte begleiten Sie auf dem Weg zu mehr Gesundheit und Wohlbefinden — direkt vor Ort im Medlake.",
+      "career": "Ausbildung & Werdegang",
+      "book": "Termin vereinbaren",
+      "bookNow": "Jetzt buchen"
+    },
+    "preise": {
+      "meta": "Preise – Medlake",
+      "title": "Preise & Leistungen",
+      "desc": "Transparente Preise für alle — inklusive medizinisch begleiteter Betreuung von Beginn an.",
+      "adults": "Erwachsene",
+      "recommended": "Empfohlen",
+      "includedLabel": "Im Abonnement enthaltene Leistungen",
+      "notIncludedLabel": "Zusätzliche Kosten (nicht im Abo enthalten)",
+      "insuranceNote": "Gerne beraten wir Sie bezüglich Reduktionen durch Ihre Krankenkasse.",
+      "book": "Termin vereinbaren",
+      "plans": {
+        "premium": { "name": "Medlake Premium", "desc": "Unser umfassendstes Paket — inklusive aller Spezialgeräte", "duration": "12 Monate", "features": ["Inklusive Galileo Vibrationsplatte", "Inklusive Sensopro", "Inklusive Kinesis Station", "Handtuch (leihweise)", "Alle Grundleistungen"] },
+        "plus":    { "name": "Medlake Plus+",   "desc": "Mit einem Spezialgerät Ihrer Wahl",                        "duration": "12 Monate", "features": ["Sensopro ODER Kinesis ODER Galileo", "Alle Grundleistungen"] },
+        "basis":   { "name": "Trainingsabonnement", "desc": "Klassisches Jahresabo ohne Extras",                   "duration": "12 Monate", "features": ["Nutzung aller Trainingseinrichtungen", "Einführung & Betreuung", "Trainingskontrolle"] }
+      },
+      "categories": {
+        "students":  "Studenten",
+        "youth":     "Jugendliche bis 20 Jahre",
+        "family":    "Familie mit Kind (bis 18 Jahre)*",
+        "single":    "Einzelleistungen",
+        "sensoproM": "Sensopro — Mitglieder & MedX",
+        "sensoproE": "Sensopro — Externe"
+      },
+      "items": {
+        "annual":     "Jahresabonnement",
+        "halfYear":   "Halbjahresabo",
+        "12months":   "12 Monate",
+        "6months":    "6 Monate",
+        "familySub":  "*Für Kinder deren Eltern ebenfalls Abo haben",
+        "singleEntry":"Einzeleintritt",
+        "sensopro":   "Sensopro",
+        "pt":         "Personaltraining",
+        "towel":      "Handtuchverleih",
+        "shower":     "Duschgel",
+        "onRequest":  "Auf Anfrage",
+        "10pack":     "10er Abonnement"
+      },
+      "included": [
+        "Benützung der Trainingseinrichtungen, Garderoben und Duschkabinen",
+        "Instruktion und Einführung — die ersten 3 Trainings werden von einem Instruktor begleitet",
+        "Regelmässige Trainingskontrolle — jedes 10. Training auf Anfrage mit Instruktor",
+        "Periodische Erneuerung des Trainingsprogrammes nach 20–40 Einheiten",
+        "Kostenlose ärztliche Trainingsberatung (bei Jahresabo)",
+        "Kostenloses gekühltes Wasser von Eauvation — mit oder ohne Kohlensäure"
+      ],
+      "notIncluded": ["Kinesis-Station", "Galileo-Vibrationstraining", "Sensopro", "Dividat", "MedX-Therapie LE/CE", "Physiotherapie"]
+    },
+    "agb": {
+      "meta": "AGB – Medlake",
+      "title": "AGB",
+      "subtitle": "Vertragsbedingungen Medlake Training AG — 2026/2027",
+      "questions": "Bei Fragen zu unseren Vertragsbedingungen stehen wir Ihnen gerne zur Verfügung."
+    },
+    "medizinisches": {
+      "meta": "Medizinisches – Medlake",
+      "eyebrow": "Medlake — Wissen",
+      "title": "Medizinisches",
+      "desc": "Fundiertes Hintergrundwissen über Muskeln, Krafttraining, Schmerzbehandlung und mehr — von unseren Fachärzten zusammengestellt."
+    },
+    "news": {
+      "meta": "News – Medlake",
+      "title": "News",
+      "eyebrow": "Medlake — Aktuell",
+      "noNews": "Keine News vorhanden.",
+      "back": "Zurück zu News"
+    }
+  },
+  "common": {
+    "more": "Mehr",
+    "readMore": "Weiterlesen",
+    "close": "Schliessen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "loading": "Wird geladen...",
+    "error": "Fehler"
+  }
+}

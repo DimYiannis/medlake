@@ -1,9 +1,9 @@
 <template>
   <section ref="el" class="section-divider px-10 py-20">
     <div class="flex items-end justify-between mb-14">
-      <p class="reveal text-[12px] tracking-[0.28em] uppercase" style="color:var(--text-3)">Aktuelles</p>
-      <NuxtLink to="/news" class="reveal reveal-delay-1 text-[12px] tracking-[0.2em] uppercase flex items-center gap-2 transition-opacity hover:opacity-70" style="color:var(--text-3)">
-        Alle News <span>→</span>
+      <p class="reveal text-[12px] tracking-[0.28em] uppercase" style="color:var(--text-3)">{{ $t('news.current') }}</p>
+      <NuxtLink :to="localePath('/news')" class="reveal reveal-delay-1 text-[12px] tracking-[0.2em] uppercase flex items-center gap-2 transition-opacity hover:opacity-70" style="color:var(--text-3)">
+        {{ $t('news.all') }} <span>→</span>
       </NuxtLink>
     </div>
 
@@ -26,11 +26,11 @@
           </div>
         </div>
         <div class="p-7">
-          <p class="text-[12px] tracking-[0.22em] uppercase mb-4" style="color:var(--text-3)">{{ post.tag || 'News' }}</p>
+          <p class="text-[12px] tracking-[0.22em] uppercase mb-4" style="color:var(--text-3)">{{ post.tag || $t('news.tag') }}</p>
           <h3 class="text-[16px] font-medium leading-[1.45] mb-5" style="color:var(--text)">{{ post.title }}</h3>
           <div class="flex items-center justify-between">
             <p class="text-[13px] tracking-[0.05em]" style="color:var(--text-4)">{{ formatDate(post.published_at || post.date) }}</p>
-            <span class="text-[13px] tracking-[0.15em] uppercase transition-opacity group-hover:opacity-70" style="color:var(--text-3)">Lesen →</span>
+            <span class="text-[13px] tracking-[0.15em] uppercase transition-opacity group-hover:opacity-70" style="color:var(--text-3)">{{ $t('news.read') }} →</span>
           </div>
         </div>
       </article>
@@ -41,6 +41,8 @@
 <script setup lang="ts">
 const router = useRouter()
 const { el } = useReveal()
+const localePath = useLocalePath()
+const { locale } = useI18n()
 
 const fallbackPosts = [
   { id: 1, title: 'Sommeraktion: 3 Monate Premium Fitness für 275 CHF', tag: 'Aktion',      image_url: null, slug: null, date: '2024-04-16', published_at: '2024-04-16' },
@@ -61,9 +63,10 @@ const displayPosts = computed(() => dbPosts.value.length ? dbPosts.value : fallb
 
 function formatDate(d: string) {
   if (!d) return ''
-  return new Date(d).toLocaleDateString('de-CH', { day: 'numeric', month: 'long', year: 'numeric' })
+  const localeTag = locale.value === 'en' ? 'en-GB' : 'de-CH'
+  return new Date(d).toLocaleDateString(localeTag, { day: 'numeric', month: 'long', year: 'numeric' })
 }
 function navigate(post: any) {
-  if (post.slug) router.push(`/news/${post.slug}`)
+  if (post.slug) router.push(localePath(`/news/${post.slug}`))
 }
 </script>

@@ -10,7 +10,7 @@
     <!-- Dark overlay -->
     <div
       class="absolute inset-0 z-[1] transition-all duration-1000"
-      :style="phase === 'far' ? 'background:rgba(0,0,0,0.1)' : 'background:rgba(0,0,0,0.1)'"
+      :style="phase === 'far' ? 'background:rgba(0,0,0,0.1)' : 'background:rgba(0,0,0,0)'"
     />
 
     <!-- Three.js -->
@@ -37,13 +37,13 @@
     <Transition name="fade-up">
       <div v-if="phase === 'far'"
         class="absolute inset-0 z-[4] flex flex-col items-center justify-center pointer-events-none">
-        <p class="text-[12px] tracking-[0.35em] uppercase text-white/30 mb-5">Medlake Training — Küsnacht</p>
+        <p class="text-[12px] tracking-[0.35em] uppercase text-white/30 mb-5">{{ $t('hero.eyebrow') }}</p>
         <h2 class="text-[clamp(26px,3.8vw,52px)] font-semibold tracking-[-0.02em] text-white/80 text-center leading-tight">
-          Kompetenzzentrum für<br>
-          <span class="text-white/35">Gesundheit & Bewegung</span>
+          {{ $t('hero.title') }}<br>
+          <span class="text-white/35">{{ $t('hero.titleAccent') }}</span>
         </h2>
         <div class="mt-10 flex flex-col items-center gap-2">
-          <p class="text-[11px] tracking-[0.3em] uppercase text-white/25">Scroll to enter</p>
+          <p class="text-[11px] tracking-[0.3em] uppercase text-white/25">{{ $t('hero.scrollHint') }}</p>
           <div class="bounce-arrow">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M7 1v12M1 8l6 6 6-6" stroke="rgba(255,255,255,0.25)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -56,26 +56,26 @@
     <!-- CLOSE phase: left hero content -->
     <Transition name="fade-up">
       <div v-if="phase === 'close'" class="absolute z-[4] bottom-44 left-6 max-w-[240px] sm:bottom-52 sm:left-10 sm:max-w-xl">
-        <p class="text-[11px] sm:text-[12px] tracking-[0.3em] uppercase text-white/30 mb-3 sm:mb-4">Küsnacht, Schweiz — seit 2001</p>
+        <p class="text-[11px] sm:text-[12px] tracking-[0.3em] uppercase text-white/30 mb-3 sm:mb-4">{{ $t('hero.location') }}</p>
         <h1 class="font-semibold leading-[1.06] tracking-[-0.025em] text-white mb-4 sm:mb-5"
           style="font-size:clamp(22px,4.5vw,66px)">
-          Die Kraft<br>
-          <span class="text-white/28">zu heilen.</span><br>
-          Die Kraft<br>
-          <span class="text-white/28">zu bewegen.</span>
+          {{ $t('hero.headline1') }}<br>
+          <span class="text-white/28">{{ $t('hero.headlineAccent1') }}</span><br>
+          {{ $t('hero.headline2') }}<br>
+          <span class="text-white/28">{{ $t('hero.headlineAccent2') }}</span>
         </h1>
         <p class="hidden sm:block text-[16px] leading-[1.8] max-w-sm text-white/42 mb-8">
-          Medizinisches Kompetenzzentrum für gesundheitsorientiertes Kraft- und Ausdauertraining.
+          {{ $t('hero.description') }}
         </p>
         <div class="flex items-center gap-3 sm:gap-6">
           <a href="https://connect.shore.com/bookings/medlake-training/services"
             target="_blank" rel="noopener"
             class="text-[11px] sm:text-[13px] tracking-[0.15em] uppercase px-3 py-1.5 sm:px-6 sm:py-3 font-medium bg-white text-black hover:bg-white/85 transition-opacity">
-            Termin buchen
+            {{ $t('nav.bookAppointment') }}
           </a>
-          <NuxtLink to="/leistungen"
+          <NuxtLink :to="localePath('/leistungen')"
             class="text-[11px] sm:text-[13px] tracking-[0.12em] uppercase flex items-center gap-1.5 text-white/32 hover:text-white/60 transition-colors">
-            Leistungen <span>→</span>
+            {{ $t('nav.services') }} <span>→</span>
           </NuxtLink>
         </div>
       </div>
@@ -99,7 +99,7 @@
               {{ slides[currentSlide].caption }}
             </p>
             <span class="inline-flex items-center gap-1.5 mt-3 text-[12px] tracking-[0.18em] uppercase text-white/30 group-hover:text-white/65 transition-colors duration-300">
-              Mehr erfahren
+              {{ $t('hero.learnMore') }}
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                 class="transition-transform duration-300 group-hover:translate-x-0.5">
                 <path d="M1 5h8M5 1l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
@@ -124,7 +124,7 @@
             <p class="text-[11px] tracking-[0.25em] uppercase text-white/30 mb-1">{{ slides[currentSlide].label }}</p>
             <p class="text-[15px] font-medium leading-[1.3] text-white/75 group-hover:text-white transition-colors mb-1">{{ slides[currentSlide].caption }}</p>
             <span class="inline-flex items-center gap-1 text-[11px] tracking-[0.18em] uppercase text-white/30 group-hover:text-white/65 transition-colors">
-              Mehr erfahren
+              {{ $t('hero.learnMore') }}
               <svg width="8" height="8" viewBox="0 0 10 10" fill="none" class="transition-transform duration-300 group-hover:translate-x-0.5">
                 <path d="M1 5h8M5 1l4 4-4 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -138,7 +138,7 @@
             :disabled="currentSlide === 0"
             :class="currentSlide === 0 ? 'opacity-20' : 'hover:opacity-70'"
             @click="prev"
-            aria-label="Vorheriges Bild"
+            :aria-label="$t('hero.prevImage')"
           >
             <svg width="18" height="18" viewBox="0 0 14 14" fill="none">
               <path d="M9 2L4 7l5 5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -161,7 +161,7 @@
             :disabled="currentSlide === slides.length - 1"
             :class="currentSlide === slides.length - 1 ? 'opacity-20' : 'hover:opacity-70'"
             @click="next"
-            aria-label="Nächstes Bild"
+            :aria-label="$t('hero.nextImage')"
           >
             <svg width="18" height="18" viewBox="0 0 14 14" fill="none">
               <path d="M5 2l5 5-5 5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -190,6 +190,7 @@
 <script setup lang="ts">
 const ThreeHeroCanvas = defineAsyncComponent(() => import('~/components/three/HeroCanvas.vue'))
 const { theme } = useTheme()
+const localePath = useLocalePath()
 const isLight = computed(() => theme.value === 'light')
 const bottomGradient = computed(() => isLight.value
   ? 'linear-gradient(to top,rgba(0,0,0,0.45) 0%,rgba(0,0,0,0.1) 40%,transparent 70%)'

@@ -7,21 +7,20 @@
 
       <div class="reveal mb-10 flex items-center gap-4">
         <div class="h-px w-12" style="background:var(--text-3)"></div>
-        <span class="text-[12px] tracking-[0.3em] uppercase" style="color:rgba(197,160,80,0.6)">Unsere Philosophie</span>
+        <span class="text-[12px] tracking-[0.3em] uppercase" style="color:rgba(197,160,80,0.6)">{{ $t('philosophy.label') }}</span>
       </div>
 
       <div class="font-normal leading-[1.4] tracking-[-0.01em]" style="font-size:clamp(22px,3.5vw,50px);color:var(--text-2)">
-        <span class="reveal reveal-delay-1 block text-[13px] tracking-[0.25em] uppercase mb-2" style="font-size:11px;color:var(--text-3)">Wer sind wir?</span>
+        <span class="reveal reveal-delay-1 block text-[13px] tracking-[0.25em] uppercase mb-2" style="font-size:11px;color:var(--text-3)">{{ $t('philosophy.whoAreWe') }}</span>
         <span class="reveal reveal-delay-2 block">
-          Kompetenzzentrum für <strong class="text-highlight" style="font-weight:500">Gesundheitsorientiertes Kraft- und Ausdauertraining.</strong>
+          {{ $t('philosophy.intro') }} <strong class="text-highlight" style="font-weight:500">{{ $t('philosophy.introHighlight') }}</strong>
         </span>
 
-        <span class="reveal reveal-delay-3 block text-[13px] tracking-[0.25em] uppercase mt-10 mb-2" style="font-size:11px;color:var(--text-3)">Was unterscheidet uns von anderen Fitnesscentern?</span>
+        <span class="reveal reveal-delay-3 block text-[13px] tracking-[0.25em] uppercase mt-10 mb-2" style="font-size:11px;color:var(--text-3)">{{ $t('philosophy.diff') }}</span>
         <span class="reveal reveal-delay-4 block">
-          <strong class="text-highlight" style="font-weight:500">Spezialärzte und Physiotherapeutinnen</strong>
-          behandeln Rücken-, Nacken- und Gelenkschmerzen —
-          Kraftmessungen von Rücken- und Nackenmuskulatur durch unsere
-          <strong class="text-highlight" style="font-weight:500">Spezialärzte.</strong>
+          <strong class="text-highlight" style="font-weight:500">{{ $t('philosophy.highlight1') }}</strong>
+          {{ $t('philosophy.diffText1') }}
+          <strong class="text-highlight" style="font-weight:500">{{ $t('philosophy.highlight2') }}</strong>
         </span>
       </div>
     </div>

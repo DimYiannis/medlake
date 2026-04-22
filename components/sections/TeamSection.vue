@@ -2,13 +2,13 @@
   <section ref="el" class="section-divider py-20 overflow-hidden" style="background:var(--team-bg)">
 
     <div class="px-10 mb-12 flex items-end justify-between">
-      <p class="reveal text-[12px] tracking-[0.28em] uppercase" style="color:var(--text-3)">Das Team</p>
+      <p class="reveal text-[12px] tracking-[0.28em] uppercase" style="color:var(--text-3)">{{ $t('team.title') }}</p>
       <NuxtLink
-        to="/team"
+        :to="localePath('/team')"
         class="reveal reveal-delay-1 text-[12px] tracking-[0.2em] uppercase transition-opacity hover:opacity-50 flex items-center gap-2"
         style="color:var(--text-3)"
       >
-        Alle ansehen
+        {{ $t('team.viewAll') }}
         <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
           <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -91,6 +91,7 @@
 
 <script setup lang="ts">
 const { el } = useReveal()
+const localePath = useLocalePath()
 const paused = ref(false)
 const hovered = ref<any>(null)
 

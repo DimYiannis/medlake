@@ -3,12 +3,12 @@
 
     <!-- Header -->
     <div class="px-10 mb-20">
-      <p class="reveal text-[12px] tracking-[0.3em] uppercase mb-5" style="color:var(--text-3)">Medlake · Küsnacht</p>
+      <p class="reveal text-[12px] tracking-[0.3em] uppercase mb-5" style="color:var(--text-3)">{{ $t('pages.team.eyebrow') }}</p>
       <h1 class="reveal reveal-delay-1 font-semibold tracking-[-0.03em] leading-none" style="font-size:clamp(48px,7vw,96px);color:var(--text)">
-        Das Team
+        {{ $t('pages.team.title') }}
       </h1>
       <p class="reveal reveal-delay-2 text-[17px] mt-6 leading-[1.8] max-w-lg" style="color:var(--text-2)">
-        Menschen mit Leidenschaft für Gesundheit, Bewegung und persönliche Betreuung.
+        {{ $t('pages.team.desc') }}
       </p>
     </div>
 
@@ -56,26 +56,28 @@
     <!-- CTA -->
     <div class="reveal px-10 mt-20 pt-12 border-t flex items-center justify-between" style="border-color:var(--border)">
       <div>
-        <p class="text-[12px] tracking-[0.25em] uppercase mb-3" style="color:var(--text-3)">Teil des Teams werden?</p>
+        <p class="text-[12px] tracking-[0.25em] uppercase mb-3" style="color:var(--text-3)">{{ $t('pages.team.join') }}</p>
         <NuxtLink
-          to="/jobs"
+          :to="localePath('/jobs')"
           class="inline-flex items-center gap-3 text-[13px] tracking-[0.18em] uppercase transition-opacity hover:opacity-60"
           style="color:var(--text-2)"
         >
-          Offene Stellen ansehen
+          {{ $t('pages.team.viewJobs') }}
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
             <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </NuxtLink>
       </div>
-      <p class="text-[12px] tracking-[0.2em] uppercase" style="color:var(--text-4)">{{ team.length }} Mitglieder</p>
+      <p class="text-[12px] tracking-[0.2em] uppercase" style="color:var(--text-4)">{{ team.length }} {{ $t('pages.team.members') }}</p>
     </div>
 
   </div>
 </template>
 
 <script setup lang="ts">
-useHead({ title: 'Das Team – Medlake' })
+const { t } = useI18n()
+const localePath = useLocalePath()
+useHead({ title: t('pages.team.meta') })
 
 const { el } = useReveal()
 

@@ -1,11 +1,11 @@
 <template>
   <div class="pt-36 px-10 pb-24 min-h-screen">
     <div v-if="post" class="max-w-2xl mx-auto">
-      <NuxtLink to="/news" class="text-[12px] tracking-[0.2em] uppercase text-white/25 hover:text-white transition-colors mb-10 inline-block">
-        ← Alle News
+      <NuxtLink :to="localePath('/news')" class="text-[12px] tracking-[0.2em] uppercase text-white/25 hover:text-white transition-colors mb-10 inline-block">
+        ← {{ $t('pages.news.back') }}
       </NuxtLink>
 
-      <p class="text-[12px] tracking-[0.22em] uppercase text-white/25 mb-4">{{ post.tag || 'News' }}</p>
+      <p class="text-[12px] tracking-[0.22em] uppercase text-white/25 mb-4">{{ post.tag || $t('news.tag') }}</p>
       <h1 class="text-[clamp(28px,4vw,52px)] font-semibold tracking-[-0.02em] leading-[1.15] mb-6">
         {{ post.title }}
       </h1>
@@ -25,7 +25,7 @@
     </div>
 
     <div v-else class="text-white/20 text-sm tracking-widest pt-20 text-center">
-      Beitrag nicht gefunden.
+      {{ $t('pages.news.noNews') }}
     </div>
   </div>
 </template>
@@ -33,6 +33,8 @@
 <script setup lang="ts">
 const route = useRoute()
 const supabase = useSupabaseClient()
+const { locale } = useI18n()
+const localePath = useLocalePath()
 
 const { data: post } = await useAsyncData(`news-post-${route.params.slug}`, async () => {
   const { data, error } = await supabase
@@ -51,6 +53,7 @@ useHead(() => ({
 
 function formatDate(d: string) {
   if (!d) return ''
-  return new Date(d).toLocaleDateString('de-CH', { day: 'numeric', month: 'long', year: 'numeric' })
+  const localeTag = locale.value === 'en' ? 'en-GB' : 'de-CH'
+  return new Date(d).toLocaleDateString(localeTag, { day: 'numeric', month: 'long', year: 'numeric' })
 }
 </script>

@@ -9,15 +9,16 @@
 
     <ul class="hidden nav:flex items-center gap-8 list-none">
       <li v-for="link in links" :key="link.to">
-        <NuxtLink :to="link.to"
+        <NuxtLink :to="localePath(link.to)"
           class="text-[13px] tracking-[0.15em] uppercase transition-opacity hover:opacity-80"
           style="color:var(--text-3)">
-          {{ link.label }}
+          {{ $t(link.labelKey) }}
         </NuxtLink>
       </li>
     </ul>
 
     <div class="hidden nav:flex items-center gap-1">
+      <ClientOnly><UiLanguageToggle /></ClientOnly>
       <ClientOnly><UiThemeToggle /></ClientOnly>
       <a
         href="https://connect.shore.com/bookings/medlake-training/services"
@@ -25,11 +26,12 @@
         rel="noopener"
         class="cta-btn text-[13px] tracking-[0.15em] uppercase px-5 py-2.5 transition-all duration-300 border"
       >
-        Termin buchen
+        {{ $t('nav.bookAppointment') }}
       </a>
     </div>
 
     <div class="nav:hidden flex items-center gap-1">
+      <ClientOnly><UiLanguageToggle /></ClientOnly>
       <ClientOnly><UiThemeToggle /></ClientOnly>
       <button class="flex flex-col gap-1.5 p-1" @click="mobileOpen = !mobileOpen" aria-label="Menu">
         <span class="block w-5 h-px transition-all" style="background:var(--text)" :class="mobileOpen ? 'rotate-45 translate-y-2' : ''" />
@@ -46,8 +48,8 @@
       >
         <ul class="flex flex-col gap-6 list-none mb-8">
           <li v-for="link in links" :key="link.to">
-            <NuxtLink :to="link.to" class="text-sm tracking-widest uppercase" style="color:var(--text-3)" @click="mobileOpen = false">
-              {{ link.label }}
+            <NuxtLink :to="localePath(link.to)" class="text-sm tracking-widest uppercase" style="color:var(--text-3)" @click="mobileOpen = false">
+              {{ $t(link.labelKey) }}
             </NuxtLink>
           </li>
         </ul>
@@ -56,7 +58,7 @@
           target="_blank"
           class="cta-btn text-[13px] tracking-[0.15em] uppercase inline-block px-5 py-3 border"
         >
-          Termin buchen
+          {{ $t('nav.bookAppointment') }}
         </a>
       </div>
     </Transition>
@@ -66,16 +68,17 @@
 <script setup lang="ts">
 const mobileOpen = ref(false)
 const scrolled = ref(false)
+const localePath = useLocalePath()
 
 const links = [
-  { to: '/team',          label: 'Team' },
-  { to: '/aerzte',        label: 'Ärzte' },
-  { to: '/preise',        label: 'Preise' },
-  { to: '/news',          label: 'News' },
-  { to: '/jobs',          label: 'Jobs' },
-  { to: '/medizinisches', label: 'Medizinisches' },
-  { to: '/kontakt',       label: 'Kontakt' },
-  { to: '/agb',           label: 'AGB' },
+  { to: '/team',          labelKey: 'nav.team' },
+  { to: '/aerzte',        labelKey: 'nav.doctors' },
+  { to: '/preise',        labelKey: 'nav.prices' },
+  { to: '/news',          labelKey: 'nav.news' },
+  { to: '/jobs',          labelKey: 'nav.jobs' },
+  { to: '/medizinisches', labelKey: 'nav.medical' },
+  { to: '/kontakt',       labelKey: 'nav.contact' },
+  { to: '/agb',           labelKey: 'nav.agb' },
 ]
 
 onMounted(() => {

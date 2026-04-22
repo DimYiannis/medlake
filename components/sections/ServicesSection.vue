@@ -1,6 +1,6 @@
 <template>
   <section id="leistungen" ref="el" class="section-divider px-10 py-20">
-    <p class="reveal text-[12px] tracking-[0.28em] uppercase mb-12" style="color:var(--text-3)">Unser Angebot</p>
+    <p class="reveal text-[12px] tracking-[0.28em] uppercase mb-12" style="color:var(--text-3)">{{ $t('services.offer') }}</p>
 
     <div>
       <div
@@ -40,11 +40,11 @@
             {{ service.description }}
           </p>
           <NuxtLink
-            :to="service.link"
+            :to="localePath(service.link)"
             class="inline-flex items-center gap-2 text-[13px] tracking-[0.18em] uppercase transition-opacity hover:opacity-60"
             style="color:var(--text-2)"
           >
-            Mehr erfahren
+            {{ $t('services.learnMore') }}
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
               <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -55,11 +55,11 @@
 
     <div class="mt-12">
       <NuxtLink
-        to="/leistungen"
+        :to="localePath('/leistungen')"
         class="inline-flex items-center gap-3 text-[13px] tracking-[0.2em] uppercase transition-opacity hover:opacity-60"
         style="color:var(--text-3)"
       >
-        Alle Leistungen ansehen
+        {{ $t('services.viewAll') }}
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
           <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -70,6 +70,7 @@
 
 <script setup lang="ts">
 const { el } = useReveal()
+const localePath = useLocalePath()
 const activeIndex = ref(0)
 const services = await useServices()
 

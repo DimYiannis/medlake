@@ -2,12 +2,12 @@
   <div class="min-h-screen pt-36 pb-24" style="background:var(--bg)">
 
     <div class="px-10 mb-16 border-b pb-12" style="border-color:var(--border)">
-      <p class="text-[12px] tracking-[0.3em] uppercase mb-4" style="color:var(--text-3)">Medlake — Wissen</p>
+      <p class="text-[12px] tracking-[0.3em] uppercase mb-4" style="color:var(--text-3)">{{ $t('pages.medizinisches.eyebrow') }}</p>
       <h1 class="font-semibold tracking-[-0.025em] leading-none" style="font-size:clamp(40px,6vw,80px);color:var(--text)">
-        Medizinisches
+        {{ $t('pages.medizinisches.title') }}
       </h1>
       <p class="text-[17px] mt-5 leading-[1.8] max-w-xl" style="color:var(--text-2)">
-        Fundiertes Hintergrundwissen über Muskeln, Krafttraining, Schmerzbehandlung und mehr — von unseren Fachärzten zusammengestellt.
+        {{ $t('pages.medizinisches.desc') }}
       </p>
     </div>
 
@@ -116,7 +116,8 @@
 </template>
 
 <script setup lang="ts">
-useHead({ title: 'Medizinisches – Medlake' })
+const { t } = useI18n()
+useHead({ title: t('pages.medizinisches.meta') })
 
 const chapters = [
   { id: 'geschichte', label: 'Geschichte' },

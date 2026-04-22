@@ -4,9 +4,9 @@
     <!-- Hours -->
     <div class="px-10 py-20 relative overflow-hidden border-b md:border-b-0 md:border-r" style="border-color:var(--border)">
       <p class="absolute bottom-0 left-0 font-bold leading-none tracking-[-0.04em] uppercase select-none pointer-events-none" style="font-size:clamp(55px,9vw,130px);color:var(--bleed)">
-        Öffnungs<br>zeiten
+        {{ $t('hours.titleBleed1') }}<br>{{ $t('hours.titleBleed2') }}
       </p>
-      <p class="reveal text-[12px] tracking-[0.28em] uppercase mb-10" style="color:var(--text-3)">Öffnungszeiten</p>
+      <p class="reveal text-[12px] tracking-[0.28em] uppercase mb-10" style="color:var(--text-3)">{{ $t('hours.title') }}</p>
       <div class="relative z-10">
         <div v-for="(row, i) in hours" :key="row.day" class="reveal flex justify-between items-center py-4 border-b" :class="`reveal-delay-${i + 1}`" style="border-color:var(--border)">
           <span class="text-[15px] tracking-wide" style="color:var(--text-3)">{{ row.day }}</span>
@@ -19,7 +19,7 @@
           <a href="https://connect.shore.com/bookings/medlake-training/services" target="_blank" rel="noopener"
             class="inline-flex items-center text-[13px] tracking-[0.2em] uppercase px-7 py-3.5 font-medium transition-opacity hover:opacity-80"
             style="background:var(--btn-bg);color:var(--btn-text)">
-            Jetzt Termin buchen
+            {{ $t('hours.bookNow') }}
           </a>
         </div>
       </div>
@@ -27,7 +27,7 @@
 
     <!-- Contact -->
     <div class="px-10 py-20">
-      <p class="reveal text-[12px] tracking-[0.28em] uppercase mb-10" style="color:var(--text-3)">Kontakt</p>
+      <p class="reveal text-[12px] tracking-[0.28em] uppercase mb-10" style="color:var(--text-3)">{{ $t('contact.title') }}</p>
       <div class="space-y-7 mb-14">
         <div v-for="(item, i) in contactItems" :key="item.key" class="reveal flex gap-8" :class="`reveal-delay-${i + 1}`">
           <span class="text-[12px] tracking-[0.2em] uppercase w-20 flex-shrink-0 pt-0.5" style="color:var(--text-4)">{{ item.key }}</span>
@@ -41,18 +41,18 @@
 
       <!-- Contact form -->
       <div class="reveal reveal-delay-4">
-        <p class="text-[12px] tracking-[0.28em] uppercase mb-6" style="color:var(--text-4)">Schreiben Sie uns</p>
+        <p class="text-[12px] tracking-[0.28em] uppercase mb-6" style="color:var(--text-4)">{{ $t('contact.writeUs') }}</p>
         <form @submit.prevent="submitForm" class="space-y-3">
-          <input v-model="form.name" type="text" placeholder="Name" class="form-input w-full text-[15px] px-4 py-3 focus:outline-none transition-colors" />
-          <input v-model="form.email" type="email" placeholder="E-Mail" class="form-input w-full text-[15px] px-4 py-3 focus:outline-none transition-colors" />
-          <input v-model="form.subject" type="text" placeholder="Betreff" class="form-input w-full text-[15px] px-4 py-3 focus:outline-none transition-colors" />
-          <textarea v-model="form.message" placeholder="Ihre Nachricht" rows="4" class="form-input w-full text-[15px] px-4 py-3 focus:outline-none transition-colors resize-none" />
+          <input v-model="form.name" type="text" :placeholder="$t('contact.name')" class="form-input w-full text-[15px] px-4 py-3 focus:outline-none transition-colors" />
+          <input v-model="form.email" type="email" :placeholder="$t('contact.emailPlaceholder')" class="form-input w-full text-[15px] px-4 py-3 focus:outline-none transition-colors" />
+          <input v-model="form.subject" type="text" :placeholder="$t('contact.subject')" class="form-input w-full text-[15px] px-4 py-3 focus:outline-none transition-colors" />
+          <textarea v-model="form.message" :placeholder="$t('contact.message')" rows="4" class="form-input w-full text-[15px] px-4 py-3 focus:outline-none transition-colors resize-none" />
           <button type="submit" :disabled="sending"
             class="w-full text-[13px] tracking-[0.2em] uppercase py-3.5 font-medium transition-opacity hover:opacity-80 disabled:opacity-40"
             style="background:var(--btn-bg);color:var(--btn-text)">
-            {{ sending ? 'Wird gesendet…' : 'Nachricht senden' }}
+            {{ sending ? $t('contact.sending') : $t('contact.send') }}
           </button>
-          <p v-if="sent" class="text-[12px] tracking-wide text-center" style="color:var(--text-3)">Vielen Dank — wir melden uns bald.</p>
+          <p v-if="sent" class="text-[12px] tracking-wide text-center" style="color:var(--text-3)">{{ $t('contact.thanks') }}</p>
         </form>
       </div>
     </div>
@@ -66,14 +66,15 @@ const settings = await useSiteSettings()
 
 const hours = computed(() => settings.value?.opening_hours ?? [])
 
+const { t } = useI18n()
 const contactItems = computed(() => {
   const c = settings.value?.contact
   if (!c) return []
   return [
-    { key: 'Adresse', value: c.address, href: null },
-    { key: 'Telefon', value: c.phone,   href: `tel:${c.phone.replace(/\s/g, '')}` },
-    { key: 'Fax',     value: c.fax,     href: null },
-    { key: 'Email',   value: c.email,   href: `mailto:${c.email}` },
+    { key: t('contact.address'), value: c.address, href: null },
+    { key: t('contact.phone'),   value: c.phone,   href: `tel:${c.phone.replace(/\s/g, '')}` },
+    { key: t('contact.fax'),     value: c.fax,     href: null },
+    { key: t('contact.email'),   value: c.email,   href: `mailto:${c.email}` },
   ]
 })
 

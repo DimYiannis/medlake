@@ -2,8 +2,8 @@
   <div class="pt-36 px-10 pb-24 min-h-screen">
     <!-- Header -->
     <div class="mb-16 border-b pb-10" style="border-color:var(--border)">
-      <p class="text-[12px] tracking-[0.28em] uppercase mb-4" style="color:var(--text-3)">Medlake</p>
-      <h1 class="text-[clamp(40px,6vw,80px)] font-semibold tracking-[-0.025em] leading-none" style="color:var(--text)">News</h1>
+      <p class="text-[12px] tracking-[0.28em] uppercase mb-4" style="color:var(--text-3)">{{ $t('pages.news.eyebrow') }}</p>
+      <h1 class="text-[clamp(40px,6vw,80px)] font-semibold tracking-[-0.025em] leading-none" style="color:var(--text)">{{ $t('pages.news.title') }}</h1>
     </div>
 
     <!-- Grid -->
@@ -11,7 +11,7 @@
       <NuxtLink
         v-for="post in posts"
         :key="post.id"
-        :to="`/news/${post.slug}`"
+        :to="localePath(`/news/${post.slug}`)"
         class="p-7 transition-colors group"
         style="background:var(--bg-card)"
         @mouseenter="($el as HTMLElement).style.background='var(--bg-2)'"
@@ -26,18 +26,20 @@
           />
           <div v-else class="w-full h-full" style="background:var(--bg-2)" />
         </div>
-        <p class="text-[12px] tracking-[0.22em] uppercase mb-3" style="color:var(--text-3)">{{ post.tag || 'News' }}</p>
+        <p class="text-[12px] tracking-[0.22em] uppercase mb-3" style="color:var(--text-3)">{{ post.tag || $t('news.tag') }}</p>
         <h2 class="text-[16px] font-medium leading-[1.45] mb-4" style="color:var(--text)">{{ post.title }}</h2>
         <p class="text-[13px]" style="color:var(--text-4)">{{ formatDate(post.published_at) }}</p>
       </NuxtLink>
     </div>
 
-    <p v-else class="text-sm tracking-widest" style="color:var(--text-3)">Keine Beiträge vorhanden.</p>
+    <p v-else class="text-sm tracking-widest" style="color:var(--text-3)">{{ $t('pages.news.noNews') }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
-useHead({ title: 'News – Medlake' })
+const { t, locale } = useI18n()
+const localePath = useLocalePath()
+useHead({ title: t('pages.news.meta') })
 
 const supabase = useSupabaseClient()
 
@@ -53,6 +55,7 @@ const { data: posts } = await useAsyncData('news-posts', async () => {
 
 function formatDate(d: string) {
   if (!d) return ''
-  return new Date(d).toLocaleDateString('de-CH', { day: 'numeric', month: 'long', year: 'numeric' })
+  const localeTag = locale.value === 'en' ? 'en-GB' : 'de-CH'
+  return new Date(d).toLocaleDateString(localeTag, { day: 'numeric', month: 'long', year: 'numeric' })
 }
 </script>

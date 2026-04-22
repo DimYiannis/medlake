@@ -1,0 +1,228 @@
+{
+  "nav": {
+    "team": "Team",
+    "doctors": "Doctors",
+    "prices": "Prices",
+    "news": "News",
+    "jobs": "Jobs",
+    "medical": "Medical",
+    "contact": "Contact",
+    "agb": "Terms",
+    "services": "Services",
+    "bookAppointment": "Book Appointment",
+    "menu": "Menu"
+  },
+  "hero": {
+    "eyebrow": "Medlake Training — Küsnacht",
+    "title": "Centre of competence for",
+    "titleAccent": "Health & Movement",
+    "scrollHint": "Scroll to enter",
+    "location": "Küsnacht, Switzerland — since 2001",
+    "headline1": "The power",
+    "headlineAccent1": "to heal.",
+    "headline2": "The power",
+    "headlineAccent2": "to move.",
+    "description": "Medical centre of competence for health-oriented strength and endurance training.",
+    "learnMore": "Learn more",
+    "prevImage": "Previous image",
+    "nextImage": "Next image"
+  },
+  "sections": {
+    "gallery": "Gallery",
+    "team": "Team",
+    "news": "News",
+    "philosophy": "Philosophy",
+    "services": "Services",
+    "hours": "Opening Hours",
+    "contact": "Contact",
+    "stats": "Numbers"
+  },
+  "team": {
+    "subtitle": "Medlake · Küsnacht",
+    "title": "The Team",
+    "description": "People with passion for health, movement and personal care.",
+    "join": "Want to join the team?",
+    "viewJobs": "View open positions",
+    "viewAll": "View all",
+    "members": "Members"
+  },
+  "gallery": {
+    "view": "View",
+    "noImage": "No image"
+  },
+  "news": {
+    "current": "Latest",
+    "all": "All News",
+    "read": "Read",
+    "tag": "News"
+  },
+  "hours": {
+    "title": "Opening Hours",
+    "titleBleed1": "Opening",
+    "titleBleed2": "Hours",
+    "bookNow": "Book Appointment Now"
+  },
+  "stats": {
+    "doctors": "Specialist\nDoctors On-Site",
+    "years": "Years of\nExperience",
+    "opening": "Opening\nMon – Fri",
+    "medical": "Medically\nSupervised"
+  },
+  "services": {
+    "offer": "Our Offering",
+    "learnMore": "Learn more",
+    "viewAll": "View all services"
+  },
+  "contact": {
+    "title": "Contact",
+    "address": "Address",
+    "phone": "Phone",
+    "fax": "Fax",
+    "email": "Email",
+    "writeUs": "Write to us",
+    "name": "Name",
+    "emailPlaceholder": "Email",
+    "subject": "Subject",
+    "message": "Your message",
+    "send": "Send message",
+    "sending": "Sending…",
+    "thanks": "Thank you — we will be in touch soon."
+  },
+  "philosophy": {
+    "label": "Our Philosophy",
+    "whoAreWe": "Who are we?",
+    "intro": "Centre of competence for",
+    "introHighlight": "health-oriented strength and endurance training.",
+    "diff": "What sets us apart from other fitness centres?",
+    "diffText1": "treat back, neck and joint pain — strength measurements of back and neck muscles carried out by our",
+    "highlight1": "Specialist doctors and physiotherapists",
+    "highlight2": "specialist doctors."
+  },
+  "footer": {
+    "company": "Medlake Training",
+    "admin": "Admin"
+  },
+  "pages": {
+    "team": {
+      "meta": "The Team – Medlake",
+      "eyebrow": "Medlake · Küsnacht",
+      "title": "The Team",
+      "desc": "People with passion for health, movement and personal care.",
+      "join": "Want to join the team?",
+      "viewJobs": "View open positions",
+      "members": "Members"
+    },
+    "kontakt": {
+      "meta": "Contact – Medlake",
+      "title": "Contact",
+      "contactData": "Contact Details",
+      "hours": "Opening Hours",
+      "writeUs": "Write to us",
+      "name": "Name",
+      "yourName": "Your name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "yourMessage": "Your message",
+      "book": "Book Appointment",
+      "send": "Send message",
+      "sending": "Sending…",
+      "thanks": "Thank you — we will be in touch soon.",
+      "mapLabel": "Location"
+    },
+    "jobs": {
+      "meta": "Jobs – Medlake",
+      "eyebrow": "Medlake — Careers",
+      "title": "Jobs",
+      "desc": "Join our team at the centre of competence for health-oriented strength and endurance training in Küsnacht.",
+      "openPosition": "Open Position",
+      "application": "Application",
+      "applicationText": "Send your complete application documents by email. We look forward to hearing from you!",
+      "apply": "Apply Now",
+      "none": "No open positions at the moment."
+    },
+    "aerzte": {
+      "meta": "Doctors – Medlake",
+      "title": "Our Doctors",
+      "desc": "Specialist and expert doctors accompany you on the path to better health and wellbeing — directly on-site at Medlake.",
+      "career": "Education & Career",
+      "book": "Book Appointment",
+      "bookNow": "Book Now"
+    },
+    "preise": {
+      "meta": "Prices – Medlake",
+      "title": "Prices & Services",
+      "desc": "Transparent prices for everyone — including medically supervised care from the start.",
+      "adults": "Adults",
+      "recommended": "Recommended",
+      "includedLabel": "Services included in the subscription",
+      "notIncludedLabel": "Additional costs (not included in subscription)",
+      "insuranceNote": "We are happy to advise you on reductions through your health insurance.",
+      "book": "Book Appointment",
+      "plans": {
+        "premium": { "name": "Medlake Premium", "desc": "Our most comprehensive package — including all specialist equipment", "duration": "12 months", "features": ["Includes Galileo vibration plate", "Includes Sensopro", "Includes Kinesis Station", "Towel (on loan)", "All basic services"] },
+        "plus":    { "name": "Medlake Plus+",   "desc": "With one specialist device of your choice",                        "duration": "12 months", "features": ["Sensopro OR Kinesis OR Galileo", "All basic services"] },
+        "basis":   { "name": "Training Subscription", "desc": "Classic annual subscription without extras",                 "duration": "12 months", "features": ["Use of all training facilities", "Introduction & guidance", "Training monitoring"] }
+      },
+      "categories": {
+        "students":  "Students",
+        "youth":     "Under 20 years",
+        "family":    "Family with child (up to 18 years)*",
+        "single":    "Single services",
+        "sensoproM": "Sensopro — Members & MedX",
+        "sensoproE": "Sensopro — External"
+      },
+      "items": {
+        "annual":     "Annual subscription",
+        "halfYear":   "6-month subscription",
+        "12months":   "12 months",
+        "6months":    "6 months",
+        "familySub":  "*For children whose parents also have a subscription",
+        "singleEntry":"Single entry",
+        "sensopro":   "Sensopro",
+        "pt":         "Personal training",
+        "towel":      "Towel rental",
+        "shower":     "Shower gel",
+        "onRequest":  "On request",
+        "10pack":     "10-session pass"
+      },
+      "included": [
+        "Use of training facilities, changing rooms and showers",
+        "Instruction and introduction — the first 3 sessions are accompanied by an instructor",
+        "Regular training monitoring — every 10th session on request with instructor",
+        "Periodic renewal of training programme after 20–40 sessions",
+        "Free medical training consultation (with annual subscription)",
+        "Free chilled water from Eauvation — still or sparkling"
+      ],
+      "notIncluded": ["Kinesis Station", "Galileo vibration training", "Sensopro", "Dividat", "MedX therapy LE/CE", "Physiotherapy"]
+    },
+    "agb": {
+      "meta": "Terms – Medlake",
+      "title": "Terms & Conditions",
+      "subtitle": "Membership Terms Medlake Training AG — 2026/2027",
+      "questions": "If you have any questions about our terms and conditions, please do not hesitate to contact us."
+    },
+    "medizinisches": {
+      "meta": "Medical – Medlake",
+      "eyebrow": "Medlake — Knowledge",
+      "title": "Medical",
+      "desc": "In-depth background knowledge about muscles, strength training, pain treatment and more — compiled by our specialist doctors."
+    },
+    "news": {
+      "meta": "News – Medlake",
+      "title": "News",
+      "eyebrow": "Medlake — Latest",
+      "noNews": "No news available.",
+      "back": "Back to News"
+    }
+  },
+  "common": {
+    "more": "More",
+    "readMore": "Read more",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "loading": "Loading...",
+    "error": "Error"
+  }
+}
