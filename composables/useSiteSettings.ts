@@ -26,7 +26,7 @@ export async function useSiteSettings() {
       .from('site_settings')
       .select('value')
       .eq('key', 'main')
-      .single()
+      .maybeSingle()
     if (error || !data) return DEFAULTS
     return { ...DEFAULTS, ...data.value } as SiteSettings
   })

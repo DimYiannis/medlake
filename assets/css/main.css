@@ -83,6 +83,10 @@ body {
 .reveal-delay-4 { transition-delay: 0.32s; }
 .section-divider { border-top: 1px solid var(--border); }
 
+/* Service icons: white on transparent source — invert in light mode */
+:root:not(.dark) .service-icon { filter: invert(1) opacity(0.5); }
+.dark .service-icon            { filter: opacity(0.65); }
+
 @media (prefers-reduced-motion: reduce) {
   .ken-burns { animation: none; }
   .reveal { transition: none; opacity: 1; transform: none; }

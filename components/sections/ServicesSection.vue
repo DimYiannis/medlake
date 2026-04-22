@@ -82,11 +82,5 @@ function toggle(i: number) {
 <style scoped>
 .service-row:first-child { border-top: 1px solid var(--border); }
 
-/* Icons are white on transparent — invert in light mode */
-:root:not(.dark) .service-icon {
-  filter: invert(1) opacity(0.5);
-}
-.dark .service-icon {
-  filter: opacity(0.65);
-}
+/* .service-icon styles live in main.css */
 </style>

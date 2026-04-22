@@ -29,6 +29,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY,
+    deeplApiKey: process.env.DEEPL_API_KEY || '',
     adminPassword: process.env.ADMIN_PASSWORD || 'medlake2025',
     public: {
       supabaseUrl: process.env.SUPABASE_URL || '',

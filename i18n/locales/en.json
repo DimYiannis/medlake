@@ -202,11 +202,105 @@
       "subtitle": "Membership Terms Medlake Training AG — 2026/2027",
       "questions": "If you have any questions about our terms and conditions, please do not hesitate to contact us."
     },
+    "leistungen": {
+      "meta": "Services – Medlake",
+      "eyebrow": "Medlake — Services",
+      "title": "Services",
+      "desc": "Medically supervised training and therapy — individually tailored to your needs.",
+      "interested": "Interested?",
+      "book": "Book Appointment",
+      "krafttraining": {
+        "meta": "Strength Training – Medlake",
+        "title": "Strength Training",
+        "intro": "Health-oriented strength training leads to a better general condition — and is the most effective prevention against chronic musculoskeletal pain.",
+        "benefitsLabel": "Benefits",
+        "benefitTitles": ["Strength Reserves", "Prevention", "Metabolism", "Bone Health"],
+        "benefitTexts": ["Building strength reserves for everyday demands and sport.", "Prevents neck tension, back and joint pain.", "Optimises metabolism and fat burning.", "Strengthens bones through stimulation of bone density."],
+        "paras": ["Weak muscles are always partly responsible for acute and chronic musculoskeletal pain, leading to tension, inflammation and ultimately pain under additional strain and wear on joints, tendons or intervertebral discs.", "An increase in strength compensates for the natural loss of muscle and creates stability in joints and the spine — relieving painful soft tissues such as ligaments, tendons and intervertebral discs.", "The main benefit of machine-based training lies in the measurable resistance, gradually increased until age-appropriate strength is achieved. Movement is guided, making it easy on the joints. Strong muscles keep people mobile and independent even in old age."]
+      },
+      "herzKreislauf": {
+        "meta": "Cardio & Circulation – Medlake",
+        "title": "Cardio & Circulation",
+        "intro": "Cardio training leads to a more efficient cardiovascular system with improved muscle blood flow — and can be carried out at any age.",
+        "benefitsLabel": "What a trained cardiovascular system achieves",
+        "benefits": ["Lower resting heart rate", "Greater blood ejection volume per heartbeat", "New blood vessel formation in stronger muscles", "Improved oxygen supply and energy provision", "Faster removal of metabolic waste products such as lactic acid", "More endurance under physical exertion", "Increased stress tolerance", "Optimal body weight", "Better overall health"],
+        "para": "To perform well in everyday life and sport, physical endurance is essential — to avoid premature fatigue and to recover as quickly as possible from exertion.",
+        "recommendationLabel": "Recommendation",
+        "recommendationText": "Health-oriented cardiovascular training is carried out 1–2 times per week for approximately 20 minutes."
+      },
+      "hilfeSchmerzen": {
+        "meta": "Pain Relief – Medlake",
+        "title": "Pain Relief",
+        "intro": "Neck, back and joint pain is treated at the Medlake Centre by three specialist doctors using state-of-the-art computerised strengthening equipment — supported by physiotherapists.",
+        "statLabels": ["Specialist doctors on-site", "Training area", "Health insurance coverage"],
+        "para1": "An integrated medical and physiotherapy practice is available for treatment and emergencies.",
+        "para2": "You will find 540 m² with a large MedX equipment park with high-quality back machines, as well as high-quality LIFEFITNESS recumbent bikes, upright bikes and cross-trainers in a separate room.",
+        "insuranceLabel": "Health Insurance",
+        "insuranceText": "Therapy costs are covered by all health insurers. A contribution towards an annual subscription is also covered."
+      },
+      "firmenfitness": {
+        "meta": "Corporate Fitness – Medlake",
+        "title": "Corporate Fitness",
+        "intro": "Your contribution to your employees' health. Benefit from a corporate partnership with Medlake and invest in your number one success factor.",
+        "benefitsLabel": "Benefits for your company",
+        "benefits": ["Higher team performance and employee capability", "Strengthens self-confidence and motivation", "Improves your company image as an attractive employer", "Promotes stress resilience and mental strength", "Active corporate health prevention", "Lower sick leave through regular fitness training"],
+        "para": "Alongside professional training and development, physical fitness is an essential foundation for company quality and productivity. We motivate your teams towards more movement and better health — with measurable results."
+      },
+      "medX": {
+        "meta": "MED-X Training Therapy – Medlake",
+        "title": "Medical Training Therapy (MED-X)",
+        "intro": "Computerised MedX devices promote muscle development in the neck and lumbar region with maximum precision — each therapy session is an individual treatment with the doctor.",
+        "para1": "Thanks to optimal patient fixation, auxiliary muscles can be completely eliminated, resulting in optimal strengthening of the target musculature. The device settings allow for measured movement within the pain-free range.",
+        "para2": "Training can be performed gently and in a controlled manner with pound-range weights, documented time and movement repetition — allowing training after an acute pain episode, joint blockages or back surgery.",
+        "analysisLabel": "Computer-Assisted Analysis",
+        "analysisText": "Based on the measured values, the computer calculates the patient's strength curve, which is compared with age-, sex- and weight-specific standard data.",
+        "indicationsLabel": "Suitable for patients with",
+        "indications": ["Restricted spinal mobility", "Insufficient strength in the back extensor muscles", "Chronic back and neck pain", "Post-back surgery", "Post-acute pain episode", "Joint blockages"]
+      },
+      "physiotherapie": {
+        "meta": "Physiotherapy & MTT – Medlake",
+        "title": "Physiotherapy & MTT",
+        "intro": "Medical training therapy to increase the resilience of the musculoskeletal system — individually tailored, therapeutically supervised, and recognised by health insurers.",
+        "para1": "MTT is used to increase the resilience of the musculoskeletal system. Using strength, endurance, mobilisation, flexibility and coordination, the musculoskeletal system and cardiovascular system are trained to support rehabilitation processes.",
+        "para2": "The training programme is created by a physiotherapist and individually tailored to the patient — taking into account medical diagnoses, the current rehabilitation phase and physical conditions.",
+        "focusTitles": ["Strength", "Endurance", "Mobilisation", "Coordination"],
+        "focusTexts": ["Targeted muscle building in the affected area.", "Improving cardiovascular resilience.", "Restoring full range of motion.", "Training neuromuscular control and stability."],
+        "insuranceLabel": "Health Insurance & Referral",
+        "insuranceText": "An MTT referral is issued by your doctor and lasts 3 months. Costs are generally covered by basic or accident insurance. We recommend continuing training with us after the referral period."
+      },
+      "kinesis": {
+        "meta": "KINESIS Training – Medlake",
+        "title": "KINESIS Training",
+        "intro": "KINESIS — Greek for movement. Unique full-body training through cable resistance against gravity over a very wide range of motion.",
+        "para1": "The concept based on Technogym KINESIS is called ›Full Gravity‹. Naturally flowing exercise execution is specifically promoted. KINESIS is not a replacement for conventional training — rather a highly effective complement.",
+        "para2": "A wide variety of exercises in minimal space is possible at the Technogym KINESIS station — covering a broad range of athletic goals with minimal time requirements.",
+        "focusTitles": ["Strength", "Flexibility", "Coordination", "Posture Control"],
+        "focusTexts": ["Efficient muscle building through functional resistance.", "Targeted stretching for all body regions.", "Combining coordinated movements with resistance.", "Training balance and stabilising muscles."],
+        "suitableLabel": "Who is it suitable for?",
+        "suitableText": "Advanced and ambitious athletes can carry out a complete training programme through special movement patterns. In physiotherapy, the KINESIS station is used for targeted rehabilitation training."
+      },
+      "galileo": {
+        "meta": "Galileo Vibration Plate – Medlake",
+        "title": "Galileo Vibration Plate",
+        "intro": "Alternating side vibration movements cause muscles to contract more frequently via stretch reflexes — precisely adjustable for sport, rehabilitation and pain therapy.",
+        "para": "The stimulation can be individually increased and adjusted via the duration, frequency setting, foot position and body posture.",
+        "usesLabel": "Areas of application",
+        "uses": ["Additional aid in competitive sport", "Intensification of strengthening in training", "Rehabilitation after injury and painful conditions", "Kneecap or Achilles tendon pain", "Movement-painful arthrosis", "Chronic pain", "Neurological conditions such as MS, Parkinson's, incomplete paralysis"],
+        "contraLabel": "Contraindications",
+        "contra": ["Pregnancy", "New implants in the leg area", "Acute thrombosis", "Epilepsy"]
+      }
+    },
     "medizinisches": {
       "meta": "Medical – Medlake",
       "eyebrow": "Medlake — Knowledge",
       "title": "Medical",
       "desc": "In-depth background knowledge about muscles, strength training, pain treatment and more — compiled by our specialist doctors."
+    },
+    "feiertage": {
+      "meta": "Public Holidays – Medlake",
+      "title": "Public Holidays",
+      "desc": "Our opening hours on public holidays. Hours may vary over Christmas and New Year.",
+      "note": "Subject to change. For questions, reach us at"
     },
     "news": {
       "meta": "News – Medlake",

@@ -202,11 +202,105 @@
       "subtitle": "Vertragsbedingungen Medlake Training AG — 2026/2027",
       "questions": "Bei Fragen zu unseren Vertragsbedingungen stehen wir Ihnen gerne zur Verfügung."
     },
+    "leistungen": {
+      "meta": "Leistungen – Medlake",
+      "eyebrow": "Medlake — Leistungen",
+      "title": "Leistungen",
+      "desc": "Medizinisch begleitetes Training und Therapie — individuell abgestimmt auf Ihre Bedürfnisse.",
+      "interested": "Interessiert?",
+      "book": "Termin buchen",
+      "krafttraining": {
+        "meta": "Krafttraining – Medlake",
+        "title": "Krafttraining",
+        "intro": "Ein gesundheitsorientiertes Krafttraining führt zu einem besseren Allgemeinzustand — und ist die wirksamste Prävention gegen chronische Schmerzen des Bewegungsapparates.",
+        "benefitsLabel": "Vorteile",
+        "benefitTitles": ["Kraftreserven", "Prävention", "Stoffwechsel", "Knochengesundheit"],
+        "benefitTexts": ["Aufbau von Kraftreserven für Alltagsbelastungen und Sport.", "Verhindert Nackenverspannungen, Rücken- und Gelenkbeschwerden.", "Optimiert den Stoffwechsel und die Fettverbrennung.", "Stärkt den Knochen durch Stimulation der Knochendichte."],
+        "paras": ["Mitverantwortlich für akute und chronische Schmerzen des Bewegungsapparates sind immer schwache Muskeln, die bei zusätzlicher Fehlbelastung sowie Abnützungen an Gelenken, Sehnen oder Bandscheiben zu Verspannungen, Entzündung und letztlich Schmerzen führen.", "Ein Kraftzuwachs kompensiert den natürlichen Muskelabbau und bewirkt Stabilität an Gelenken und Wirbelsäule. Dadurch werden die schmerzenden Weichteile wie Bänder, Sehnen und Bandscheiben entlastet.", "Der Hauptnutzen des Trainings an Geräten liegt im dosierbaren Widerstand, der nach und nach vergrössert wird, bis die altersentsprechende Kraft erreicht wird. Krafttraining mit Geräten ist gelenkschonend, weil die Bewegung geführt wird. Eine kräftige Muskulatur hält den Menschen auch im Alter mobil und selbständig."]
+      },
+      "herzKreislauf": {
+        "meta": "Herz & Kreislauf – Medlake",
+        "title": "Herz & Kreislauf",
+        "intro": "Cardio-Training führt zur Ökonomisierung des Herzkreislaufsystems mit verbesserter Muskeldurchblutung — und kann in jedem Alter durchgeführt werden.",
+        "benefitsLabel": "Was ein trainiertes Herz-Kreislauf-System bewirkt",
+        "benefits": ["Tieferer Ruhepuls", "Grösseres Blutauswurfvolumen pro Herzschlag", "Gefässneubildungen in kräftigeren Muskeln", "Verbesserte Sauerstoffversorgung und Energiebereitstellung", "Schnellerer Abtransport von Abbaustoffen wie Milchsäure", "Mehr Ausdauer auch bei körperlicher Belastung", "Erhöhte Stresstoleranz", "Optimales Körpergewicht", "Bessere allgemeine Gesundheit"],
+        "para": "Um im Alltag und Sport gute Leistungen vollbringen zu können, braucht es körperliche Ausdauer — einerseits um nicht vorzeitig zu ermüden, anderseits aber auch, um sich möglichst bald von den Strapazen erholen zu können.",
+        "recommendationLabel": "Empfehlung",
+        "recommendationText": "Ein gesundheitsorientiertes Kreislauftraining wird 1–2 Mal pro Woche während ca. 20 Minuten durchgeführt."
+      },
+      "hilfeSchmerzen": {
+        "meta": "Hilfe bei Schmerzen – Medlake",
+        "title": "Hilfe bei Schmerzen",
+        "intro": "Schmerzen im Nacken, Rücken und Gelenken werden im Medlake Center von drei Spezialärzten mit modernsten und computerisierten Kräftigungsgeräten behandelt — unterstützt von Physiotherapeutinnen.",
+        "statLabels": ["Spezialärzte vor Ort", "Trainingsfläche", "Krankenkassendeckung"],
+        "para1": "Es steht eine integrierte Arzt- und Physiotherapiepraxis zur Behandlung und für Notfälle zur Verfügung.",
+        "para2": "Sie finden auf 540 m² einen grossen MedX-Gerätepark mit hochwertigen Rückengeräten sowie in einem separaten Raum hochwertige LIFEFITNESS Liegevelos, Bikes und Crosstrainer.",
+        "insuranceLabel": "Krankenkasse",
+        "insuranceText": "Die Therapiekosten werden von allen Krankenkassen bezahlt. Für ein Jahresabonnement wird ein Kostenanteil übernommen."
+      },
+      "firmenfitness": {
+        "meta": "Firmenfitness – Medlake",
+        "title": "Firmenfitness",
+        "intro": "Ihr Beitrag zur Gesundheit Ihrer Mitarbeitenden. Profitieren Sie von einer Firmen-Kooperation mit Medlake und investieren Sie in Ihren Erfolgsfaktor Nr. 1.",
+        "benefitsLabel": "Vorteile für Ihr Unternehmen",
+        "benefits": ["Höhere Team- und Leistungsfähigkeit der Mitarbeitenden", "Stärkt das Selbstvertrauen und die Motivation", "Verbessert Ihr Unternehmensimage als attraktiver Arbeitgeber", "Förderung von Stressresistenz und mentaler Stärke", "Prävention vom Unternehmen aktiv gefördert", "Niedrigerer Krankheitsstand durch regelmässiges Fitnesstraining"],
+        "para": "Neben der fachlichen Aus- und Weiterbildung der Mitarbeitenden ist ihre körperliche Fitness eine wesentliche Grundlage für Unternehmensqualität und Produktivität. Wir motivieren Ihre Teams zu mehr Bewegung und Gesundheit — mit messbaren Ergebnissen."
+      },
+      "medX": {
+        "meta": "MED-X Trainingstherapie – Medlake",
+        "title": "Ärztliche Trainingstherapie (MED-X)",
+        "intro": "Computerisierte MedX-Geräte fördern den Muskelaufbau im Nacken- und Lendenbereich mit höchster Präzision — jede Therapieeinheit erfolgt in Einzelbehandlung mit dem Arzt.",
+        "para1": "Dank optimaler Fixierung des Patienten können Hilfsmuskeln völlig ausgeschaltet werden, was eine optimale Kräftigung der Zielmuskulatur bewirkt. Die Geräteeinstellung erlaubt ein dosiertes Bewegen im schmerzfreien Bereich.",
+        "para2": "Mit Gewichten im Pfundbereich, mit dokumentierter Zeit und Bewegungsrepetition kann schonend und kontrolliert trainiert werden. Dies lässt ein Training nach akutem Schmerzschub, nach Gelenksblockierungen oder nach Rückenoperationen zu.",
+        "analysisLabel": "Computergestützte Analyse",
+        "analysisText": "Aufgrund der gemessenen Werte errechnet der Computer die Kraftkurve des Patienten, welche mit alters-, geschlechts- und gewichtsspezifischen Normdaten verglichen wird.",
+        "indicationsLabel": "Geeignet für Patienten mit",
+        "indications": ["Eingeschränkter Beweglichkeit der Wirbelsäule", "Zu niedrigem Kraftniveau der Rückenstreckmuskulatur", "Chronischen Rücken- und Nackenschmerzen", "Zustand nach Rückenoperationen", "Zustand nach akutem Schmerzschub", "Gelenksblockierungen"]
+      },
+      "physiotherapie": {
+        "meta": "Physiotherapie & MTT – Medlake",
+        "title": "Physiotherapie & MTT",
+        "intro": "Medizinische Trainingstherapie zur Steigerung der Belastbarkeit des Bewegungsapparates — individuell abgestimmt, therapeutisch begleitet, krankenkassenanerkannt.",
+        "para1": "MTT wird zur Steigerung der Belastbarkeit des Bewegungsapparates eingesetzt. Mittels Kraft, Ausdauer, Mobilisation, Beweglichkeit und Koordination werden der Bewegungsapparat und der Herzkreislauf trainiert. Dieses Training wird zur Unterstützung von Rehabilitationsprozessen eingesetzt.",
+        "para2": "Das Trainingsprogramm wird von einem Physiotherapeuten erstellt und individuell auf den Patienten abgestimmt — unter Berücksichtigung medizinischer Diagnosen, der aktuellen Rehabilitationsphase und der körperlichen Voraussetzungen.",
+        "focusTitles": ["Kraft", "Ausdauer", "Mobilisation", "Koordination"],
+        "focusTexts": ["Gezielter Aufbau der Muskulatur im betroffenen Bereich.", "Verbesserung der kardiovaskulären Belastbarkeit.", "Wiederherstellung des vollen Bewegungsumfangs.", "Training neuromuskulärer Steuerung und Stabilität."],
+        "insuranceLabel": "Krankenkasse & Verordnung",
+        "insuranceText": "Eine MTT-Verordnung wird von Ihrem Arzt ausgestellt und dauert 3 Monate. Die Kosten werden in der Regel von der Grundversicherung oder der Unfallversicherung übernommen. Wir empfehlen nach Ablauf der Verordnung, das Training bei uns fortzuführen."
+      },
+      "kinesis": {
+        "meta": "KINESIS Training – Medlake",
+        "title": "KINESIS Training",
+        "intro": "KINESIS — griechisch für Bewegung. Einzigartiges Ganzkörpertraining durch Seilrollen-Widerstand gegen die Schwerkraft über einen sehr weiten Bewegungsradius.",
+        "para1": "Das auf Technogym KINESIS basierende Konzept heißt entsprechend ›Full Gravity‹. Natürlich fliessende Übungsausführungen werden dadurch gezielt gefördert. KINESIS ist kein Ersatz für das konventionelle Training — vielmehr eine hocheffektive Ergänzung.",
+        "para2": "Eine Vielzahl von Übungen auf engstem Raum ist an der Technogym KINESIS-Station möglich. So lässt sich mit minimalem Zeitbedarf eine grosse Bandbreite an sportlichen Zielen abdecken.",
+        "focusTitles": ["Kraft", "Flexibilität", "Koordination", "Haltungskontrolle"],
+        "focusTexts": ["Effizienter Muskelaufbau durch funktionelle Widerstände.", "Gezielte Dehnübungen für alle Körperregionen.", "Koordinierte Bewegungen mit Widerständen verbinden.", "Training von Gleichgewicht und stabilisierender Muskulatur."],
+        "suitableLabel": "Für wen geeignet?",
+        "suitableText": "Fortgeschrittene und ambitionierte Sportler können ein komplettes Trainingsprogramm durch spezielle Bewegungsformen durchführen. Im Rahmen der Physiotherapie wird die KINESIS-Station für gezieltes Training in der Rehabilitation eingesetzt."
+      },
+      "galileo": {
+        "meta": "Galileo Vibrationsplatte – Medlake",
+        "title": "Galileo Vibrationsplatte",
+        "intro": "Seitenalternierende Vibrationsbewegungen bringen Muskeln über Dehnreflexe zu vermehrten Kontraktionen — präzise dosierbar für Sport, Rehabilitation und Schmerztherapie.",
+        "para": "Die Stimulation lässt sich über die Zeitdauer, die Frequenzeinstellung sowie über die Fussposition und Körperhaltung individuell steigern und anpassen.",
+        "usesLabel": "Einsatzgebiete",
+        "uses": ["Zusätzliches Hilfsmittel beim Leistungssport", "Intensivierung der Kräftigung im Training", "Rehabilitation nach Verletzung und schmerzhaften Zuständen", "Kniescheiben- oder Achillessehnenschmerzen", "Bewegungsschmerzhafte Arthrosen", "Chronifizierte Schmerzen", "Neurologische Erkrankungen wie MS, Parkinson, inkomplette Lähmungen"],
+        "contraLabel": "Kontraindikationen",
+        "contra": ["Schwangerschaft", "Neue Implantate im Beinbereich", "Akute Thrombosen", "Epilepsie"]
+      }
+    },
     "medizinisches": {
       "meta": "Medizinisches – Medlake",
       "eyebrow": "Medlake — Wissen",
       "title": "Medizinisches",
       "desc": "Fundiertes Hintergrundwissen über Muskeln, Krafttraining, Schmerzbehandlung und mehr — von unseren Fachärzten zusammengestellt."
+    },
+    "feiertage": {
+      "meta": "Feiertage – Medlake",
+      "title": "Feiertage",
+      "desc": "Unsere Öffnungszeiten an Feiertagen. An Weihnachten und Neujahr können die Zeiten variieren.",
+      "note": "Änderungen vorbehalten. Bei Fragen stehen wir Ihnen unter"
     },
     "news": {
       "meta": "News – Medlake",
