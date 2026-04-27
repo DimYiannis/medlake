@@ -266,6 +266,10 @@
           </div>
           <div class="space-y-px bg-ml-border border border-ml-border">
             <div v-for="d in doctors" :key="d.id" class="bg-[#080808] px-5 py-4 flex items-center gap-4 hover:bg-white/[0.02] transition-colors">
+              <div class="w-9 h-9 rounded-full bg-white/[0.05] flex-shrink-0 overflow-hidden">
+                <img v-if="d.photo_url" :src="d.photo_url" class="w-full h-full object-cover" />
+                <span v-else class="w-full h-full flex items-center justify-center text-[13px] text-white/30">{{ initials(d.name) }}</span>
+              </div>
               <div class="flex-1 min-w-0">
                 <p class="text-[16px] text-white">{{ d.name }}</p>
                 <p class="text-[13px] text-white/25">{{ d.specialty }}</p>
