@@ -8,10 +8,10 @@
       </h1>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-px px-10" style="background:var(--border)">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-px px-4" style="background:var(--border)">
 
       <!-- Contact info -->
-      <div class="px-0 py-10 pr-16" style="background:var(--bg)">
+      <div class="px-0 py-10 pr-16 pl-4" style="background:var(--bg)">
         <p class="text-[12px] tracking-[0.25em] uppercase mb-8" style="color:var(--text-3)">{{ $t('pages.kontakt.contactData') }}</p>
         <div class="space-y-7">
           <div v-for="item in contactItems" :key="item.key" class="flex gap-8">

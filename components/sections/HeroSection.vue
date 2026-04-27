@@ -194,11 +194,11 @@ const localePath = useLocalePath()
 const isLight = computed(() => theme.value === 'light')
 const bottomGradient = computed(() => isLight.value
   ? 'linear-gradient(to top,rgba(0,0,0,0.45) 0%,rgba(0,0,0,0.1) 40%,transparent 70%)'
-  : 'linear-gradient(to top,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.25) 40%,transparent 70%)'
+  : 'linear-gradient(to top,rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.18) 40%,transparent 70%)'
 )
 const leftGradient = computed(() => isLight.value
   ? 'linear-gradient(to right,rgba(0,0,0,0.2) 0%,transparent 55%)'
-  : 'linear-gradient(to right,rgba(0,0,0,0.45) 0%,transparent 55%)'
+  : 'linear-gradient(to right,rgba(0,0,0,0.3) 0%,transparent 55%)'
 )
 
 const slides = [

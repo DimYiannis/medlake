@@ -5,23 +5,23 @@
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
 
   /* Dark (default) */
-  --bg:            #050505;
-  --bg-2:          #0a0a0a;
-  --bg-card:       #0d0d0d;
-  --bg-input:      rgba(255,255,255,0.04);
+  --bg:            #111113;
+  --bg-2:          #18181b;
+  --bg-card:       #1c1c1f;
+  --bg-input:      rgba(255,255,255,0.05);
   --text:          #ffffff;
   --text-2:        rgba(255,255,255,0.55);
   --text-3:        rgba(255,255,255,0.42);
   --text-4:        rgba(255,255,255,0.22);
-  --border:        rgba(255,255,255,0.07);
+  --border:        rgba(255,255,255,0.08);
   --border-2:      rgba(255,255,255,0.18);
-  --bleed:         rgba(255,255,255,0.035);
+  --bleed:         rgba(255,255,255,0.04);
   --btn-bg:        #ffffff;
-  --btn-text:      #050505;
-  --nav-bg:        rgba(5,5,5,0.92);
-  --marquee-bg:    #070707;
-  --team-bg:       #060606;
-  --footer-bg:     #030303;
+  --btn-text:      #111113;
+  --nav-bg:        rgba(17,17,19,0.92);
+  --marquee-bg:    #141416;
+  --team-bg:       #131315;
+  --footer-bg:     #0d0d0f;
 }
 
 [data-theme='light'] {
