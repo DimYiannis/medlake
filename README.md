@@ -1,19 +1,20 @@
 # Medlake — Nuxt 3 Website
 
 Website for Medlake Training Küsnacht.
-Built with Nuxt 3, Tailwind CSS, Three.js, and Supabase.
+Built with Nuxt 3, Tailwind CSS, Three.js, Supabase, and DeepL.
 
 ---
 
 ## Stack
 
-| Layer      | Tech                        |
-|------------|-----------------------------|
-| Framework  | Nuxt 3                      |
-| Styling    | Tailwind CSS                |
-| 3D / Hero  | Three.js (icosahedron + particles + mouse parallax) |
-| Backend    | Supabase (Postgres + Storage + Auth) |
-| Hosting    | Vercel
+| Layer        | Tech                                                        |
+|--------------|-------------------------------------------------------------|
+| Framework    | Nuxt 3                                                      |
+| Styling      | Tailwind CSS + CSS custom properties (dark/light theme)     |
+| 3D / Hero    | Three.js (icosahedron + particles + mouse parallax)         |
+| Backend      | Supabase (Postgres + Storage)                               |
+| Translations | DeepL API (auto-translate locale files + DB records)        |
+| Hosting      | Vercel                                                      |
 
 ---
 
@@ -26,14 +27,23 @@ npm install
 
 ### 2. Set up Supabase
 1. Go to [supabase.com](https://supabase.com) → New project
-2. In **SQL Editor** → run the contents of `supabase-schema.sql`
-3. In **Storage** → create a bucket called `medlake` (set to **Public**)
-4. Copy your project URL and API keys
+2. In **SQL Editor** → run `supabase-schema.sql`
+3. In **Storage** → create bucket `medlake` (Public)
+4. In **Storage → Policies** → add anon INSERT policy on `medlake` bucket
+5. In **Authentication → Policies** → add anon ALL policies on all tables
 
 ### 3. Configure environment
 ```bash
 cp .env.example .env
 ```
+
+| Variable              | Description                          |
+|-----------------------|--------------------------------------|
+| `SUPABASE_URL`        | Your Supabase project URL            |
+| `SUPABASE_ANON_KEY`   | Supabase publishable key             |
+| `SUPABASE_SERVICE_KEY`| Supabase secret key (server only)    |
+| `ADMIN_PASSWORD`      | Password for `/admin`                |
+| `DEEPL_API_KEY`       | DeepL API key (free tier works)      |
 
 ### 4. Run dev server
 ```bash
@@ -46,18 +56,47 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ## Admin Panel
 
-Visit `/admin` → enter your `ADMIN_PASSWORD`.
+Visit `/admin` → enter `ADMIN_PASSWORD`.
 
-### What you can manage:
+### Capabilities
 
-| Section       | Actions                                  |
-|---------------|------------------------------------------|
-| News          | Create, edit, delete posts with images   |
-| Team          | Add/remove members, upload photos        |
-| Galerie       | Upload/delete photos, add captions       |
-| Hero-Text     | Edit headline, subtitle, eyebrow text    |
-| Öffnungszeiten| Edit opening hours rows                  |
-| Leistungen    | Edit service names and descriptions      |
+| Section        | Actions                                                    |
+|----------------|------------------------------------------------------------|
+| News           | Create, edit, delete posts — image upload via Supabase Storage |
+| Team           | Add/remove members, upload photos, set sort order          |
+| Ärzte          | Add/edit doctors — name, specialty, photo, bio, phone      |
+| Galerie        | Upload multiple photos, add captions, delete               |
+| Leistungen     | Edit service names, descriptions, icons, links             |
+| Feiertage      | Manage holiday opening hours                               |
+| Jobs           | Create/edit job listings with sections (JSON), toggle active |
+| Hero-Text      | Edit headline, subtitle, eyebrow text                      |
+| Öffnungszeiten | Edit opening hours rows with optional links                |
+| Kontakt        | Edit address, phone, fax, email                            |
+
+---
+
+## Internationalisation
+
+Site supports **DE** (default), **EN**, **FR**, **IT**.
+
+### Add a new language
+
+1. Run the translation script:
+```bash
+DEEPL_API_KEY=your-key node scripts/translate-locales.mjs XX
+```
+Replace `XX` with a DeepL language code (e.g. `ES`, `PT`, `NL`).
+
+2. Add the locale to `nuxt.config.ts`:
+```ts
+{ code: 'xx', name: 'Language Name', file: 'xx.json' }
+```
+
+The nav language dropdown picks it up automatically.
+
+### DB record translation pipeline
+
+`POST /api/translate-record` translates individual Supabase records via DeepL and caches results in a `translations` column. Supports plain text and HTML fields.
 
 ---
 
@@ -67,14 +106,14 @@ Visit `/admin` → enter your `ADMIN_PASSWORD`.
 npm run build
 ```
 
-Or connect your GitHub repo to [vercel.com](https://vercel.com) and add the environment variables in the Vercel dashboard.
+Or connect GitHub repo to [vercel.com](https://vercel.com) and add environment variables in the Vercel dashboard.
 
 ---
 
 ## Customisation
 
-- **Fonts**: Change in `nuxt.config.ts` → `head.link` and `tailwind.config.ts` → `fontFamily`
-- **Three.js scene**: Edit `components/three/HeroCanvas.vue`
-- **Marquee items**: Edit `components/ui/MarqueeTicker.vue`
-- **Services list**: Editable via admin panel, or directly in `components/sections/ServicesSection.vue`
-- **Colors**: All in `tailwind.config.ts` under `colors.ml`
+- **Theme colors**: `assets/css/main.css` → `:root` (dark) and `[data-theme='light']`
+- **Fonts**: `nuxt.config.ts` → `head.link` and `tailwind.config.ts` → `fontFamily`
+- **Three.js scene**: `components/three/HeroCanvas.vue`
+- **Marquee items**: `components/ui/MarqueeTicker.vue`
+- **Nav links**: `components/SiteNav.vue` → `links` array

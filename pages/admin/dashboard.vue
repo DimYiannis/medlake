@@ -168,7 +168,8 @@
           </div>
           <div class="mb-6">
             <label class="admin-label">Fotos hochladen</label>
-            <input type="file" accept="image/*" multiple class="admin-input" @change="handleGalleryUpload" />
+            <input type="file" accept="image/*" multiple class="admin-input" :disabled="uploadingGallery" @change="handleGalleryUpload" />
+            <p v-if="uploadingGallery" class="text-[12px] text-white/30 mt-2 tracking-widest uppercase">Wird hochgeladen…</p>
           </div>
           <div class="grid grid-cols-3 gap-px bg-ml-border border border-ml-border">
             <div
@@ -457,6 +458,7 @@ const editingDoctor = ref<any>(null)
 const editingService = ref<any>(null)
 const editingJob = ref<any>(null)
 const saving = ref(false)
+const uploadingGallery = ref(false)
 
 const siteSettings = ref({
   hero_title_1:   'Die Kraft',
@@ -489,7 +491,7 @@ async function loadAll() {
       supabase.from('news_posts').select('*').order('published_at', { ascending: false }),
       supabase.from('team_members').select('*').order('sort_order'),
       supabase.from('gallery_photos').select('*').order('sort_order'),
-      supabase.from('site_settings').select('value').eq('key', 'main').single(),
+      supabase.from('site_settings').select('value').eq('key', 'main').maybeSingle(),
       supabase.from('doctors').select('*').order('sort_order'),
       supabase.from('services').select('*').order('sort_order'),
       supabase.from('holidays').select('*').order('sort_order'),
@@ -575,18 +577,27 @@ async function handleImageUpload(e: Event, context: 'news' | 'team' | 'doctors')
 async function handleGalleryUpload(e: Event) {
   const files = (e.target as HTMLInputElement).files
   if (!files) return
-  for (const file of Array.from(files)) {
-    const path = `gallery/${Date.now()}-${file.name}`
-    const { error } = await supabase.storage.from('medlake').upload(path, file)
-    if (error) continue
-    const { data: urlData } = supabase.storage.from('medlake').getPublicUrl(path)
-    await supabase.from('gallery_photos').insert({
-      url: urlData.publicUrl,
-      caption: null,
-      sort_order: gallery.value.length + 1,
-    })
+  uploadingGallery.value = true
+  try {
+    for (const file of Array.from(files)) {
+      const path = `gallery/${Date.now()}-${file.name}`
+      const { error } = await supabase.storage.from('medlake').upload(path, file)
+      if (error) {
+        alert(`Upload fehlgeschlagen: ${error.message}`)
+        continue
+      }
+      const { data: urlData } = supabase.storage.from('medlake').getPublicUrl(path)
+      const { error: dbError } = await supabase.from('gallery_photos').insert({
+        url: urlData.publicUrl,
+        caption: null,
+        sort_order: gallery.value.length + 1,
+      })
+      if (dbError) alert(`DB-Fehler: ${dbError.message}`)
+    }
+    await loadAll()
+  } finally {
+    uploadingGallery.value = false
   }
-  await loadAll()
 }
 
 async function deleteGalleryPhoto(id: number) {

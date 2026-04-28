@@ -1,0 +1,432 @@
+{
+  "nav": {
+    "team": "Équipe",
+    "doctors": "Médecins",
+    "prices": "Prix",
+    "news": "Actualités",
+    "jobs": "Emplois",
+    "medical": "Médical",
+    "contact": "Contact",
+    "agb": "CONDITIONS GÉNÉRALES DE VENTE",
+    "services": "Prestations",
+    "bookAppointment": "Réserver un rendez-vous",
+    "menu": "Menu"
+  },
+  "hero": {
+    "eyebrow": "Formation Medlake - Küsnacht",
+    "title": "Centre de compétences pour",
+    "titleAccent": "Santé et activité physique",
+    "scrollHint": "Faire défiler pour entrer",
+    "location": "Küsnacht, Suisse - depuis 2001",
+    "headline1": "La force",
+    "headlineAccent1": "de guérir.",
+    "headline2": "La force",
+    "headlineAccent2": "de se déplacer.",
+    "description": "Centre de compétence médical pour l'entraînement de la force et de l'endurance axé sur la santé.",
+    "learnMore": "En savoir plus",
+    "prevImage": "Image précédente",
+    "nextImage": "Image suivante"
+  },
+  "sections": {
+    "gallery": "Galerie",
+    "team": "Équipe",
+    "news": "Actualités",
+    "philosophy": "Philosophie",
+    "services": "Prestations",
+    "hours": "Heures d'ouverture",
+    "contact": "Contact",
+    "stats": "Chiffres"
+  },
+  "team": {
+    "subtitle": "Medlake - Küsnacht",
+    "title": "L'équipe",
+    "description": "Des personnes passionnées par la santé, l'activité physique et les soins personnels.",
+    "join": "Faire partie de l'équipe ?",
+    "viewJobs": "Voir les postes vacants",
+    "viewAll": "Voir tous",
+    "members": "Membres"
+  },
+  "gallery": {
+    "view": "Voir",
+    "noImage": "Pas d'image"
+  },
+  "news": {
+    "current": "Actualités",
+    "all": "Toutes les actualités",
+    "read": "Lire",
+    "tag": "Actualités"
+  },
+  "hours": {
+    "title": "Heures d'ouverture",
+    "titleBleed1": "Ouverture",
+    "titleBleed2": "temps",
+    "bookNow": "Réserver un rendez-vous maintenant"
+  },
+  "stats": {
+    "doctors": "Médecins spécialistes\nsur place",
+    "years": "années\nExpérience",
+    "opening": "Ouverture\nLu - Ve",
+    "medical": "Médical\naccompagné"
+  },
+  "services": {
+    "offer": "Notre offre",
+    "learnMore": "En savoir plus",
+    "viewAll": "Voir tous les services"
+  },
+  "contact": {
+    "title": "Contact",
+    "address": "Adresse",
+    "phone": "Téléphone",
+    "fax": "Fax",
+    "email": "Email",
+    "writeUs": "Écrivez-nous",
+    "name": "Nom",
+    "emailPlaceholder": "Courrier électronique",
+    "subject": "Sujet",
+    "message": "Votre message",
+    "send": "Envoyer un message",
+    "sending": "En cours d'envoi...",
+    "thanks": "Merci beaucoup - nous vous contacterons bientôt."
+  },
+  "philosophy": {
+    "label": "Notre philosophie",
+    "whoAreWe": "Qui sommes-nous ?",
+    "intro": "Centre de compétences pour",
+    "introHighlight": "Entraînement de la force et de l'endurance axé sur la santé.",
+    "diff": "Qu'est-ce qui nous différencie des autres centres de fitness ?",
+    "diffText1": "traitent les douleurs dorsales, cervicales et articulaires - mesures de la force des muscles du dos et de la nuque par nos",
+    "highlight1": "Médecins spécialisés et physiothérapeutes",
+    "highlight2": "Médecins spécialistes."
+  },
+  "footer": {
+    "company": "Formation Medlake",
+    "admin": "Admin"
+  },
+  "pages": {
+    "team": {
+      "meta": "L'équipe - Medlake",
+      "eyebrow": "Medlake - Küsnacht",
+      "title": "L'équipe",
+      "desc": "Des personnes passionnées par la santé, l'activité physique et les soins personnels.",
+      "join": "Faire partie de l'équipe ?",
+      "viewJobs": "Voir les postes vacants",
+      "members": "Membres"
+    },
+    "kontakt": {
+      "meta": "Contact - Medlake",
+      "title": "Contact",
+      "contactData": "Coordonnées",
+      "hours": "Heures d'ouverture",
+      "writeUs": "Écrivez-nous",
+      "name": "Nom",
+      "yourName": "Votre nom",
+      "email": "Courrier électronique",
+      "subject": "Sujet",
+      "message": "Message",
+      "yourMessage": "Votre message",
+      "book": "Réserver un rendez-vous",
+      "send": "Envoyer un message",
+      "sending": "En cours d'envoi...",
+      "thanks": "Merci - nous vous contacterons bientôt.",
+      "mapLabel": "Site"
+    },
+    "jobs": {
+      "meta": "Emplois - Medlake",
+      "eyebrow": "Medlake - Carrière",
+      "title": "Emplois",
+      "desc": "Fais partie de notre équipe au centre de compétences pour la musculation et l'endurance axées sur la santé à Küsnacht.",
+      "openPosition": "Poste vacant",
+      "application": "Candidature",
+      "applicationText": "Envoie-nous ton dossier de candidature complet par e-mail. Nous nous réjouissons de t'accueillir !",
+      "apply": "Postuler maintenant",
+      "none": "Aucun poste vacant pour le moment."
+    },
+    "aerzte": {
+      "meta": "Médecins - Medlake",
+      "title": "Nos médecins",
+      "desc": "Des spécialistes et des médecins spécialisés vous accompagnent sur la voie d'une meilleure santé et d'un plus grand bien-être - directement sur place au Medlake.",
+      "career": "Formation & carrière",
+      "book": "Prendre rendez-vous",
+      "bookNow": "Réserver maintenant"
+    },
+    "preise": {
+      "meta": "Prix - Medlake",
+      "title": "Prix et services",
+      "desc": "Des prix transparents pour tous - y compris un suivi médical dès le début.",
+      "adults": "Adultes",
+      "recommended": "Recommandé",
+      "includedLabel": "Services inclus dans l'abonnement",
+      "notIncludedLabel": "Coûts supplémentaires (non compris dans l'abonnement)",
+      "insuranceNote": "Nous vous conseillons volontiers sur les réductions accordées par votre caisse maladie.",
+      "book": "Prendre rendez-vous",
+      "plans": {
+        "premium": {
+          "name": "Medlake Premium",
+          "desc": "Notre package le plus complet - incluant tous les appareils spéciaux",
+          "duration": "12 mois",
+          "features": [
+            "Plaque vibrante Galileo incluse",
+            "Sensopro inclus",
+            "Station Kinesis incluse",
+            "Serviette (à titre de prêt)",
+            "Tous les services de base"
+          ]
+        },
+        "plus": {
+          "name": "Medlake Plus+",
+          "desc": "Avec un appareil spécial de votre choix",
+          "duration": "12 mois",
+          "features": [
+            "Sensopro OU Kinesis OU Galileo",
+            "Tous les services de base"
+          ]
+        },
+        "basis": {
+          "name": "Abonnement à la formation",
+          "desc": "Abonnement annuel classique sans extras",
+          "duration": "12 mois",
+          "features": [
+            "Utilisation de toutes les installations d'entraînement",
+            "Introduction et suivi",
+            "Contrôle de l'entraînement"
+          ]
+        }
+      },
+      "categories": {
+        "students": "Étudiants",
+        "youth": "Jeunes jusqu'à 20 ans",
+        "family": "Famille avec enfant (jusqu'à 18 ans)*",
+        "single": "Prestations individuelles",
+        "sensoproM": "Sensopro - Membres & MedX",
+        "sensoproE": "Sensopro - Externe"
+      },
+      "items": {
+        "annual": "Abonnement annuel",
+        "halfYear": "Abonnement semestriel",
+        "12months": "12 mois",
+        "6months": "6 mois",
+        "familySub": "*Pour les enfants dont les parents ont également un abonnement",
+        "singleEntry": "Entrée unique",
+        "sensopro": "Sensopro",
+        "pt": "Entraînement personnel",
+        "towel": "Location de serviettes",
+        "shower": "Gel douche",
+        "onRequest": "Sur demande",
+        "10pack": "Abonnement de 10"
+      },
+      "included": [
+        "Utilisation des installations d'entraînement, des vestiaires et des cabines de douche",
+        "Instruction et introduction - les 3 premiers entraînements sont accompagnés par un instructeur",
+        "Contrôle régulier de l'entraînement - tous les 10 entraînements sur demande avec l'instructeur",
+        "Renouvellement périodique du programme d'entraînement après 20-40 unités",
+        "Conseil médical d'entraînement gratuit (en cas d'abonnement annuel)",
+        "Eau réfrigérée gratuite d'Eauvation - gazeuse ou non gazeuse"
+      ],
+      "notIncluded": [
+        "Station Kinesis",
+        "Entraînement par vibrations Galileo",
+        "Sensopro",
+        "Dividat",
+        "Thérapie MedX LE/CE",
+        "Physiothérapie"
+      ]
+    },
+    "agb": {
+      "meta": "Conditions générales de vente - Medlake",
+      "title": "CONDITIONS GÉNÉRALES DE VENTE",
+      "subtitle": "Conditions contractuelles Medlake Training AG - 2026/2027",
+      "questions": "Nous nous tenons à votre disposition pour toute question concernant nos conditions contractuelles."
+    },
+    "leistungen": {
+      "meta": "Prestations - Medlake",
+      "eyebrow": "Medlake - Prestations",
+      "title": "Prestations",
+      "desc": "Entraînement et thérapie sous surveillance médicale - adaptés individuellement à vos besoins.",
+      "interested": "Intéressé(e) ?",
+      "book": "Réserver un rendez-vous",
+      "krafttraining": {
+        "meta": "Musculation - Medlake",
+        "title": "Entraînement de la force",
+        "intro": "Un entraînement musculaire axé sur la santé permet d'améliorer l'état général - et constitue la prévention la plus efficace contre les douleurs chroniques de l'appareil locomoteur.",
+        "benefitsLabel": "Avantages",
+        "benefitTitles": [
+          "Réserves de force",
+          "Prévention",
+          "Métabolisme",
+          "Santé osseuse"
+        ],
+        "benefitTexts": [
+          "Constitution de réserves de force pour les efforts quotidiens et le sport.",
+          "Prévient les tensions cervicales, les douleurs dorsales et articulaires.",
+          "Optimise le métabolisme et la combustion des graisses.",
+          "Renforce les os en stimulant la densité osseuse."
+        ],
+        "paras": [
+          "Les douleurs aiguës et chroniques de l'appareil locomoteur sont toujours dues à la faiblesse des muscles qui, en cas de mauvaise sollicitation supplémentaire et d'usure des articulations, des tendons ou des disques intervertébraux, entraînent des tensions, des inflammations et, finalement, des douleurs.",
+          "Une augmentation de la force compense la diminution naturelle de la masse musculaire et entraîne une stabilité au niveau des articulations et de la colonne vertébrale. Cela permet de soulager les parties molles douloureuses telles que les ligaments, les tendons et les disques intervertébraux.",
+          "Le principal avantage de l'entraînement sur des appareils réside dans la résistance dosable, qui est augmentée progressivement jusqu'à ce que la force correspondant à l'âge soit atteinte. La musculation avec des appareils ménage les articulations, car le mouvement est guidé. Une musculature forte permet à l'individu de rester mobile et autonome, même à un âge avancé."
+        ]
+      },
+      "herzKreislauf": {
+        "meta": "Cœur et circulation - Medlake",
+        "title": "Cœur et circulation",
+        "intro": "Le cardio-training permet d'économiser le système cardiovasculaire en améliorant l'irrigation sanguine des muscles - et peut être pratiqué à tout âge.",
+        "benefitsLabel": "Les effets d'un système cardio-vasculaire entraîné",
+        "benefits": [
+          "Pouls au repos plus bas",
+          "Plus grand volume d'éjection du sang par battement de cœur",
+          "Nouveaux vaisseaux sanguins dans des muscles plus forts",
+          "Amélioration de l'oxygénation et de la fourniture d'énergie",
+          "Élimination plus rapide des substances de dégradation comme l'acide lactique",
+          "Plus d'endurance même en cas d'effort physique",
+          "Tolérance accrue au stress",
+          "Poids corporel optimal",
+          "Meilleure santé générale"
+        ],
+        "para": "Pour pouvoir réaliser de bonnes performances au quotidien et dans le sport, il faut de l'endurance physique - d'une part pour ne pas se fatiguer prématurément, mais d'autre part aussi pour pouvoir récupérer le plus rapidement possible des efforts fournis.",
+        "recommendationLabel": "Recommandation",
+        "recommendationText": "Un entraînement circulatoire axé sur la santé est effectué 1 à 2 fois par semaine pendant environ 20 minutes."
+      },
+      "hilfeSchmerzen": {
+        "meta": "Aide en cas de douleurs - Medlake",
+        "title": "Aide en cas de douleurs",
+        "intro": "Les douleurs au niveau de la nuque, du dos et des articulations sont traitées au Medlake Center par trois médecins spécialisés à l'aide d'appareils de renforcement musculaire ultramodernes et informatisés - avec l'aide de physiothérapeutes.",
+        "statLabels": [
+          "Médecins spécialisés sur place",
+          "Surface d'entraînement",
+          "Couverture de l'assurance maladie"
+        ],
+        "para1": "Un cabinet médical et de physiothérapie intégré est disponible pour les traitements et les urgences.",
+        "para2": "Vous trouverez sur 540 m² un grand parc d'appareils MedX avec des appareils pour le dos de grande qualité ainsi que, dans une salle séparée, des vélos couchés, des vélos et des vélos elliptiques LIFEFITNESS de grande qualité.",
+        "insuranceLabel": "Caisse d'assurance maladie",
+        "insuranceText": "Les frais de thérapie sont pris en charge par toutes les caisses d'assurance maladie. Pour un abonnement annuel, une participation aux frais est prise en charge."
+      },
+      "firmenfitness": {
+        "meta": "Fitness d'entreprise - Medlake",
+        "title": "Fitness d'entreprise",
+        "intro": "Votre contribution à la santé de vos collaborateurs. Profitez d'une coopération d'entreprise avec Medlake et investissez dans votre facteur de réussite numéro 1.",
+        "benefitsLabel": "Avantages pour votre entreprise",
+        "benefits": [
+          "Meilleure performance de l'équipe et des collaborateurs",
+          "Renforce la confiance en soi et la motivation",
+          "Améliore l'image de votre entreprise en tant qu'employeur attractif",
+          "Promotion de la résistance au stress et de la force mentale",
+          "Prévention activement encouragée par l'entreprise",
+          "Un taux de maladie plus faible grâce à un entraînement physique régulier"
+        ],
+        "para": "Outre la formation et le perfectionnement professionnels des collaborateurs, leur forme physique est une base essentielle pour la qualité de l'entreprise et la productivité. Nous incitons vos équipes à bouger davantage et à être en bonne santé - avec des résultats mesurables."
+      },
+      "medX": {
+        "meta": "Thérapie d'entraînement MED-X - Medlake",
+        "title": "Thérapie médicale d'entraînement (MED-X)",
+        "intro": "Les appareils MedX informatisés favorisent le développement musculaire dans la région de la nuque et des lombaires avec la plus grande précision - chaque unité thérapeutique se fait en traitement individuel avec le médecin.",
+        "para1": "Grâce à une fixation optimale du patient, les muscles auxiliaires peuvent être totalement éliminés, ce qui permet un renforcement optimal de la musculature cible. Le réglage de l'appareil permet un mouvement dosé dans une zone indolore.",
+        "para2": "Avec des poids de l'ordre de la livre, avec un temps documenté et une répétition des mouvements, il est possible de s'entraîner en douceur et de manière contrôlée. Cela permet de s'entraîner après une poussée de douleur aiguë, après un blocage articulaire ou après une opération du dos.",
+        "analysisLabel": "Analyse assistée par ordinateur",
+        "analysisText": "Sur la base des valeurs mesurées, l'ordinateur calcule la courbe de force du patient, qui est comparée à des données normatives spécifiques à l'âge, au sexe et au poids.",
+        "indicationsLabel": "Convient aux patients atteints de",
+        "indications": [
+          "Mobilité réduite de la colonne vertébrale",
+          "Niveau de force trop faible des muscles extenseurs du dos",
+          "Douleurs chroniques du dos et de la nuque",
+          "État après une opération du dos",
+          "État après une poussée douloureuse aiguë",
+          "Blocage des articulations"
+        ]
+      },
+      "physiotherapie": {
+        "meta": "Physiothérapie et MTT - Medlake",
+        "title": "Physiothérapie & MTT",
+        "intro": "Thérapie médicale d'entraînement pour augmenter la résistance de l'appareil locomoteur - adaptée individuellement, accompagnée par un thérapeute, reconnue par les caisses d'assurance maladie.",
+        "para1": "La MTT est utilisée pour augmenter la résistance de l'appareil locomoteur. L'appareil locomoteur et le système cardiovasculaire sont entraînés au moyen de la force, de l'endurance, de la mobilisation, de la mobilité et de la coordination. Cet entraînement est utilisé pour soutenir les processus de rééducation.",
+        "para2": "Le programme d'entraînement est établi par un physiothérapeute et adapté individuellement au patient - en tenant compte des diagnostics médicaux, de la phase de rééducation en cours et des conditions physiques.",
+        "focusTitles": [
+          "Force",
+          "Endurance",
+          "Mobilisation",
+          "Coordination"
+        ],
+        "focusTexts": [
+          "Développement ciblé de la musculature dans la zone concernée.",
+          "Amélioration de la capacité de charge cardiovasculaire.",
+          "Rétablissement de l'amplitude complète des mouvements.",
+          "Entraînement du contrôle neuromusculaire et de la stabilité."
+        ],
+        "insuranceLabel": "Caisse maladie & ordonnance",
+        "insuranceText": "Une ordonnance MTT est établie par votre médecin et dure 3 mois. Les coûts sont généralement pris en charge par l'assurance de base ou l'assurance accident. Nous recommandons de poursuivre l'entraînement chez nous après l'expiration de l'ordonnance."
+      },
+      "kinesis": {
+        "meta": "Formation KINESIS - Medlake",
+        "title": "Formation KINESIS",
+        "intro": "KINESIS - du grec pour mouvement. Entraînement unique de tout le corps grâce à la résistance des poulies contre la gravité sur une très grande amplitude de mouvement.",
+        "para1": "Le concept basé sur KINESIS de Technogym s'appelle donc 'Full Gravity'. Il favorise la réalisation d'exercices fluides et naturels. KINESIS ne remplace pas l'entraînement conventionnel, mais le complète de manière très efficace.",
+        "para2": "Une multitude d'exercices dans un espace restreint est possible sur la station KINESIS de Technogym. Il est ainsi possible de couvrir un large éventail d'objectifs sportifs en un minimum de temps.",
+        "focusTitles": [
+          "Force",
+          "Flexibilité",
+          "Coordination",
+          "Contrôle de l'élevage"
+        ],
+        "focusTexts": [
+          "Développement musculaire efficace grâce à des résistances fonctionnelles.",
+          "Exercices d'étirement ciblés pour toutes les régions du corps.",
+          "Associer des mouvements coordonnés à des résistances",
+          "Entraînement de l'équilibre et de la musculature stabilisatrice."
+        ],
+        "suitableLabel": "Pour qui ?",
+        "suitableText": "Les sportifs avancés et ambitieux peuvent suivre un programme d'entraînement complet grâce à des formes de mouvements spécifiques. Dans le cadre de la physiothérapie, la station KINESIS est utilisée pour un entraînement ciblé dans le cadre de la rééducation."
+      },
+      "galileo": {
+        "meta": "Plaque vibrante Galileo - Medlake",
+        "title": "Plaque vibrante Galileo",
+        "intro": "Les mouvements vibratoires alternatifs latéraux provoquent des contractions musculaires accrues par le biais de réflexes d'étirement - à doser avec précision pour le sport, la rééducation et le traitement de la douleur.",
+        "para": "La stimulation peut être augmentée et adaptée individuellement par la durée, le réglage de la fréquence ainsi que par la position des pieds et la posture du corps.",
+        "usesLabel": "Domaines d'application",
+        "uses": [
+          "Une aide supplémentaire pour le sport de compétition",
+          "Intensifier le renforcement musculaire pendant l'entraînement",
+          "Réhabilitation après une blessure ou un état douloureux",
+          "Douleurs de la rotule ou du tendon d'Achille",
+          "Arthroses douloureuses dues au mouvement",
+          "Douleurs chroniques",
+          "Maladies neurologiques comme la sclérose en plaques, la maladie de Parkinson, les paralysies incomplètes"
+        ],
+        "contraLabel": "Contre-indications",
+        "contra": [
+          "Grossesse",
+          "Nouveaux implants dans la région des jambes",
+          "Thromboses aiguës",
+          "Epilepsie"
+        ]
+      }
+    },
+    "medizinisches": {
+      "meta": "Médical - Medlake",
+      "eyebrow": "Medlake - Connaissance",
+      "title": "Médical",
+      "desc": "Des connaissances de base approfondies sur les muscles, la musculation, le traitement de la douleur et bien plus encore - compilées par nos médecins spécialistes."
+    },
+    "feiertage": {
+      "meta": "Jours fériés - Medlake",
+      "title": "Jours fériés",
+      "desc": "Nos heures d'ouverture pendant les jours fériés. Les horaires peuvent varier à Noël et au Nouvel An.",
+      "note": "Sous réserve de modifications. Si vous avez des questions, n'hésitez pas à nous contacter à"
+    },
+    "news": {
+      "meta": "Actualités - Medlake",
+      "title": "Actualités",
+      "eyebrow": "Medlake - Actualités",
+      "noNews": "Aucune nouvelle disponible.",
+      "back": "Retour à Actualités"
+    }
+  },
+  "common": {
+    "more": "Plus",
+    "readMore": "Lire la suite",
+    "close": "Fermer",
+    "back": "Retour",
+    "next": "Continuer",
+    "loading": "En cours de chargement...",
+    "error": "Erreur"
+  }
+}

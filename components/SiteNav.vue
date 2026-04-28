@@ -7,11 +7,12 @@
       Med<span style="color:var(--text-3)">lake</span>
     </NuxtLink>
 
-    <ul class="hidden nav:flex items-center gap-8 list-none">
+    <ul class="hidden nav:flex items-center list-none" :class="navGap">
       <li v-for="link in links" :key="link.to">
         <NuxtLink :to="localePath(link.to)"
-          class="text-[13px] tracking-[0.15em] uppercase transition-opacity hover:opacity-80"
-          style="color:var(--text-3)">
+          class="tracking-[0.15em] uppercase transition-opacity hover:opacity-80"
+          :style="{ color: 'var(--text-3)', fontSize: navFontSize }"
+        >
           {{ $t(link.labelKey) }}
         </NuxtLink>
       </li>
@@ -69,6 +70,9 @@
 const mobileOpen = ref(false)
 const scrolled = ref(false)
 const localePath = useLocalePath()
+const { locale } = useI18n()
+const navFontSize = computed(() => ['fr', 'it'].includes(locale.value) ? '11px' : '13px')
+const navGap = computed(() => ['fr', 'it'].includes(locale.value) ? 'gap-5' : 'gap-8')
 
 const links = [
   { to: '/team',          labelKey: 'nav.team' },
