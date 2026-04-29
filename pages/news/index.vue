@@ -42,7 +42,6 @@ const localePath = useLocalePath()
 useHead({ title: t('pages.news.meta') })
 
 const supabase = useSupabaseClient()
-const apiFetch = useRequestFetch()
 
 const { data: posts } = await useAsyncData(`news-posts-${locale.value}`, async () => {
   const { data, error } = await supabase
@@ -54,17 +53,10 @@ const { data: posts } = await useAsyncData(`news-posts-${locale.value}`, async (
   const list = data ?? []
   if (locale.value === 'de') return list
 
-  return Promise.all(list.map(async (p: any) => {
+  return list.map((p: any) => {
     const cached = p.translations?.[locale.value]
-    if (cached) return { ...p, ...cached }
-    try {
-      const tr = await apiFetch<any>('/api/translate-record', {
-        method: 'POST',
-        body: { table: 'news_posts', id: p.id, targetLang: locale.value, fields: { title: p.title, tag: p.tag } },
-      })
-      return tr ? { ...p, ...tr } : p
-    } catch { return p }
-  }))
+    return cached ? { ...p, ...cached } : p
+  })
 })
 
 function formatDate(d: string) {

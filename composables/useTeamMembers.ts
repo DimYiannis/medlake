@@ -11,7 +11,6 @@ const FALLBACK = [
 export async function useTeamMembers() {
   const supabase = useSupabaseClient()
   const { locale } = useI18n()
-  const apiFetch = useRequestFetch()
 
   const { data } = await useAsyncData(`team-members-${locale.value}`, async () => {
     const { data, error } = await supabase
@@ -21,17 +20,10 @@ export async function useTeamMembers() {
     const members = (error || !data?.length) ? FALLBACK : data
     if (locale.value === 'de') return members
 
-    return Promise.all(members.map(async (m: any) => {
+    return members.map((m: any) => {
       const cached = m.translations?.[locale.value]
-      if (cached) return { ...m, ...cached }
-      try {
-        const tr = await apiFetch<any>('/api/translate-record', {
-          method: 'POST',
-          body: { table: 'team_members', id: m.id, targetLang: locale.value, fields: { role: m.role } },
-        })
-        return tr ? { ...m, ...tr } : m
-      } catch { return m }
-    }))
+      return cached ? { ...m, ...cached } : m
+    })
   })
   return data
 }

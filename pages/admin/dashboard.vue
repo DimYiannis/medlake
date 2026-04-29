@@ -460,6 +460,11 @@ const editingJob = ref<any>(null)
 const saving = ref(false)
 const uploadingGallery = ref(false)
 
+function triggerTranslation(table: string, id: number, fields: Record<string, any>, htmlFields?: string[], sections?: any[]) {
+  $fetch('/api/translate-all', { method: 'POST', body: { table, id, fields, htmlFields, sections } })
+    .catch((e: any) => console.error('[admin] translation failed:', e))
+}
+
 const siteSettings = ref({
   hero_title_1:   'Die Kraft',
   hero_title_2:   'zu heilen. Die Kraft zu bewegen.',
@@ -519,14 +524,21 @@ async function savePost() {
   if (!editingPost.value) return
   saving.value = true
   try {
+    const payload = stripMeta(editingPost.value)
+    let savedId: number = editingPost.value.id
     if (editingPost.value.id) {
-      await supabase.from('news_posts').update(editingPost.value).eq('id', editingPost.value.id)
+      await supabase.from('news_posts').update(payload).eq('id', editingPost.value.id)
     } else {
-      editingPost.value.published_at = new Date().toISOString()
-      await supabase.from('news_posts').insert(editingPost.value)
+      payload.published_at = new Date().toISOString()
+      const { data } = await supabase.from('news_posts').insert(payload).select('id').single()
+      savedId = data?.id
     }
     await loadAll()
     editingPost.value = null
+    if (savedId) {
+      const p = news.value.find((x: any) => x.id === savedId)
+      if (p) triggerTranslation('news_posts', savedId, { title: p.title, tag: p.tag, content: p.content }, ['content'])
+    }
   } finally { saving.value = false }
 }
 async function deletePost(id: number) {
@@ -544,13 +556,20 @@ async function saveMember() {
   if (!editingMember.value) return
   saving.value = true
   try {
+    const payload = stripMeta(editingMember.value)
+    let savedId: number = editingMember.value.id
     if (editingMember.value.id) {
-      await supabase.from('team_members').update(editingMember.value).eq('id', editingMember.value.id)
+      await supabase.from('team_members').update(payload).eq('id', editingMember.value.id)
     } else {
-      await supabase.from('team_members').insert(editingMember.value)
+      const { data } = await supabase.from('team_members').insert(payload).select('id').single()
+      savedId = data?.id
     }
     await loadAll()
     editingMember.value = null
+    if (savedId) {
+      const m = team.value.find((x: any) => x.id === savedId)
+      if (m) triggerTranslation('team_members', savedId, { role: m.role })
+    }
   } finally { saving.value = false }
 }
 async function deleteMember(id: number) {
@@ -619,13 +638,20 @@ async function saveDoctor() {
   if (!editingDoctor.value) return
   saving.value = true
   try {
+    const payload = stripMeta(editingDoctor.value)
+    let savedId: number = editingDoctor.value.id
     if (editingDoctor.value.id) {
-      await supabase.from('doctors').update(editingDoctor.value).eq('id', editingDoctor.value.id)
+      await supabase.from('doctors').update(payload).eq('id', editingDoctor.value.id)
     } else {
-      await supabase.from('doctors').insert(editingDoctor.value)
+      const { data } = await supabase.from('doctors').insert(payload).select('id').single()
+      savedId = data?.id
     }
     await loadAll()
     editingDoctor.value = null
+    if (savedId) {
+      const d = doctors.value.find((x: any) => x.id === savedId)
+      if (d) triggerTranslation('doctors', savedId, { specialty: d.specialty, bio: d.bio ?? [] })
+    }
   } finally { saving.value = false }
 }
 async function deleteDoctor(id: number) {
@@ -643,13 +669,20 @@ async function saveService() {
   if (!editingService.value) return
   saving.value = true
   try {
+    const payload = stripMeta(editingService.value)
+    let savedId: number = editingService.value.id
     if (editingService.value.id) {
-      await supabase.from('services').update(editingService.value).eq('id', editingService.value.id)
+      await supabase.from('services').update(payload).eq('id', editingService.value.id)
     } else {
-      await supabase.from('services').insert(editingService.value)
+      const { data } = await supabase.from('services').insert(payload).select('id').single()
+      savedId = data?.id
     }
     await loadAll()
     editingService.value = null
+    if (savedId) {
+      const s = services.value.find((x: any) => x.id === savedId)
+      if (s) triggerTranslation('services', savedId, { name: s.name, description: s.description })
+    }
   } finally { saving.value = false }
 }
 async function deleteService(id: number) {
@@ -681,13 +714,24 @@ async function saveJob() {
   if (!editingJob.value) return
   saving.value = true
   try {
+    const payload = stripMeta(editingJob.value)
+    let savedId: number = editingJob.value.id
     if (editingJob.value.id) {
-      await supabase.from('jobs').update(editingJob.value).eq('id', editingJob.value.id)
+      await supabase.from('jobs').update(payload).eq('id', editingJob.value.id)
     } else {
-      await supabase.from('jobs').insert(editingJob.value)
+      const { data } = await supabase.from('jobs').insert(payload).select('id').single()
+      savedId = data?.id
     }
     await loadAll()
     editingJob.value = null
+    if (savedId) {
+      const j = jobs.value.find((x: any) => x.id === savedId)
+      if (j) triggerTranslation('jobs', savedId,
+        { title: j.title ?? '', subtitle: j.subtitle ?? '', intro: j.intro ?? '' },
+        undefined,
+        j.sections ?? [],
+      )
+    }
   } finally { saving.value = false }
 }
 async function deleteJob(id: number) {
@@ -702,6 +746,11 @@ async function saveSettings() {
   try {
     await supabase.from('site_settings').upsert({ key: 'main', value: siteSettings.value })
   } finally { saving.value = false }
+}
+
+function stripMeta(obj: any) {
+  const { translations, created_at, updated_at, ...rest } = obj
+  return rest
 }
 
 // ── Helpers ──

@@ -5,6 +5,7 @@ ALTER TABLE team_members  ADD COLUMN IF NOT EXISTS translations JSONB DEFAULT '{
 ALTER TABLE services      ADD COLUMN IF NOT EXISTS translations JSONB DEFAULT '{}';
 ALTER TABLE doctors       ADD COLUMN IF NOT EXISTS translations JSONB DEFAULT '{}';
 ALTER TABLE news_posts    ADD COLUMN IF NOT EXISTS translations JSONB DEFAULT '{}';
+ALTER TABLE jobs          ADD COLUMN IF NOT EXISTS translations JSONB DEFAULT '{}';
 
 -- Trigger function: wipe translations cache when German content changes
 CREATE OR REPLACE FUNCTION clear_translations()
@@ -37,4 +38,10 @@ CREATE TRIGGER doctors_clear_translations
 DROP TRIGGER IF EXISTS news_posts_clear_translations ON news_posts;
 CREATE TRIGGER news_posts_clear_translations
   BEFORE UPDATE OF title, content, tag ON news_posts
+  FOR EACH ROW EXECUTE FUNCTION clear_translations();
+
+-- jobs: clear cache when translatable content changes
+DROP TRIGGER IF EXISTS jobs_clear_translations ON jobs;
+CREATE TRIGGER jobs_clear_translations
+  BEFORE UPDATE OF title, subtitle, intro, sections ON jobs
   FOR EACH ROW EXECUTE FUNCTION clear_translations();

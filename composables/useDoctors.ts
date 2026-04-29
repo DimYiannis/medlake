@@ -18,7 +18,6 @@ const FALLBACK = [
 export async function useDoctors() {
   const supabase = useSupabaseClient()
   const { locale } = useI18n()
-  const apiFetch = useRequestFetch()
 
   const { data } = await useAsyncData(`doctors-${locale.value}`, async () => {
     const { data, error } = await supabase
@@ -28,20 +27,10 @@ export async function useDoctors() {
     const doctors = (error || !data?.length) ? FALLBACK : data
     if (locale.value === 'de') return doctors
 
-    return Promise.all(doctors.map(async (d: any) => {
+    return doctors.map((d: any) => {
       const cached = d.translations?.[locale.value]
-      if (cached) return { ...d, ...cached }
-      try {
-        const tr = await apiFetch<any>('/api/translate-record', {
-          method: 'POST',
-          body: {
-            table: 'doctors', id: d.id, targetLang: locale.value,
-            fields: { specialty: d.specialty, bio: d.bio ?? [] },
-          },
-        })
-        return tr ? { ...d, ...tr } : d
-      } catch { return d }
-    }))
+      return cached ? { ...d, ...cached } : d
+    })
   })
   return data
 }

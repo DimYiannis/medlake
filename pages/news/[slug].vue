@@ -35,7 +35,6 @@ const route = useRoute()
 const supabase = useSupabaseClient()
 const { locale } = useI18n()
 const localePath = useLocalePath()
-const apiFetch = useRequestFetch()
 
 const { data: post } = await useAsyncData(`news-post-${route.params.slug}-${locale.value}`, async () => {
   const { data, error } = await supabase
@@ -48,18 +47,7 @@ const { data: post } = await useAsyncData(`news-post-${route.params.slug}-${loca
   if (locale.value === 'de') return data
 
   const cached = data?.translations?.[locale.value]
-  if (cached) return { ...data, ...cached }
-  try {
-    const tr = await apiFetch<any>('/api/translate-record', {
-      method: 'POST',
-      body: {
-        table: 'news_posts', id: data.id, targetLang: locale.value,
-        fields: { title: data.title, tag: data.tag, content: data.content },
-        htmlFields: ['content'],
-      },
-    })
-    return tr ? { ...data, ...tr } : data
-  } catch { return data }
+  return cached ? { ...data, ...cached } : data
 })
 
 useHead(() => ({
