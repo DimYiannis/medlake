@@ -94,3 +94,48 @@ export async function translateSections(
     items: out.slice(start, end),
   }))
 }
+
+export async function translateContent(
+  content: Record<string, any>,
+  targetLang: string,
+  apiKey: string,
+): Promise<Record<string, any>> {
+  const texts: string[] = []
+  const paths: (string | number)[][] = []
+
+  function collect(val: any, path: (string | number)[]) {
+    if (typeof val === 'string' && val.trim()) {
+      paths.push(path)
+      texts.push(val)
+    } else if (Array.isArray(val)) {
+      val.forEach((v, i) => collect(v, [...path, i]))
+    } else if (val && typeof val === 'object') {
+      for (const [k, v] of Object.entries(val)) collect(v, [...path, k])
+    }
+  }
+
+  collect(content, [])
+  if (!texts.length) return content
+
+  const res = await $fetch<{ translations: Array<{ text: string }> }>(DEEPL_ENDPOINT, {
+    method: 'POST',
+    headers: { Authorization: `DeepL-Auth-Key ${apiKey}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: texts, target_lang: targetLang.toUpperCase(), source_lang: 'DE' }),
+  })
+  const translated = res.translations.map(t => t.text)
+
+  function assign(obj: any, path: (string | number)[], value: string): any {
+    if (!path.length) return value
+    const [key, ...rest] = path
+    if (Array.isArray(obj)) {
+      const arr = [...obj]
+      arr[key as number] = assign(arr[key as number], rest, value)
+      return arr
+    }
+    return { ...obj, [key as string]: assign((obj as Record<string, any>)[key as string], rest, value) }
+  }
+
+  let result: Record<string, any> = JSON.parse(JSON.stringify(content))
+  paths.forEach((path, i) => { result = assign(result, path, translated[i]) as Record<string, any> })
+  return result
+}

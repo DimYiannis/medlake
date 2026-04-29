@@ -404,6 +404,36 @@
           </div>
         </div>
 
+        <!-- ── Seiteninhalte ── -->
+        <div v-if="activeTab === 'seiteninhalte'">
+          <div class="space-y-px bg-ml-border border border-ml-border">
+            <div
+              v-for="(label, slug) in PAGE_LABELS" :key="slug"
+              class="bg-[#080808] px-5 py-4 flex items-center justify-between hover:bg-white/[0.02] transition-colors"
+            >
+              <p class="text-[15px] text-white">{{ label }}</p>
+              <button @click="openPageEdit(slug)" class="admin-btn-sm">Bearbeiten</button>
+            </div>
+          </div>
+
+          <div v-if="editingPageSlug" class="fixed inset-0 z-50 bg-black/80 flex items-start justify-center overflow-y-auto py-10">
+            <div class="bg-[#0a0a0a] border border-ml-border w-full max-w-3xl mx-6 p-8">
+              <h2 class="text-[16px] font-medium mb-2">{{ PAGE_LABELS[editingPageSlug] }}</h2>
+              <p class="text-[12px] text-white/30 mb-5 tracking-wide">Inhalt auf Deutsch bearbeiten — wird automatisch übersetzt</p>
+              <textarea
+                v-model="editingPageJson"
+                rows="28"
+                class="admin-input w-full font-mono text-[12px]"
+                spellcheck="false"
+              />
+              <div class="flex gap-3 mt-5">
+                <button @click="savePageContent" :disabled="saving" class="admin-btn">{{ saving ? 'Speichern…' : 'Speichern & Übersetzen' }}</button>
+                <button @click="editingPageSlug = null" class="admin-btn-sm">Abbrechen</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- ── AGB ── -->
         <div v-if="activeTab === 'agb'">
           <div class="flex items-center justify-between mb-6">
@@ -459,8 +489,9 @@ const tabs = [
   { id: 'services',  label: 'Leistungen' },
   { id: 'holidays',  label: 'Feiertage' },
   { id: 'jobs',      label: 'Jobs' },
-  { id: 'agb',       label: 'AGB' },
-  { id: 'hero',      label: 'Hero-Text' },
+  { id: 'agb',            label: 'AGB' },
+  { id: 'seiteninhalte', label: 'Seiteninhalte' },
+  { id: 'hero',           label: 'Hero-Text' },
   { id: 'hours',     label: 'Öffnungszeiten' },
   { id: 'contact',   label: 'Kontakt' },
 ]
@@ -482,7 +513,23 @@ const editingService = ref<any>(null)
 const editingJob = ref<any>(null)
 const agbArticles = ref<string[]>([])
 const agbId = ref<number | null>(null)
+const pageContents = ref<Array<{ id: number; slug: string; content: any }>>([])
+const editingPageSlug = ref<string | null>(null)
+const editingPageJson = ref('')
 const saving = ref(false)
+
+const PAGE_LABELS: Record<string, string> = {
+  'leistungen/krafttraining':     'Krafttraining',
+  'leistungen/herz-kreislauf':    'Herz & Kreislauf',
+  'leistungen/hilfe-bei-schmerzen': 'Hilfe bei Schmerzen',
+  'leistungen/firmenfitness':     'Firmenfitness',
+  'leistungen/galileo':           'Galileo',
+  'leistungen/kinesis':           'KINESIS',
+  'leistungen/med-x':             'MED-X',
+  'leistungen/physiotherapie':    'Physiotherapie',
+  'preise':                       'Preise',
+  'medizinisches':                'Medizinisches',
+}
 const uploadingGallery = ref(false)
 
 function triggerTranslation(table: string, id: number, fields: Record<string, any>, htmlFields?: string[], sections?: any[]) {
@@ -517,7 +564,7 @@ const supabase = useSupabaseClient()
 // ── Load all data ──
 async function loadAll() {
   try {
-    const [postsRes, teamRes, galleryRes, settingsRes, doctorsRes, servicesRes, holidaysRes, jobsRes, agbRes] = await Promise.all([
+    const [postsRes, teamRes, galleryRes, settingsRes, doctorsRes, servicesRes, holidaysRes, jobsRes, agbRes, pageRes] = await Promise.all([
       supabase.from('news_posts').select('*').order('published_at', { ascending: false }),
       supabase.from('team_members').select('*').order('sort_order'),
       supabase.from('gallery_photos').select('*').order('sort_order'),
@@ -527,6 +574,7 @@ async function loadAll() {
       supabase.from('holidays').select('*').order('sort_order'),
       supabase.from('jobs').select('*').order('created_at', { ascending: false }),
       supabase.from('agb').select('id, articles').single(),
+      supabase.from('page_content').select('id, slug, content').order('slug'),
     ])
     news.value     = postsRes.data     || []
     team.value     = teamRes.data      || []
@@ -539,6 +587,7 @@ async function loadAll() {
       agbId.value       = agbRes.data.id
       agbArticles.value = agbRes.data.articles ?? []
     }
+    pageContents.value = pageRes.data || []
     if (settingsRes.data?.value) {
       Object.assign(siteSettings.value, settingsRes.data.value)
     }
@@ -785,6 +834,30 @@ async function saveAgb() {
       triggerTranslation('agb', agbId.value, { articles })
     }
     await loadAll()
+  } finally { saving.value = false }
+}
+
+// ── Seiteninhalte ──
+function openPageEdit(slug: string) {
+  const row = pageContents.value.find((p: any) => p.slug === slug)
+  if (!row) return
+  editingPageSlug.value = slug
+  editingPageJson.value = JSON.stringify(row.content, null, 2)
+}
+async function savePageContent() {
+  const slug = editingPageSlug.value
+  if (!slug) return
+  let parsed: any
+  try { parsed = JSON.parse(editingPageJson.value) } catch { alert('Ungültiges JSON'); return }
+  saving.value = true
+  try {
+    const row = pageContents.value.find((p: any) => p.slug === slug)
+    if (!row) return
+    await supabase.from('page_content').update({ content: parsed }).eq('id', row.id)
+    $fetch('/api/translate-page', { method: 'POST', body: { id: row.id, content: parsed } })
+      .catch((e: any) => console.error('[admin] page translation failed:', e))
+    await loadAll()
+    editingPageSlug.value = null
   } finally { saving.value = false }
 }
 

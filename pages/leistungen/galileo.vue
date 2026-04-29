@@ -1,12 +1,12 @@
 <template>
   <ServiceLayout>
-    <template #title>{{ $t('pages.leistungen.galileo.title') }}</template>
-    <template #intro>{{ $t('pages.leistungen.galileo.intro') }}</template>
+    <template #title>{{ page?.title || '' }}</template>
+    <template #intro>{{ page?.intro || '' }}</template>
     <template #body>
       <div class="space-y-10">
-        <p class="text-[17px] leading-[1.85]" style="color:var(--text-2)">{{ $t('pages.leistungen.galileo.para') }}</p>
+        <p class="text-[17px] leading-[1.85]" style="color:var(--text-2)">{{ page?.para || '' }}</p>
         <div>
-          <p class="text-[12px] tracking-[0.25em] uppercase mb-6" style="color:var(--text-3)">{{ $t('pages.leistungen.galileo.usesLabel') }}</p>
+          <p class="text-[12px] tracking-[0.25em] uppercase mb-6" style="color:var(--text-3)">{{ page?.usesLabel || '' }}</p>
           <div class="space-y-px" style="border-top:1px solid var(--border)">
             <div v-for="u in uses" :key="u" class="flex items-start gap-4 py-4 border-b" style="border-color:var(--border)">
               <span class="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:var(--text-3)" />
@@ -15,7 +15,7 @@
           </div>
         </div>
         <div class="border rounded-sm px-7 py-6" style="border-color:var(--border)">
-          <p class="text-[12px] tracking-[0.25em] uppercase mb-5" style="color:var(--text-3)">{{ $t('pages.leistungen.galileo.contraLabel') }}</p>
+          <p class="text-[12px] tracking-[0.25em] uppercase mb-5" style="color:var(--text-3)">{{ page?.contraLabel || '' }}</p>
           <div class="grid grid-cols-2 gap-3">
             <div v-for="c in contra" :key="c" class="flex items-start gap-3">
               <span class="mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0" style="background:var(--text-4)" />
@@ -29,9 +29,10 @@
 </template>
 
 <script setup lang="ts">
-const { t, tm, rt } = useI18n()
-useHead({ title: t('pages.leistungen.galileo.meta') })
-const arr = (key: string) => (tm(key) as any[]).map((v: any) => rt(v))
-const uses   = arr('pages.leistungen.galileo.uses')
-const contra = arr('pages.leistungen.galileo.contra')
+const { t } = useI18n()
+const page = await usePageContent('leistungen/galileo')
+useHead({ title: computed(() => page.value?.title ? `${page.value.title} – Medlake` : t('pages.leistungen.galileo.meta')) })
+
+const uses   = computed(() => (page.value?.uses as string[]) || [])
+const contra = computed(() => (page.value?.contra as string[]) || [])
 </script>
