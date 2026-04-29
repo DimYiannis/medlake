@@ -64,10 +64,7 @@
           {{ $t('hero.headline2') }}<br>
           <span class="text-white/28">{{ $t('hero.headlineAccent2') }}</span>
         </h1>
-        <p class="hidden sm:block text-[16px] leading-[1.8] max-w-sm text-white/42 mb-8">
-          {{ $t('hero.description') }}
-        </p>
-        <div class="flex items-center gap-3 sm:gap-6">
+        <div class="flex items-center gap-3 sm:gap-6 mt-0 md:mt-12">
           <a href="https://connect.shore.com/bookings/medlake-training/services"
             target="_blank" rel="noopener"
             class="text-[11px] sm:text-[13px] tracking-[0.15em] uppercase px-3 py-1.5 sm:px-6 sm:py-3 font-medium bg-white text-black hover:bg-white/85 transition-opacity">
