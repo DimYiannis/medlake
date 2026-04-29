@@ -404,6 +404,28 @@
           </div>
         </div>
 
+        <!-- ── AGB ── -->
+        <div v-if="activeTab === 'agb'">
+          <div class="flex items-center justify-between mb-6">
+            <p class="text-[13px] text-white/30 tracking-widest uppercase">{{ agbArticles.length }} Artikel</p>
+            <button @click="agbArticles.push('')" class="admin-btn">+ Artikel hinzufügen</button>
+          </div>
+          <div class="space-y-3">
+            <div v-for="(_, i) in agbArticles" :key="i" class="flex gap-3 items-start">
+              <span class="text-[13px] text-white/25 pt-2.5 w-6 flex-shrink-0">{{ i + 1 }}.</span>
+              <textarea
+                v-model="agbArticles[i]"
+                rows="3"
+                class="admin-input flex-1"
+              />
+              <button @click="agbArticles.splice(i, 1)" class="admin-btn-sm text-red-400/50 hover:text-red-400 mt-1.5 flex-shrink-0">×</button>
+            </div>
+          </div>
+          <div class="flex gap-3 mt-6">
+            <button @click="saveAgb" :disabled="saving" class="admin-btn">{{ saving ? 'Speichern…' : 'Speichern & Übersetzen' }}</button>
+          </div>
+        </div>
+
       </div>
     </main>
   </div>
@@ -437,6 +459,7 @@ const tabs = [
   { id: 'services',  label: 'Leistungen' },
   { id: 'holidays',  label: 'Feiertage' },
   { id: 'jobs',      label: 'Jobs' },
+  { id: 'agb',       label: 'AGB' },
   { id: 'hero',      label: 'Hero-Text' },
   { id: 'hours',     label: 'Öffnungszeiten' },
   { id: 'contact',   label: 'Kontakt' },
@@ -457,6 +480,8 @@ const editingMember = ref<any>(null)
 const editingDoctor = ref<any>(null)
 const editingService = ref<any>(null)
 const editingJob = ref<any>(null)
+const agbArticles = ref<string[]>([])
+const agbId = ref<number | null>(null)
 const saving = ref(false)
 const uploadingGallery = ref(false)
 
@@ -492,7 +517,7 @@ const supabase = useSupabaseClient()
 // ── Load all data ──
 async function loadAll() {
   try {
-    const [postsRes, teamRes, galleryRes, settingsRes, doctorsRes, servicesRes, holidaysRes, jobsRes] = await Promise.all([
+    const [postsRes, teamRes, galleryRes, settingsRes, doctorsRes, servicesRes, holidaysRes, jobsRes, agbRes] = await Promise.all([
       supabase.from('news_posts').select('*').order('published_at', { ascending: false }),
       supabase.from('team_members').select('*').order('sort_order'),
       supabase.from('gallery_photos').select('*').order('sort_order'),
@@ -501,6 +526,7 @@ async function loadAll() {
       supabase.from('services').select('*').order('sort_order'),
       supabase.from('holidays').select('*').order('sort_order'),
       supabase.from('jobs').select('*').order('created_at', { ascending: false }),
+      supabase.from('agb').select('id, articles').single(),
     ])
     news.value     = postsRes.data     || []
     team.value     = teamRes.data      || []
@@ -509,6 +535,10 @@ async function loadAll() {
     services.value = servicesRes.data  || []
     holidays.value = holidaysRes.data  || []
     jobs.value     = jobsRes.data      || []
+    if (agbRes.data) {
+      agbId.value       = agbRes.data.id
+      agbArticles.value = agbRes.data.articles ?? []
+    }
     if (settingsRes.data?.value) {
       Object.assign(siteSettings.value, settingsRes.data.value)
     }
@@ -738,6 +768,24 @@ async function deleteJob(id: number) {
   if (!confirm('Job wirklich löschen?')) return
   await supabase.from('jobs').delete().eq('id', id)
   await loadAll()
+}
+
+// ── AGB ──
+async function saveAgb() {
+  saving.value = true
+  try {
+    const articles = agbArticles.value.filter((a: string) => a.trim())
+    if (agbId.value) {
+      await supabase.from('agb').update({ articles }).eq('id', agbId.value)
+    } else {
+      const { data } = await supabase.from('agb').insert({ articles }).select('id').single()
+      agbId.value = data?.id ?? null
+    }
+    if (agbId.value) {
+      triggerTranslation('agb', agbId.value, { articles })
+    }
+    await loadAll()
+  } finally { saving.value = false }
 }
 
 // ── Settings ──
