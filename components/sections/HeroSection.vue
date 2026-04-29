@@ -204,7 +204,7 @@ const leftGradient = computed(() => isLight.value
 const slides = [
   { label: 'Fitness',        caption: 'Modernste Geräte für Kraft & Ausdauer',     link: '/leistungen/krafttraining' },
   { label: 'Ärzte',          caption: 'Fach- und Spezialärzte unterstützen Sie auf Ihrem Weg.',           link: '/aerzte' },
-  { label: 'Physiotherapie · Belaria', caption: 'Individuelle Therapie & Rehabilitation',     link: 'https://rueckenschmerz.ch/team/' },
+  { label: 'Physiotherapie', caption: 'Individuelle Therapie & Rehabilitation',     link: '/leistungen' },
 ]
 
 const currentSlide = ref(0)
