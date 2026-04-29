@@ -25,7 +25,8 @@
         href="https://connect.shore.com/bookings/medlake-training/services"
         target="_blank"
         rel="noopener"
-        class="cta-btn text-[13px] tracking-[0.15em] uppercase px-5 py-2.5 transition-all duration-300 border"
+        class="cta-btn uppercase px-5 py-2.5 transition-all duration-300 border"
+        :style="{ fontSize: ctaFontSize, letterSpacing: ctaTracking }"
       >
         {{ $t('nav.bookAppointment') }}
       </a>
@@ -57,7 +58,8 @@
         <a
           href="https://connect.shore.com/bookings/medlake-training/services"
           target="_blank"
-          class="cta-btn text-[13px] tracking-[0.15em] uppercase inline-block px-5 py-3 border"
+          class="cta-btn uppercase inline-block px-5 py-3 border"
+          :style="{ fontSize: ctaFontSize, letterSpacing: ctaTracking }"
         >
           {{ $t('nav.bookAppointment') }}
         </a>
@@ -72,6 +74,8 @@ const scrolled = ref(false)
 const localePath = useLocalePath()
 const { locale } = useI18n()
 const navFontSize = computed(() => ['fr', 'it'].includes(locale.value) ? '11px' : '13px')
+const ctaFontSize = computed(() => ['fr', 'it'].includes(locale.value) ? '10px' : '13px')
+const ctaTracking = computed(() => ['fr', 'it'].includes(locale.value) ? '0.05em' : '0.15em')
 const navGap = computed(() => ['fr', 'it'].includes(locale.value) ? 'gap-5' : 'gap-8')
 
 const links = [

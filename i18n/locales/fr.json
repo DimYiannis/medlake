@@ -7,7 +7,7 @@
     "jobs": "Emplois",
     "medical": "Médical",
     "contact": "Contact",
-    "agb": "CONDITIONS GÉNÉRALES DE VENTE",
+    "agb": "CGV",
     "services": "Prestations",
     "bookAppointment": "Réserver un rendez-vous",
     "menu": "Menu"
@@ -233,7 +233,7 @@
     },
     "agb": {
       "meta": "Conditions générales de vente - Medlake",
-      "title": "CONDITIONS GÉNÉRALES DE VENTE",
+      "title": "CGV",
       "subtitle": "Conditions contractuelles Medlake Training AG - 2026/2027",
       "questions": "Nous nous tenons à votre disposition pour toute question concernant nos conditions contractuelles."
     },
