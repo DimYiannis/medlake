@@ -1,5 +1,5 @@
 # Medlake Training — Website Redesign
-<img width="2722" height="1710" alt="Screenshot from 2026-05-26 15-40-04" src="https://github.com/user-attachments/assets/d0f3225c-0fc8-4950-b514-c7e5aced03e8" />
+<img width="2722" height="1532" alt="Screenshot from 2026-05-26 15-37-15" src="https://github.com/user-attachments/assets/ad411746-5225-4839-bfbe-036a682e7375" />
 <img width="2722" height="1710" alt="Screenshot from 2026-05-26 15-38-06" src="https://github.com/user-attachments/assets/91e87d99-c760-461d-9054-81935df3f0fe" />
 
 A full redesign of Medlake Training Küsnacht — a Swiss medical fitness centre. Built as a freelance project with a focus on cinematic design, smooth 3D animations, a complete content management system, and automatic multilingual support.
@@ -54,8 +54,7 @@ Adding a new language takes a single command — DeepL handles the rest.
 
 ## Admin Panel
 
-<img width="2722" height="1532" alt="Screenshot from 2026-05-26 15-37-15" src="https://github.com/user-attachments/assets/a3918777-9cb8-4e08-80d6-9654a1a4f71c" />
-<img width="2722" height="1532" alt="Screenshot from 2026-05-26 15-37-15" src="https://github.com/user-attachments/assets/ad411746-5225-4839-bfbe-036a682e7375" />
+<img width="2722" height="1710" alt="Screenshot from 2026-05-26 15-40-04" src="https://github.com/user-attachments/assets/d0f3225c-0fc8-4950-b514-c7e5aced03e8" />
 <img width="2722" height="1710" alt="Screenshot from 2026-05-26 15-40-04" src="https://github.com/user-attachments/assets/77986ca2-e8e3-416b-9c13-fc8dea15aa9c" />
 
 
